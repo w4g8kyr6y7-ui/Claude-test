@@ -1,0 +1,678 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Snake Protéiné</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Mise en page : une colonne — tableau des scores, plateau carré façon tapis de salle, échelle des paliers */
+:root {
+  --mat: #1a1f24;        /* tapis caoutchouc */
+  --mat-2: #222930;      /* dalle claire du tapis */
+  --line: #313b45;       /* joints entre dalles */
+  --chalk: #eceee8;      /* magnésie */
+  --muted: #95a1ab;
+  --plate: #f2c230;      /* disque de fonte jaune */
+  --plate-ink: #1a1f24;
+  --band: #e0483a;       /* bandeau rouge */
+  --font-display: "Anton", "Impact", "Arial Narrow Bold", sans-serif;
+  --font-body: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--mat);
+  color: var(--chalk);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.35;
+}
+.wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+header { display: flex; flex-direction: column; gap: 2px; }
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 9vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+h1 span { color: var(--plate); }
+.tagline { margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: var(--mat-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  min-width: 0;
+}
+.stat .lbl {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.stat .val {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.stat.hot .val { color: var(--plate); }
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tier-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tier-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--plate);
+}
+.tier-next { color: var(--muted); font-size: 1rem; }
+.bar { height: 8px; background: var(--mat-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.bar > div { height: 100%; width: 0; background: var(--plate); transition: width .25s ease; }
+
+.board {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  border: 3px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--mat);
+  cursor: pointer;
+}
+.board:focus-visible { outline: 3px solid var(--plate); outline-offset: 3px; }
+.board canvas { display: block; width: 100%; height: 100%; }
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  background: rgba(16, 19, 23, 0.78);
+}
+.overlay h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 8vw, 2.8rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.overlay p { margin: 0; max-width: 34ch; color: var(--chalk); }
+.overlay .hint { color: var(--muted); font-size: 0.95rem; }
+.overlay .record { color: var(--plate); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.key {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px solid var(--line);
+  border-bottom-width: 3px;
+  border-radius: 4px;
+  background: var(--mat-2);
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.controls { margin: 0; color: var(--muted); font-size: 1rem; }
+
+.ladder h3 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ladder ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.ladder li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--muted);
+}
+.ladder .num { font-family: var(--font-display); font-size: 1.15rem; text-align: center; }
+.ladder .name { display: flex; flex-direction: column; min-width: 0; }
+.ladder .name b { color: var(--chalk); font-weight: 700; font-size: 1.08rem; }
+.ladder .name small { font-size: 0.92rem; }
+.ladder .pts { font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; text-align: right; }
+.ladder .pts small { display: block; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; }
+.ladder li.done .num { color: var(--plate); }
+.ladder li.current { background: var(--mat-2); border-color: var(--plate); }
+.ladder li.current .num, .ladder li.current .pts { color: var(--plate); }
+
+@media (max-width: 420px) {
+  .stat { padding: 6px 8px; }
+  .stat .val { font-size: 1.3rem; }
+  .stat .lbl { font-size: 0.7rem; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Snake <span>Protéiné</span></h1>
+    <p class="tagline">Chaque shaker avalé rend le serpent plus massif.</p>
+  </header>
+
+  <section class="stats" aria-label="Scores">
+    <div class="stat hot"><span class="lbl">Score</span><span class="val" id="score">0</span></div>
+    <div class="stat"><span class="lbl">Record</span><span class="val" id="best">0</span></div>
+    <div class="stat"><span class="lbl">Shakers</span><span class="val" id="eaten">0</span></div>
+    <div class="stat"><span class="lbl">Pts / shaker</span><span class="val" id="pts">+1</span></div>
+  </section>
+
+  <section class="tier" aria-label="Palier actuel">
+    <div class="tier-top">
+      <span class="tier-name" id="tierName">Crevette</span>
+      <span class="tier-next" id="tierNext">5 shakers avant « Débutant motivé »</span>
+    </div>
+    <div class="bar"><div id="tierBar"></div></div>
+  </section>
+
+  <div class="board" id="board" tabindex="0" aria-label="Plateau de jeu">
+    <canvas id="game"></canvas>
+    <div class="overlay" id="overlay"></div>
+  </div>
+
+  <p class="controls">
+    <span class="key">↑</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span>
+    ou <span class="key">Z</span><span class="key">Q</span><span class="key">S</span><span class="key">D</span> pour diriger.
+    Les bords se traversent. Pas de pause.
+  </p>
+
+  <section class="ladder" aria-label="Paliers">
+    <h3>Les paliers</h3>
+    <ol id="ladder"></ol>
+  </section>
+</div>
+
+<script>
+(() => {
+  // ---------- Réglages du jeu ----------
+  const COLS = 17, ROWS = 17;
+  const STEP_MS = 110; // vitesse constante : l'évolution reste visuelle
+
+  // Paliers : à partir de "min" shakers mangés, chaque shaker rapporte "pts" points.
+  const TIERS = [
+    { min: 0,  name: "Crevette",             pts: 1,  desc: "Tout fin, tout pâle." },
+    { min: 5,  name: "Débutant motivé",      pts: 2,  desc: "Les premiers gains se voient." },
+    { min: 12, name: "Sec",                  pts: 3,  desc: "Les abdos se dessinent." },
+    { min: 20, name: "Massif",               pts: 5,  desc: "Ça déborde de partout." },
+    { min: 30, name: "Bête de salle",        pts: 8,  desc: "Bandeau, veines, bronzage." },
+    { min: 45, name: "Monstre de l'Olympia", pts: 12, desc: "Doré et inarrêtable." },
+  ];
+
+  // Apparence du serpent pour chaque palier
+  const SKINS = [
+    { body: "#b3dcaa", dark: "#7fae77", light: "#e0f3da", width: 0.50, bulge: 0.00 },
+    { body: "#78c672", dark: "#4c9a48", light: "#b2e6ac", width: 0.62, bulge: 0.05 },
+    { body: "#3fa35a", dark: "#277840", light: "#86d699", width: 0.72, bulge: 0.09 },
+    { body: "#2f8f66", dark: "#1c6346", light: "#6fcaa0", width: 0.82, bulge: 0.14 },
+    { body: "#c47c3b", dark: "#8a5124", light: "#ecb06d", width: 0.90, bulge: 0.16 },
+    { body: "#dba92f", dark: "#a07513", light: "#ffe38f", width: 0.98, bulge: 0.18 },
+  ];
+
+  const css = getComputedStyle(document.documentElement);
+  const C = {
+    mat: css.getPropertyValue("--mat").trim(),
+    mat2: css.getPropertyValue("--mat-2").trim(),
+    line: css.getPropertyValue("--line").trim(),
+    chalk: css.getPropertyValue("--chalk").trim(),
+    plate: css.getPropertyValue("--plate").trim(),
+    ink: css.getPropertyValue("--plate-ink").trim(),
+    band: css.getPropertyValue("--band").trim(),
+  };
+  const DISPLAY_FONT = css.getPropertyValue("--font-display").trim();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- Éléments de la page ----------
+  const $ = (id) => document.getElementById(id);
+  const board = $("board"), canvas = $("game"), ctx = canvas.getContext("2d"), overlay = $("overlay");
+  const ui = {
+    score: $("score"), best: $("best"), eaten: $("eaten"), pts: $("pts"),
+    tierName: $("tierName"), tierNext: $("tierNext"), tierBar: $("tierBar"), ladder: $("ladder"),
+  };
+
+  // ---------- Record (sauvegardé dans le navigateur si possible) ----------
+  let best = 0;
+  try { best = parseInt(localStorage.getItem("snake-proteine-best") || "0", 10) || 0; } catch (e) {}
+  function saveBest() { try { localStorage.setItem("snake-proteine-best", String(best)); } catch (e) {} }
+
+  // ---------- État de la partie ----------
+  let snake, dir, queue, shaker, eaten, score, state = "ready";
+  let popups = [], banner = null, acc = 0, time = 0, newRecord = false;
+
+  function tierIndex(n) {
+    let i = 0;
+    for (let k = 0; k < TIERS.length; k++) if (n >= TIERS[k].min) i = k;
+    return i;
+  }
+
+  function reset() {
+    const cy = Math.floor(ROWS / 2), cx = Math.floor(COLS / 2);
+    snake = [{ x: cx, y: cy }, { x: cx - 1, y: cy }, { x: cx - 2, y: cy }];
+    dir = { x: 1, y: 0 };
+    queue = [];
+    eaten = 0; score = 0; acc = 0;
+    popups = []; banner = null; newRecord = false;
+    placeShaker();
+    updateHud();
+  }
+
+  function placeShaker() {
+    const free = [];
+    for (let y = 0; y < ROWS; y++)
+      for (let x = 0; x < COLS; x++)
+        if (!snake.some((s) => s.x === x && s.y === y)) free.push({ x, y });
+    shaker = free[Math.floor(Math.random() * free.length)];
+  }
+
+  function step() {
+    if (queue.length) dir = queue.shift();
+    const head = snake[0];
+    // Les bords se traversent : on réapparaît de l'autre côté
+    const nx = (head.x + dir.x + COLS) % COLS;
+    const ny = (head.y + dir.y + ROWS) % ROWS;
+    const eating = nx === shaker.x && ny === shaker.y;
+
+    // La queue avance en même temps que la tête, sauf si on mange
+    const body = eating ? snake : snake.slice(0, -1);
+    if (body.some((s) => s.x === nx && s.y === ny)) return gameOver();
+
+    snake.unshift({ x: nx, y: ny });
+    if (eating) {
+      const before = tierIndex(eaten);
+      const gain = TIERS[before].pts;
+      score += gain;
+      eaten++;
+      popups.push({ x: nx, y: ny, text: "+" + gain, t: 0 });
+      const after = tierIndex(eaten);
+      if (after > before) banner = { name: TIERS[after].name, t: 0 };
+      placeShaker();
+      updateHud();
+    } else {
+      snake.pop();
+    }
+  }
+
+  function start() {
+    reset();
+    state = "playing";
+    overlay.hidden = true;
+    board.focus({ preventScroll: true });
+  }
+
+  function gameOver() {
+    state = "over";
+    if (score > best) { best = score; newRecord = true; saveBest(); }
+    updateHud();
+    showOverlay();
+  }
+
+  // ---------- Commandes ----------
+  const KEYS = {
+    ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0],
+    z: [0, -1], w: [0, -1], s: [0, 1], q: [-1, 0], a: [-1, 0], d: [1, 0],
+  };
+
+  window.addEventListener("keydown", (e) => {
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (k === " " || k === "Enter") {
+      e.preventDefault();
+      if (state !== "playing") start();
+      return;
+    }
+    const v = KEYS[k];
+    if (!v) return;
+    e.preventDefault();
+    if (state !== "playing") { start(); }
+    const lastDir = queue.length ? queue[queue.length - 1] : dir;
+    // Interdit le demi-tour sur place et ignore les doublons
+    if (v[0] === -lastDir.x && v[1] === -lastDir.y) return;
+    if (v[0] === lastDir.x && v[1] === lastDir.y) return;
+    if (queue.length < 2) queue.push({ x: v[0], y: v[1] });
+  });
+
+  board.addEventListener("click", () => {
+    board.focus({ preventScroll: true });
+    if (state !== "playing") start();
+  });
+
+  // ---------- Affichage HTML ----------
+  function updateHud() {
+    const i = tierIndex(eaten);
+    const t = TIERS[i], next = TIERS[i + 1];
+    ui.score.textContent = score;
+    ui.best.textContent = Math.max(best, score);
+    ui.eaten.textContent = eaten;
+    ui.pts.textContent = "+" + t.pts;
+    ui.tierName.textContent = t.name;
+    if (next) {
+      const left = next.min - eaten;
+      ui.tierNext.textContent = `${left} shaker${left > 1 ? "s" : ""} avant « ${next.name} »`;
+      ui.tierBar.style.width = ((eaten - t.min) / (next.min - t.min)) * 100 + "%";
+    } else {
+      ui.tierNext.textContent = "Palier maximum atteint";
+      ui.tierBar.style.width = "100%";
+    }
+    [...ui.ladder.children].forEach((li, k) => {
+      li.classList.toggle("current", k === i);
+      li.classList.toggle("done", k < i);
+    });
+  }
+
+  function buildLadder() {
+    ui.ladder.innerHTML = TIERS.map((t, k) => `
+      <li>
+        <span class="num">${k + 1}</span>
+        <span class="name"><b>${t.name}</b><small>${t.min === 0 ? "Au départ" : "Dès " + t.min + " shakers"} · ${t.desc}</small></span>
+        <span class="pts">+${t.pts}<small>par shaker</small></span>
+      </li>`).join("");
+  }
+
+  function showOverlay() {
+    if (state === "ready") {
+      overlay.innerHTML = `
+        <h2>Prêt à soulever ?</h2>
+        <p>Appuie sur une flèche ou sur <span class="key">Espace</span> pour lancer la séance.</p>
+        <p class="hint">Si rien ne bouge, clique d'abord sur le plateau.</p>`;
+    } else {
+      const t = TIERS[tierIndex(eaten)];
+      overlay.innerHTML = `
+        <h2>Fin de la séance</h2>
+        ${newRecord ? '<p class="record">Nouveau record</p>' : ""}
+        <p>${score} point${score > 1 ? "s" : ""} · ${eaten} shaker${eaten > 1 ? "s" : ""} · palier « ${t.name} »</p>
+        <p class="hint">Appuie sur <span class="key">Espace</span> pour rejouer.</p>`;
+    }
+    overlay.hidden = false;
+  }
+
+  // ---------- Dessin ----------
+  let cell = 20, size = 420;
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    size = canvas.clientWidth;
+    cell = size / COLS;
+    canvas.width = Math.round(size * dpr);
+    canvas.height = Math.round(size * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+
+  function rrect(x, y, w, h, r) {
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
+    else ctx.rect(x, y, w, h);
+  }
+
+  function drawFloor() {
+    ctx.fillStyle = C.mat;
+    ctx.fillRect(0, 0, size, size);
+    // Dalles de tapis 3x3 cases, en damier discret
+    const tile = 3;
+    ctx.fillStyle = C.mat2;
+    for (let ty = 0; ty < ROWS; ty += tile)
+      for (let tx = 0; tx < COLS; tx += tile)
+        if (((tx + ty) / tile) % 2 === 0) ctx.fillRect(tx * cell, ty * cell, tile * cell, tile * cell);
+  }
+
+  function drawShaker(cx, cy) {
+    const bob = reduceMotion ? 1 : 1 + 0.06 * Math.sin(time / 220);
+    const w = cell * 0.66 * bob, h = cell * 0.96 * bob;
+    ctx.save();
+    ctx.translate(cx, cy);
+    // ombre au sol
+    ctx.fillStyle = "rgba(0,0,0,0.35)";
+    ctx.beginPath();
+    ctx.ellipse(0, h * 0.48, w * 0.55, h * 0.08, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // corps transparent
+    rrect(-w / 2, -h * 0.22, w, h * 0.7, w * 0.18);
+    ctx.fillStyle = "rgba(225,236,244,0.92)";
+    ctx.fill();
+    // protéine chocolat
+    ctx.save();
+    ctx.clip();
+    ctx.fillStyle = "#7b4a2b";
+    ctx.fillRect(-w / 2, h * 0.08, w, h * 0.42);
+    ctx.fillStyle = "#9a6240";
+    ctx.fillRect(-w / 2, h * 0.08, w, h * 0.05);
+    ctx.restore();
+    // étiquette
+    ctx.fillStyle = C.band;
+    ctx.fillRect(-w / 2, -h * 0.1, w, h * 0.12);
+    // couvercle
+    rrect(-w * 0.55, -h * 0.38, w * 1.1, h * 0.17, w * 0.08);
+    ctx.fillStyle = C.plate;
+    ctx.fill();
+    // bec verseur
+    rrect(-w * 0.14, -h * 0.5, w * 0.28, h * 0.13, w * 0.05);
+    ctx.fillStyle = C.ink;
+    ctx.fill();
+    // reflet
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    ctx.fillRect(-w * 0.36, -h * 0.18, w * 0.09, h * 0.55);
+    ctx.restore();
+  }
+
+  function center(s) { return { x: (s.x + 0.5) * cell, y: (s.y + 0.5) * cell }; }
+  function adjacent(a, b) { return Math.abs(a.x - b.x) + Math.abs(a.y - b.y) === 1; }
+
+  function drawSnake() {
+    const tier = tierIndex(eaten);
+    const skin = SKINS[tier];
+    const base = (cell * skin.width) / 2;
+    const radius = (i) => {
+      if (i === 0) return Math.min(cell * 0.62, base * 1.15 + cell * 0.04);
+      const taper = i > snake.length - 3 ? 0.78 : 1; // queue plus fine
+      const muscle = i % 2 === 0 ? 1 + skin.bulge : 1 - skin.bulge * 0.6;
+      return base * taper * muscle;
+    };
+
+    ctx.save();
+    ctx.lineCap = "round";
+
+    // Aura dorée au dernier palier
+    if (tier === 5) {
+      ctx.shadowColor = C.plate;
+      ctx.shadowBlur = cell * (reduceMotion ? 0.6 : 0.5 + 0.25 * Math.sin(time / 300));
+    }
+
+    // Passe 1 : contour sombre ; passe 2 : couleur du corps
+    for (const pass of [0, 1]) {
+      const extra = pass === 0 ? Math.max(1.5, cell * 0.06) : 0;
+      ctx.strokeStyle = ctx.fillStyle = pass === 0 ? skin.dark : skin.body;
+      ctx.lineWidth = base * 1.7 + extra * 2;
+      for (let i = snake.length - 1; i > 0; i--) {
+        if (!adjacent(snake[i], snake[i - 1])) continue; // pas de trait quand on traverse un bord
+        const a = center(snake[i]), b = center(snake[i - 1]);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      for (let i = snake.length - 1; i >= 0; i--) {
+        const p = center(snake[i]);
+        ctx.beginPath(); ctx.arc(p.x, p.y, radius(i) + extra, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+    }
+
+    // Détails musculaires sur le corps
+    for (let i = snake.length - 1; i > 0; i--) {
+      const p = center(snake[i]), r = radius(i);
+      // reflet de volume
+      ctx.fillStyle = skin.light;
+      ctx.globalAlpha = 0.55;
+      ctx.beginPath(); ctx.arc(p.x - r * 0.3, p.y - r * 0.3, r * 0.32, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+      // abdos (à partir de "Sec")
+      if (tier >= 2 && i % 2 === 0) {
+        ctx.strokeStyle = skin.dark;
+        ctx.lineWidth = Math.max(1, cell * 0.05);
+        ctx.beginPath(); ctx.moveTo(p.x - r * 0.45, p.y); ctx.lineTo(p.x + r * 0.45, p.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p.x, p.y - r * 0.45); ctx.lineTo(p.x, p.y + r * 0.45); ctx.stroke();
+      }
+      // veines (à partir de "Bête de salle")
+      if (tier >= 4 && i % 3 === 1) {
+        ctx.strokeStyle = skin.dark;
+        ctx.lineWidth = Math.max(1, cell * 0.045);
+        ctx.beginPath();
+        ctx.moveTo(p.x - r * 0.6, p.y + r * 0.3);
+        ctx.quadraticCurveTo(p.x - r * 0.1, p.y - r * 0.5, p.x + r * 0.2, p.y + r * 0.1);
+        ctx.quadraticCurveTo(p.x + r * 0.45, p.y + r * 0.45, p.x + r * 0.65, p.y - r * 0.2);
+        ctx.stroke();
+      }
+    }
+
+    drawHead(tier, skin, radius(0));
+    ctx.restore();
+  }
+
+  function drawHead(tier, skin, rh) {
+    const p = center(snake[0]);
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(Math.atan2(dir.y, dir.x)); // l'avant de la tête pointe vers +x
+
+    // Bandeau rouge (à partir de "Bête de salle")
+    if (tier >= 4) {
+      ctx.save();
+      ctx.beginPath(); ctx.arc(0, 0, rh, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = C.band;
+      ctx.fillRect(-rh * 0.42, -rh, rh * 0.3, rh * 2);
+      ctx.restore();
+      ctx.fillStyle = C.band;
+      ctx.beginPath();
+      ctx.moveTo(-rh * 0.4, rh * 0.75);
+      ctx.lineTo(-rh * 1.25, rh * 1.05);
+      ctx.lineTo(-rh * 1.15, rh * 0.7);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Yeux
+    const eyeX = rh * 0.32, eyeY = rh * 0.44, eyeR = rh * 0.27;
+    for (const sgn of [-1, 1]) {
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.arc(eyeX, sgn * eyeY, eyeR, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#111417";
+      const pupil = tier >= 2 ? eyeR * 0.5 : eyeR * 0.58;
+      ctx.beginPath(); ctx.arc(eyeX + eyeR * 0.35, sgn * eyeY, pupil, 0, Math.PI * 2); ctx.fill();
+      // Sourcils froncés : de plus en plus déterminé
+      if (tier >= 1) {
+        ctx.strokeStyle = "#111417";
+        ctx.lineCap = "round";
+        ctx.lineWidth = Math.max(1.5, rh * (0.1 + tier * 0.02));
+        ctx.beginPath();
+        ctx.moveTo(eyeX - eyeR * 0.9, sgn * (eyeY + eyeR * 1.05));
+        ctx.lineTo(eyeX + eyeR * 1.1, sgn * (eyeY + eyeR * (1.15 - tier * 0.12)));
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  function drawPopups(dt) {
+    ctx.save();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `${Math.round(cell * 0.85)}px ${DISPLAY_FONT}`;
+    popups = popups.filter((pp) => (pp.t += dt) < 750);
+    for (const pp of popups) {
+      const k = pp.t / 750;
+      const c = center(pp);
+      ctx.globalAlpha = 1 - k;
+      ctx.lineWidth = Math.max(2, cell * 0.12);
+      ctx.strokeStyle = C.ink;
+      ctx.fillStyle = C.plate;
+      ctx.strokeText(pp.text, c.x, c.y - cell * (0.6 + k * 1.1));
+      ctx.fillText(pp.text, c.x, c.y - cell * (0.6 + k * 1.1));
+    }
+    ctx.restore();
+  }
+
+  function drawBanner(dt) {
+    if (!banner) return;
+    banner.t += dt;
+    const life = 1800;
+    if (banner.t > life) { banner = null; return; }
+    const k = banner.t / life;
+    const alpha = k < 0.1 ? k / 0.1 : k > 0.8 ? (1 - k) / 0.2 : 1;
+    const h = size * 0.2, y = size * 0.4;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = C.plate;
+    ctx.fillRect(0, y, size, h);
+    ctx.fillStyle = C.ink;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `600 ${Math.round(size * 0.035)}px ${css.getPropertyValue("--font-body")}`;
+    ctx.fillText("NOUVEAU PALIER", size / 2, y + h * 0.27);
+    let fs = size * 0.085;
+    ctx.font = `${Math.round(fs)}px ${DISPLAY_FONT}`;
+    const text = banner.name.toUpperCase();
+    const wmax = size * 0.9, w = ctx.measureText(text).width;
+    if (w > wmax) { fs *= wmax / w; ctx.font = `${Math.round(fs)}px ${DISPLAY_FONT}`; }
+    ctx.fillText(text, size / 2, y + h * 0.64);
+    ctx.restore();
+  }
+
+  // ---------- Boucle principale ----------
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(now - last, 250);
+    last = now;
+    time += dt;
+    if (state === "playing") {
+      acc += dt;
+      while (acc >= STEP_MS && state === "playing") { acc -= STEP_MS; step(); }
+    }
+    if (canvas.clientWidth !== size) resize();
+    drawFloor();
+    drawShaker((shaker.x + 0.5) * cell, (shaker.y + 0.5) * cell);
+    drawSnake();
+    drawPopups(dt);
+    drawBanner(dt);
+    requestAnimationFrame(frame);
+  }
+
+  buildLadder();
+  reset();
+  resize();
+  showOverlay();
+  requestAnimationFrame(frame);
+})();
+</script>
