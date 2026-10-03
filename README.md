@@ -8,6 +8,7 @@ Ouvre le fichier `index.html` dans ton navigateur (double-clic dessus après l'a
 
 - **Flèches** ou **Z Q S D** pour diriger le serpent
 - **Espace** pour lancer ou relancer une partie
+- Sur téléphone : bouton « Jouer en plein écran » et croix directionnelle tactile transparente
 - Les bords se traversent : on réapparaît de l'autre côté
 - On perd si le serpent se mord la queue
 

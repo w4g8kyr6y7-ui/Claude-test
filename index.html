@@ -176,6 +176,102 @@ h1 span { color: var(--plate); }
 .ladder li.current { background: var(--mat-2); border-color: var(--plate); }
 .ladder li.current .num, .ladder li.current .pts { color: var(--plate); }
 
+/* ---------- Mobile : plein écran et croix directionnelle transparente ---------- */
+body { touch-action: manipulation; }
+.fsbtn {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border: 2px solid var(--plate);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--plate);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.fsbtn:focus-visible, .fsbar button:focus-visible { outline: 3px solid var(--plate); outline-offset: 2px; }
+.stage { display: flex; flex-direction: column; gap: 12px; }
+.fsbar { display: none; }
+.pad {
+  display: none;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 6px;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+@media (pointer: coarse) { .pad { display: grid; } }
+.pad button {
+  border: 2px solid rgba(236, 238, 232, 0.35);
+  border-radius: 14px;
+  background: rgba(236, 238, 232, 0.12);
+  color: rgba(236, 238, 232, 0.75);
+  font-size: 1.5rem;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pad button.on { background: rgba(242, 194, 48, 0.45); border-color: var(--plate); }
+.pad [data-d="up"] { grid-area: 1 / 2; }
+.pad [data-d="left"] { grid-area: 2 / 1; }
+.pad [data-d="right"] { grid-area: 2 / 3; }
+.pad [data-d="down"] { grid-area: 3 / 2; }
+
+body.fs { overflow: hidden; }
+body.fs .wrap > :not(.stage) { display: none; }
+body.fs .stage {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: var(--mat);
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 8px calc(8px + env(safe-area-inset-bottom, 0px));
+}
+body.fs .board, body.fs .fsbar { width: min(calc(100vw - 16px), calc(100dvh - 72px)); }
+body.fs .fsbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+body.fs .fsbar .fs-score { font-family: var(--font-display); font-size: 1.4rem; color: var(--plate); font-variant-numeric: tabular-nums; }
+body.fs .fsbar .fs-tier { color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.fsbar button {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--mat-2);
+  color: var(--chalk);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+body.fs .pad {
+  display: grid;
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  grid-template-columns: repeat(3, 76px);
+  grid-template-rows: repeat(3, 76px);
+  z-index: 11;
+}
+@media (orientation: landscape) {
+  body.fs .pad {
+    left: auto;
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+}
+
 @media (max-width: 420px) {
   .stat { padding: 6px 8px; }
   .stat .val { font-size: 1.3rem; }
@@ -204,9 +300,24 @@ h1 span { color: var(--plate); }
     <div class="bar"><div id="tierBar"></div></div>
   </section>
 
+  <button class="fsbtn" id="fsBtn" type="button">Jouer en plein écran</button>
+
+  <div class="stage" id="stage">
+  <div class="fsbar">
+    <span class="fs-score" id="fsScore">0 pt</span>
+    <span class="fs-tier" id="fsTier">Crevette</span>
+    <button id="fsExit" type="button">Quitter</button>
+  </div>
   <div class="board" id="board" tabindex="0" aria-label="Plateau de jeu">
     <canvas id="game"></canvas>
     <div class="overlay" id="overlay"></div>
+  </div>
+  <div class="pad" id="pad" aria-label="Croix directionnelle">
+    <button type="button" data-d="up" aria-label="Haut">▲</button>
+    <button type="button" data-d="left" aria-label="Gauche">◀</button>
+    <button type="button" data-d="right" aria-label="Droite">▶</button>
+    <button type="button" data-d="down" aria-label="Bas">▼</button>
+  </div>
   </div>
 
   <p class="controls">
@@ -360,12 +471,46 @@ h1 span { color: var(--plate); }
     const v = KEYS[k];
     if (!v) return;
     e.preventDefault();
+    turn(v);
+  });
+
+  function turn(v) {
     if (state !== "playing") { start(); }
     const lastDir = queue.length ? queue[queue.length - 1] : dir;
     // Interdit le demi-tour sur place et ignore les doublons
     if (v[0] === -lastDir.x && v[1] === -lastDir.y) return;
     if (v[0] === lastDir.x && v[1] === lastDir.y) return;
     if (queue.length < 2) queue.push({ x: v[0], y: v[1] });
+  }
+
+  // Croix tactile : réagit dès que le doigt touche (pas d'attente du relâchement)
+  const PAD = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+  document.querySelectorAll("#pad button").forEach((btn) => {
+    btn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      btn.classList.add("on");
+      turn(PAD[btn.dataset.d]);
+    });
+    for (const ev of ["pointerup", "pointercancel", "pointerleave"])
+      btn.addEventListener(ev, () => btn.classList.remove("on"));
+  });
+
+  // Plein écran : vrai plein écran si le navigateur l'accepte, sinon le jeu occupe tout l'écran
+  $("fsBtn").addEventListener("click", () => {
+    document.body.classList.add("fs");
+    const el = document.documentElement;
+    try {
+      const req = el.requestFullscreen || el.webkitRequestFullscreen;
+      const r = req && req.call(el);
+      if (r && r.catch) r.catch(() => {});
+    } catch (err) {}
+  });
+  $("fsExit").addEventListener("click", () => {
+    document.body.classList.remove("fs");
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  });
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) document.body.classList.remove("fs");
   });
 
   board.addEventListener("click", () => {
@@ -382,6 +527,8 @@ h1 span { color: var(--plate); }
     ui.eaten.textContent = eaten;
     ui.pts.textContent = "+" + t.pts;
     ui.tierName.textContent = t.name;
+    $("fsScore").textContent = score + (score > 1 ? " pts" : " pt");
+    $("fsTier").textContent = t.name;
     if (next) {
       const left = next.min - eaten;
       ui.tierNext.textContent = `${left} shaker${left > 1 ? "s" : ""} avant « ${next.name} »`;
@@ -409,7 +556,7 @@ h1 span { color: var(--plate); }
     if (state === "ready") {
       overlay.innerHTML = `
         <h2>Prêt à soulever ?</h2>
-        <p>Appuie sur une flèche ou sur <span class="key">Espace</span> pour lancer la séance.</p>
+        <p>Appuie sur une flèche, sur <span class="key">Espace</span> ou touche le plateau pour lancer la séance.</p>
         <p class="hint">Si rien ne bouge, clique d'abord sur le plateau.</p>`;
     } else {
       const t = TIERS[tierIndex(eaten)];
@@ -417,7 +564,7 @@ h1 span { color: var(--plate); }
         <h2>Fin de la séance</h2>
         ${newRecord ? '<p class="record">Nouveau record</p>' : ""}
         <p>${score} point${score > 1 ? "s" : ""} · ${eaten} shaker${eaten > 1 ? "s" : ""} · palier « ${t.name} »</p>
-        <p class="hint">Appuie sur <span class="key">Espace</span> pour rejouer.</p>`;
+        <p class="hint">Appuie sur <span class="key">Espace</span> ou touche le plateau pour rejouer.</p>`;
     }
     overlay.hidden = false;
   }
