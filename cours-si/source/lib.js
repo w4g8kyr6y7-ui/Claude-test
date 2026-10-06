@@ -24,17 +24,18 @@ function fr(s) {
     .replace(/« /g, '« ');
 }
 
-// Inline markup: **bold**, *italic*.
+// Inline markup: **bold**, *italic*, ^{superscript}.
 function runs(s, base = {}) {
   const out = [];
-  const re = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const re = /(\*\*[^*]+\*\*|\*[^*]+\*|\^\{[^}]+\})/g;
   const str = fr(s);
   let last = 0;
   let m;
   while ((m = re.exec(str))) {
     if (m.index > last) out.push(new TextRun({ text: str.slice(last, m.index), ...base }));
     const tok = m[0];
-    if (tok.startsWith('**')) out.push(new TextRun({ text: tok.slice(2, -2), ...base, bold: true }));
+    if (tok.startsWith('^{')) out.push(new TextRun({ text: tok.slice(2, -1), ...base, superScript: true }));
+    else if (tok.startsWith('**')) out.push(new TextRun({ text: tok.slice(2, -2), ...base, bold: true }));
     else out.push(new TextRun({ text: tok.slice(1, -1), ...base, italics: true }));
     last = m.index + tok.length;
   }

@@ -13,7 +13,7 @@ const { C, MARGIN, PAGE_W, runs, body, toc, H1, H2, H3, SRC, P, UL, OL, DEF, KEY
 const cover = [
   new Paragraph({ spacing: { after: 40 }, children: runs('LICENCE 2 ÉCONOMIE-GESTION · COURS DE SYNTHÈSE', { bold: true, size: 18, color: C.accent }) }),
   new Paragraph({ spacing: { after: 40 }, children: runs("Systèmes d'information", { bold: true, size: 56, color: C.primary }) }),
-  new Paragraph({ spacing: { after: 60 }, children: runs('Fondamentaux des SI · Séances 1 à 6', { size: 26, color: C.muted }) }),
+  new Paragraph({ spacing: { after: 60 }, children: runs('Fondamentaux des SI · Séances 1 à 9', { size: 26, color: C.muted }) }),
   new Paragraph({ spacing: { after: 320 }, children: runs('Document évolutif : les séances suivantes seront ajoutées à la suite.', { italics: true, size: 18, color: C.muted }) }),
   new Paragraph({
     spacing: { after: 60 },
@@ -684,6 +684,337 @@ RETENIR([
 ]);
 
 // =====================================================================
+// SÉANCE 7
+// =====================================================================
+H1('Séance 7 – SI et Internet des objets (IoT)');
+SRC('Support : « SI et IoT », J. Saint-Samat.');
+
+H2('1. Rappels : le SI dans la gestion');
+H3('Les SI fonctionnels et leur intégration');
+TBL(['SI', 'Rôle', 'Outils'], [0.2, 0.55, 0.25], [
+  ['Comptable et financier', 'Gère les flux (factures, paiements, immobilisations, écritures) ; produit les **états financiers** (bilan, compte de résultat, trésorerie) et des indicateurs (rentabilité, marges, cash-flow). Le SI **financier**, plus large, intègre budget, prévisions, investissements et risques.', 'Sage, Cegid, SAP Finance'],
+  ['Production', 'Planification des ressources, stocks et approvisionnements, suivi des ordres de production, maintenance des équipements', '**PPS** (*Production Planning System*), **GPAO** (gestion de la production assistée par ordinateur)'],
+  ['Marketing et commercial', 'Collecte et analyse des données clients et ventes pour **segmenter** le marché, suivre la satisfaction, cibler les campagnes, prévoir la demande', '**CRM**, **SFA** (*Sales Force Automation*), BI'],
+  ['Ressources humaines', 'Gestion administrative (paie, congés, contrats), recrutement, formation, évaluation et compétences', 'SIRH'],
+  ['Logistique et achats', 'Suivre les flux de marchandises, gérer les stocks, planifier les approvisionnements, **optimiser les itinéraires** de livraison', '—'],
+]);
+KEY("Longtemps **séparés** (redondances, incohérences, pertes de temps), ces SI sont intégrés par l'**ERP** (SAP, Oracle, Microsoft Dynamics) : une commande saisie par le commercial déclenche automatiquement la production, la facturation et la mise à jour des stocks.");
+
+H3("Flux d'information et prise de décision");
+UL([
+  "**3 types de flux** : **descendants** (de la direction vers la base : décisions), **ascendants** (de la base vers le sommet : remontée des ventes, des incidents), **transversaux** (entre services ou partenaires : production et logistique).",
+  "**Cycle de l'information** : collecte → traitement → stockage → diffusion (rapports, alertes, tableaux de bord).",
+  "**Qualité de l'information** : elle n'a de valeur que si elle est **fiable**, **pertinente**, **rapide**, **accessible** et **sécurisée**.",
+  ['**3 niveaux de décision**, chacun soutenu par un type de SI :', [
+    '**opérationnel** (traiter une commande) : les SI opérationnels automatisent les tâches de base ;',
+    '**tactique** (ajuster la production) : les SI décisionnels (tableaux de bord, BI) analysent et prévoient ;',
+    '**stratégique** (lancer un nouveau produit) : les SI stratégiques offrent simulation et aide à la planification.',
+  ]],
+]);
+
+H3('Enjeux managériaux et limites des SI traditionnels');
+UL([
+  "Le **manager devient un acteur de l'information** : il formule ses besoins en données, interprète les indicateurs et veille à la circulation de l'information.",
+  'Le SI **transforme le travail** : moins de tâches administratives, coordination plus transversale, métiers tournés vers l\'analyse, la communication et la supervision.',
+  '**Limites des SI traditionnels** : informations pas toujours en **temps réel**, données **cloisonnées**, traitement lent et centralisé, **manque de visibilité sur le terrain**.',
+]);
+KEY("Les objets connectés y répondent en collectant des données **directement depuis le monde réel** (machines, produits, véhicules, bâtiments, personnes) : meilleur pilotage, décisions automatisées, nouveaux services et modèles économiques.");
+
+H2("2. L'Internet des objets (IoT)");
+H3('Définition et caractéristiques');
+DEF("L'**Internet des objets (IoT)** désigne l'ensemble des **objets physiques** capables de **collecter, transmettre, recevoir et parfois traiter des données via Internet**, **sans intervention humaine directe**.");
+UL([
+  "Ces objets sont munis de **capteurs** (percevoir l'environnement : température, mouvement, pression, lumière…), de **connectivité** (envoyer et recevoir des données) et parfois d'une **intelligence embarquée** (analyser ou agir localement). Un objet connecté peut donc **observer, communiquer et parfois agir**.",
+  "L'IoT **prolonge Internet dans le monde matériel** : Internet reliait des personnes (e-mails, réseaux sociaux) et des machines informatiques ; désormais les **objets physiques** rejoignent le réseau.",
+  '**4 caractéristiques** qui le distinguent de l\'informatique traditionnelle : **ubiquité**, **autonomie**, **interconnexion**, **intelligence**.',
+]);
+
+H3('Le fonctionnement en 4 couches');
+TBL(['Couche', 'Rôle', 'Contenu'], [0.17, 0.2, 0.63], [
+  ['1. Perception', 'Le monde réel : capter et agir', '**Capteurs** (données physiques, biologiques, de position), **actionneurs** (ouvrir une vanne, allumer un moteur), **identifiants** électroniques (puces RFID, QR codes)'],
+  ['2. Transmission', 'Faire circuler les données', 'Wi-Fi (rapide, espace restreint), Bluetooth (courte distance), 4G / 5G (objets mobiles ou distants), LoRa / Sigfox (faible consommation : villes intelligentes, capteurs agricoles), Ethernet ou fibre (objets industriels fixes)'],
+  ['3. Traitement', 'Stocker et analyser', '**Cloud computing** : centraliser, traiter et croiser les données de milliers d\'objets. **Edge computing** : traiter **localement**, sur l\'objet ou à proximité, pour réduire le temps de réponse'],
+  ['4. Application', 'Utilisation métier', 'Applications industrielles (supervision, maintenance), commerciales (marketing, expérience client), médicales (suivi, alertes), publiques (trafic, énergie, sécurité)'],
+]);
+IMG('iot.png', 600, "Les 4 couches d'un système IoT et son cycle : percevoir → transmettre → analyser → agir.");
+
+H2("3. Les domaines d'application");
+TBL(['Domaine', 'Apports', 'Exemples du cours'], [0.18, 0.37, 0.45], [
+  ['Industrie (**industrie 4.0**, *smart factories*)', 'Produire plus efficacement, réduire et **anticiper les pannes**, garantir la qualité', '**Rolls-Royce, « Power by the Hour »** : des centaines de capteurs par moteur, maintenance anticipée ; le client paie **à l\'heure de vol** → la vente d\'un moteur devient un **service de propulsion**'],
+  ['Logistique et supply chain (**traçabilité intelligente**)', 'Savoir où sont les produits, dans quelles conditions, à quel moment : GPS, capteurs de température, RFID, balances connectées', '**Chaîne du froid** : alerte automatique au-delà d\'un seuil (+4 °C), produit isolé ou livraison stoppée. **DHL** : véhicules connectés, itinéraires optimisés, **logistique prédictive**'],
+  ['Commerce et marketing (**expérience client personnalisée**)', 'Suivre l\'usage réel des produits ; passer du marketing de masse au marketing **individualisé et contextuel** ; l\'objet devient un **point de contact permanent**', '**Nespresso** : machine connectée (recommandations, commande automatique, maintenance). **Decathlon** : RFID, passage en caisse automatique. **Amazon Go** : magasin sans caissier, achat « sans friction »'],
+  ['Santé (**e-santé**)', 'Suivi continu des patients, détection précoce des anomalies, prévention des maladies chroniques', 'Montres et bracelets connectés (Apple Watch, Fitbit, Withings) ; équipements hospitaliers connectés au dossier médical électronique. Défis : **protection des données de santé**, cybersécurité, fiabilité'],
+]);
+
+H2("4. Avantages et limites de l'IoT");
+TBL(['Avantages', 'Risques et limites'], [0.5, 0.5], [[
+  [
+    '**Efficacité opérationnelle** : capteurs à la place de la saisie manuelle (moins d\'erreurs), alertes automatiques, moins de temps morts, de rebuts et de gaspillage',
+    '**Décision en temps réel** : on ne raisonne plus sur les chiffres du mois passé ; l\'entreprise devient « **temps réel** »',
+    '**Relation client continue**, au-delà de l\'achat : vente d\'un **écosystème de services connectés**',
+    '**Nouveaux modèles économiques** : facturation **à l\'usage** (*pay per use*), abonnements → l\'industriel devient une **entreprise de services**',
+    '**Bénéfices collectifs** : villes (énergie, pollution, trafic, sécurité), santé publique, environnement → outil de **développement durable**',
+  ],
+  [
+    '**Techniques** : objets vulnérables au **piratage**, réseaux instables, maintenance complexe',
+    '**Économiques** : coût élevé ; **dépendance** aux fournisseurs et aux clouds étrangers (Amazon, Google, Microsoft) → **souveraineté numérique** ; frein pour les PME',
+    '**Juridiques et éthiques** : masse de **données personnelles** (localisation, habitudes, santé) → propriété, usage, confidentialité, **RGPD**',
+    '**Sociaux** : automatisation de certains emplois (logistique, maintenance, surveillance), mais nouveaux métiers (data analyst, ingénieur IoT, cybersécurité) → enjeu de **formation**',
+  ],
+]], { firstColBold: false, headerFill: C.accent });
+
+H2("5. L'intégration de l'IoT dans le SI");
+H3('Un SI qui change de nature');
+TBL(['Critère', 'SI traditionnel', 'SI intégrant l\'IoT'], [0.16, 0.42, 0.42], [
+  ['Nature', 'Fermé, centralisé', '**Ouvert, dynamique**, en interaction avec le monde physique'],
+  ['Données', 'Saisies **manuellement, après coup** ; limitées, surtout quantitatives et comptables ; collecte coûteuse et lente', 'Mesurées **en continu** par des milliers d\'objets : **Big Data**, analysé par l\'**IA** en temps réel'],
+  ['Pilotage', '**A posteriori** : l\'entreprise « constate » les événements (rapports périodiques)', '**En continu** : décisions automatisées ; le rôle du gestionnaire change'],
+]);
+
+H3("L'architecture du SI connecté");
+OL([
+  '**Capteurs et objets connectés** : couche physique ; données environnementales, d\'usage et de localisation, parfois plusieurs fois par seconde.',
+  '**Connectivité et passerelles** (*gateways*) : elles traduisent les protocoles des objets (LoRa, Zigbee, Bluetooth…) vers le réseau de l\'entreprise (Ethernet, Wi-Fi, 4G, 5G).',
+  '**Plateformes IoT** : collecte et normalisation des données, gestion des appareils, premier niveau d\'analyse (AWS IoT, Azure IoT Hub, Google Cloud IoT, ThingSpeak en open source).',
+  '**Intégration au SI** : vers l\'**ERP**, le **CRM**, la **BI**, le **SCM** et le **MES** (*Manufacturing Execution System*) → vision unifiée des données physiques et administratives.',
+]);
+
+H3("Les apports de l'IoT au SI");
+UL([
+  '**Pilotage en temps réel** : tableaux de bord en direct, alertes automatiques → le management passe de **réactif** à **proactif**.',
+  '**Automatisation** grâce au **M2M** (*machine to machine*) : machine qui s\'arrête en cas d\'anomalie, entrepôt qui recommande des pièces sous un seuil critique, chauffage qui s\'ajuste à la présence → SI **auto-régulé**.',
+  '**Fiabilité et traçabilité** : données mesurées automatiquement (moins d\'erreurs humaines), **datées, localisées, vérifiables** (ex. : prouver le respect de la chaîne du froid lors d\'un contrôle).',
+  '**Analyse et prévision** (BI, IA) : tendances cachées, pannes, demande, simulation de scénarios → **SI prédictif**, qui anticipe le futur au lieu de décrire le passé.',
+]);
+
+H3('Transformations organisationnelles et enjeux');
+UL([
+  'Organisation **data-centric** : décisions fondées sur la donnée, pôles de *data management*, coopération accrue entre services, nouvelles compétences dans tous les métiers.',
+  'Le **DSI** gère désormais un écosystème connecté et distribué ; le **CDO** (*Chief Data Officer*) devient le garant de la qualité, de la cohérence et de la **gouvernance des données**.',
+  'Nouveaux métiers : analyste IoT, ingénieur de la donnée, expert cybersécurité, responsable d\'innovation digitale.',
+]);
+TBL(['Enjeu', 'Réponses'], [0.25, 0.75], [
+  ['Sécurité', 'Chaque objet est un point d\'entrée pour un pirate : **chiffrement** des communications, **authentification** des objets, mises à jour, supervision du réseau'],
+  ['Gouvernance des données', 'À qui appartiennent les données ? Qui y accède ? Combien de temps les garder ? Pour quels usages ? → classification, règles d\'accès, **RGPD**, archivage'],
+  ['Complexité d\'intégration', 'Compatibilité des formats, **interopérabilité**, flux massifs, technologies qui évoluent vite → architectures souples fondées sur des **API** et des standards ouverts'],
+  ['Accompagnement humain', 'Expliquer les bénéfices, rassurer (emploi, surveillance), former aux nouveaux outils'],
+]);
+KEY('« Sans gouvernance, la donnée devient un **fardeau** plutôt qu\'une richesse. »');
+
+RETENIR([
+  '**IoT** = objets physiques qui **collectent, transmettent, reçoivent et parfois traitent** des données via Internet, sans intervention humaine directe (capteurs + connectivité + parfois intelligence embarquée).',
+  '4 couches : **perception → transmission → traitement (cloud / edge) → application** ; cycle **percevoir, transmettre, analyser, agir**.',
+  'Il répond aux **limites des SI traditionnels** : pas de temps réel, données cloisonnées, manque de visibilité terrain.',
+  'Exemples : Rolls-Royce (*Power by the Hour*), chaîne du froid, DHL, Nespresso, Decathlon (RFID), Amazon Go, e-santé.',
+  '**+** efficacité, décision en temps réel, relation client continue, **modèles à l\'usage** ; **–** sécurité, coût et dépendance, données personnelles (RGPD), emploi.',
+  'Le SI devient ouvert, temps réel, **auto-régulé (M2M)** et **prédictif** ; enjeux : sécurité, **gouvernance des données** (CDO), interopérabilité (API), accompagnement du changement.',
+]);
+
+// =====================================================================
+// SÉANCE 8
+// =====================================================================
+H1("Séance 8 – Les métiers des systèmes d'information");
+SRC("Support : « Métiers des systèmes d'information (SI) », É. Lavoué.");
+
+H2('1. Le SI, un secteur porteur');
+UL([
+  "Le SI est l'**élément central** de l'organisation : il améliore la productivité, aide à mettre en œuvre la stratégie, favorise la collaboration interne et externe.",
+  'Les métiers du SI couvrent toutes les actions liées aux données : **collecte, stockage, traitement et partage**.',
+  'On les exerce partout : cabinets de conseil, **ESN** (entreprises de services numériques), grandes entreprises, PME/PMI, éditeurs de logiciels (Microsoft, Adobe, Oracle)…',
+  'Secteur **pointu** (expertise), **dynamique très favorable à l\'emploi** (difficultés de recrutement), nombreuses évolutions de carrière.',
+  'Les métiers évoluent avec les **innovations** : intelligence artificielle, cloud, big data, machine learning (voir séance 9).',
+]);
+
+H2('2. La nomenclature du Cigref');
+DEF("Le **Cigref** (association loi 1901 créée en 1970) réunit près de **150 grandes entreprises et administrations** françaises et les accompagne sur les enjeux du numérique. Il publie une **nomenclature des profils métiers du SI**, régulièrement mise à jour, qui sert de référence à ce cours.");
+UL([
+  'Évolution : avant 2009, des familles organisées en **silos techniques** (conseil, développement, expertise, exploitation, support) ; après 2009, une organisation **en couches** transversales.',
+  'Depuis 2018 : **9 familles** pour **50 métiers**.',
+  'Chaque **profil métier** se décrit par : un titre → une **mission** → des **activités** → des **domaines de compétences** (déclinés en niveaux de responsabilité, appuyés sur des connaissances et savoir-faire) → des notions transversales → des **livrables** → des **indicateurs de performance (KPI)** → un parcours professionnel → des tendances d\'évolution.',
+]);
+
+H2('3. Les 9 familles de métiers');
+TBL(['Famille', 'Rôle', 'Exemples de métiers'], [0.25, 0.33, 0.42], [
+  ['1. Pilotage, organisation et gestion des évolutions du SI', 'Mise en **cohérence organisationnelle et fonctionnelle** du SI avec la stratégie', '**Consultant en SI**, urbaniste des SI, responsable du SI « métier », gestionnaire d\'applications, chargé d\'affaires internes, architecte d\'entreprise, **responsable Green IT**'],
+  ['2. Management de projet', '**Piloter, suivre et coordonner** les projets SI (travaux, ressources, communication)', 'Directeur de projets, chef de projet MOA, **chef de projet MOE**, coach agile, Scrum master, product owner, chargé de pilotage SI (PMO)'],
+  ['3. Cycle de vie des applications', '**Conception, développement, réalisation technique** des solutions : les « briques » du SI, pas son organisation', 'Responsable des systèmes applicatifs, **concepteur / développeur**, testeur, intégrateur d\'applications, paramétreur de progiciels'],
+  ['4. Mise à disposition et maintenance des infrastructures', 'Étude, conception, intégration et **exploitation des infrastructures** ; support IT interne à la DSI', '**Technicien d\'exploitation**, technicien poste de travail ou réseaux-télécoms, administrateurs (systèmes, réseaux, bases de données), pilote d\'exploitation, architecte technique'],
+  ['5. Support et assistance', '**Assistance et accompagnement** des utilisateurs du SI', 'Assistant fonctionnel, technicien support utilisateurs, **expert méthode et outils / qualité**'],
+  ['6. Sécurité', 'Définition, expertise, **audit**, mise en place et contrôle de la **cybersécurité**', '**Expert en cybersécurité**, auditeur SSI, **RSSI** (responsable de la sécurité des SI)'],
+  ['7. Management opérationnel', '**Responsabilité hiérarchique** : RH, budget, décision, périmètre', '**DSI**, responsables d\'entité, télécoms, d\'exploitation, d\'études ; *Chief Digital Officer* ; responsable marketing de la DSI'],
+  ['8. Données', '**Cycle de gestion de la donnée**', 'Data scientist, **data analyst**, *Chief Data Officer*, data engineer, **DPO** (délégué à la protection des données)'],
+  ['9. Relations fournisseurs', '**Achats**, gestion des **contrats** et des **licences**', '**Manager de contrats**, acheteur IT, *Software Asset Manager* (SAM), *vendor manager*'],
+]);
+NOTE('En gras : les métiers détaillés en cours. Attention, le sigle CDO désigne soit le Chief Digital Officer (famille 7), soit le Chief Data Officer (famille 8, vu aussi en séance 7).');
+
+H2('4. Zoom sur quelques métiers');
+TBL(['Métier', 'Mission', 'Salaire brut annuel'], [0.22, 0.62, 0.16], [
+  ['Consultant en SI', 'Anticipe et fait mûrir les nouveaux projets (apport des technologies, analyse prospective des processus) ; assiste la **maîtrise d\'ouvrage** dans la définition des besoins et des solutions', '35 – 51 k€'],
+  ['Responsable Green IT', 'Construit un SI **(éco)responsable** ; élabore et fait évoluer la stratégie **RSE** de l\'entreprise côté SI, avec le DSI et le directeur du développement durable ; pilote la stratégie Green IT', '55 – 80 k€'],
+  ['Chef de projet MOE', 'Définit, met en œuvre et conduit un projet SI **de la conception à la réception**, conformément aux exigences de la MOA (qualité, performance, coût, délai, sécurité)', '43 – 58 k€'],
+  ['Concepteur / développeur', 'À la demande du métier, **analyse, paramètre et code** les composants logiciels, dans le respect des normes et procédures', '45 – 63 k€'],
+  ['Technicien d\'exploitation', 'Assure la **gestion courante de l\'exploitation** (hors réseau) et surveille les équipements du centre de production informatique', '—'],
+  ['Expert méthode et outils / qualité', 'Référent de son domaine : conseil, assistance, formation, **alerte sur les risques** ; veille technologique ; interlocuteur des experts externes', '45 – 65 k€'],
+  ['Expert en cybersécurité', 'Définit et met en œuvre les **dispositifs techniques de sécurité**, conformément à la politique de sécurité et aux réglementations ; veille, conseil, alerte sur les risques', '40 – 72 k€'],
+  ['DSI', 'Garant de l\'**alignement du SI sur la stratégie** ; responsable de la conception, de la mise en œuvre, de la sécurité et de la qualité du SI ; fixe les grandes évolutions, maîtrise les coûts, décide des investissements', '90 – 250 k€'],
+  ['Data analyst', 'Met en œuvre outils informatiques et **méthodes statistiques** pour organiser et traduire les données métiers ; produit les **indicateurs de performance** utiles à la décision', '50 – 80 k€'],
+  ['Manager de contrats', 'Optimise les **achats de la DSI** : compétitivité et équité des contrats, suivi des fournisseurs, sous-traitance (TMA, infogérance)', '51 – 70 k€'],
+]);
+NOTE('Salaires indicatifs relevés entre 2020 et 2024 selon les sources citées dans le cours.');
+
+H3('Deux notions à connaître : Green IT et projet');
+DEF("**Green IT** : ensemble des technologies dont l'usage permet de **réduire les effets nocifs de l'activité humaine sur l'environnement**. Objectif : réduire l'impact environnemental du numérique (consommation énergétique, empreinte carbone, gaz à effet de serre, déchets électroniques).");
+TBL(['Notion', 'Définition'], [0.24, 0.76], [
+  ['Projet', 'Ensemble d\'actions pour répondre à un **besoin défini**, avec une qualité suffisante, dans un **délai fixé**, mobilisant des ressources humaines et matérielles, et ayant un **coût**'],
+  ['Maître d\'ouvrage (MOA)', 'Personne physique ou morale **propriétaire de l\'ouvrage** : elle fixe les **objectifs**, le **budget** et les **délais**'],
+  ['Maître d\'œuvre (MOE)', 'Personne qui reçoit mission de la MOA pour **concevoir et réaliser** l\'ouvrage'],
+  ['Conduite de projet', 'Organisation méthodologique qui garantit que l\'ouvrage réalisé par la MOE répond aux attentes de la MOA, **dans les contraintes de délai, coût et qualité**'],
+]);
+
+H2('5. Les compétences transversales');
+P('Communes à tous les métiers, de la simple sensibilisation à l\'engagement proactif, elles couvrent **7 domaines** : **accessibilité**, **éthique**, **questions juridiques** liées aux TIC, **respect de la vie privée**, **sécurité**, **développement durable**, **utilisabilité**.');
+P('En conclusion : des métiers variés (compétences, responsabilités, secteurs), en **forte demande**, dans un domaine qui évolue vite. Le master MSI de l\'iaelyon prépare à cette **double compétence métier et technique** (consultant, directeur de projet, DSI, responsable Green IT…).');
+
+RETENIR([
+  'Les métiers du SI couvrent la **collecte, le stockage, le traitement et le partage** des données ; secteur porteur, présent partout (ESN, cabinets, entreprises, éditeurs).',
+  'Référence : la **nomenclature du Cigref**, **9 familles et 50 métiers** depuis 2018 (organisation en couches depuis 2009).',
+  'Les 9 familles : pilotage du SI, management de projet, cycle de vie des applications, infrastructures, support, sécurité, management opérationnel, données, relations fournisseurs.',
+  'Métiers phares : consultant SI, chef de projet MOE, développeur, expert cybersécurité / RSSI, **DSI** (alignement SI-stratégie), data analyst, DPO, responsable **Green IT**.',
+  '**MOA** = propriétaire (objectifs, budget, délais) ; **MOE** = conçoit et réalise ; projet = besoin + délai + ressources + coût.',
+  '**7 compétences transversales** : accessibilité, éthique, juridique, vie privée, sécurité, développement durable, utilisabilité.',
+]);
+
+// =====================================================================
+// SÉANCE 9
+// =====================================================================
+H1("Séance 9 – Perspectives de l'IA sur les SI");
+SRC("Support : « Perspective IA sur les SI… et perspectives d'actualité », B. Fuchs.");
+
+H2("1. Qu'est-ce que l'intelligence artificielle ?");
+H3("Du programme à l'IA");
+UL([
+  'Un ordinateur est une « machine stupide » : il se contente d\'**exécuter des programmes**, grâce à une mémoire (données et programmes) et à des circuits électroniques.',
+  "L'« intelligence » vient du **programme**, qui applique une méthode, l'**algorithme**, conçue par le programmeur.",
+  "**Limite** : un programme ne réalise qu'**une tâche bien définie** et enferme des connaissances. D'où l'idée de **sortir les connaissances** dans une **base de connaissances**, exploitée par des programmes **génériques** capables de résoudre n'importe quel problème.",
+]);
+
+H3('Définitions et approches');
+DEF("Il n'existe pas de définition consensuelle. L'**IA** consiste à **doter les machines de capacités** leur permettant d'effectuer des tâches réputées « intelligentes » car réalisées par des humains : concevoir des systèmes capables de **raisonner** pour résoudre un problème en **exploitant des connaissances**.");
+UL([
+  'Hypothèse : une tâche intelligente suppose des **connaissances** et des **mécanismes de raisonnement** qui les exploitent.',
+  'Un système d\'IA sait : acquérir de l\'information ; raisonner, résoudre des problèmes, planifier ; expliquer et communiquer ; comprendre le langage naturel ; apprendre et découvrir.',
+  '**Test de Turing** : un interrogateur humain dialogue sans les voir avec un humain et avec un système d\'IA ; s\'il ne parvient pas à distinguer la machine de l\'humain, la machine est jugée intelligente.',
+]);
+TBL(['', 'Centré sur l\'humain', 'Performance idéale (rationnel)'], [0.24, 0.38, 0.38], [
+  ['Pensée et raisonnement', 'Systèmes qui **pensent comme les humains**', 'Systèmes qui **pensent de façon rationnelle**'],
+  ['Comportement', 'Systèmes qui **se comportent comme les humains**', 'Systèmes qui **se comportent de façon rationnelle**'],
+]);
+
+H3('Repères historiques');
+TBL(['Période', 'Repères'], [0.2, 0.8], [
+  ['Antiquité', '**Aristote** analyse le raisonnement valide : le **syllogisme** (« Tous les hommes sont mortels, Socrate est un homme, donc Socrate est mortel »), mais aussi l\'analogie'],
+  ['Avant 1956', 'Travaux précurseurs : réseaux de neurones artificiels, cybernétique, théorie de l\'information, **Turing**, *Logic Theorist* (Simon et Newell)'],
+  ['1956', '**Conférence de Dartmouth** : « naissance » de l\'IA (Minsky, McCarthy) ; *General Problem Solver* (Simon et Newell)'],
+  ['1960-1980', 'Délimitation du domaine, traduction automatique ; prise de conscience de la difficulté et **premières désillusions** ; coup d\'arrêt aux réseaux de neurones ; premiers **systèmes experts**'],
+  ['1980-1990', 'Essor des systèmes experts, puis « **hiver de l\'IA** » (promesses non tenues, fin des financements) ; émergence de l\'apprentissage, IA distribuée'],
+  ['1990-2000', 'Fin des systèmes experts, retour des réseaux de neurones, fouille de données ; **1997 : Deep Blue bat Kasparov** aux échecs'],
+  ['XXIe siècle', '1989 : le web (Tim Berners-Lee) ; 2001 : **web sémantique** ; 2005 : véhicules robotisés ; **2012 : deep learning** ; **2016 : AlphaGo**'],
+]);
+
+H3('Capacités et applications');
+P('**Capacités** : traitement du langage naturel (communiquer), représentation des connaissances (stocker), raisonnement (répondre, conclure), apprentissage automatique (s\'adapter), vision artificielle (percevoir), robotique (manipuler, se déplacer).');
+TBL(['Domaine', 'Applications'], [0.22, 0.78], [
+  ['Commerce et marketing', 'Segmentation de la clientèle, profil du consommateur, **analyse du panier de la ménagère**, rétention des clients, prédiction des ventes, détection des fraudes, clients à risque'],
+  ['Finance', 'Corrélations entre indicateurs financiers, optimisation du rendement de portefeuilles d\'actions'],
+  ['Ressources humaines', 'Prévision du plan de carrière, aide au recrutement'],
+  ['Industrie', 'Détection et diagnostic de pannes et de défauts, analyse des flux dans les réseaux de distribution'],
+  ['Sciences', 'Diagnostic médical, génome, chimie et pharmacie, astronomie'],
+  ['Résolution de problèmes', 'Planification (emploi du temps, production), recherche de chemin (routage, télécoms), jeux (échecs, go)'],
+]);
+
+H2('2. Résoudre des problèmes');
+UL([
+  'Un problème se modélise par **P = (D, O, B)** : **D** = données ou état initial ; **B** = but ou état final ; **O** = opérateurs qui font passer d\'un état à un autre.',
+  'L\'**espace d\'états** est l\'ensemble des configurations possibles. **Résoudre**, c\'est trouver un **chemin** de D à B dans cet espace, en général celui de **coût minimal**.',
+  'Exemple des échecs : avec p coups possibles par position, explorer n coups d\'avance représente p^{n} états. Pour n = 100, environ 2^{100} ≈ 10^{30} opérations : à une opération par microseconde, 3 × 10^{16} ans, plus de 2 millions de fois l\'âge de l\'univers.',
+]);
+KEY("Explorer tout l'espace d'états est impossible : l'IA doit **mobiliser des connaissances** pour guider la recherche.");
+
+H2('3. Représenter les connaissances et raisonner');
+H3('Les systèmes à base de connaissances (SBC)');
+UL([
+  'Principe : **représenter = stocker + raisonner**. On abstrait le problème du monde réel, on le représente ; des **inférences** exploitent la **base de connaissances** pour produire une solution, que l\'on interprète.',
+  'La connaissance est représentée de façon **explicite** (base indépendante du programme) et **déclarative** (on comprend ce qu\'elle exprime sans faire tourner de programme).',
+  'Un bon formalisme est **correct** (toute description a un sens) et **cohérent** (toutes les connaissances sont vraies simultanément).',
+  'Formalismes : procéduraux (Lisp), **logiques** (calcul des propositions, des prédicats, Prolog), **règles de production** (systèmes experts), structurels (frames, objets, réseaux sémantiques), distribués (systèmes multi-agents).',
+]);
+
+H3("Les modes d'inférence");
+DEF("L'**inférence** est le mécanisme qui permet de passer d'un ensemble de principes à une **conclusion**.");
+TBL(['Mode', 'Sens', 'Exemple du cours'], [0.17, 0.3, 0.53], [
+  ['Déduction', 'Du **général au particulier**', 'Tous les hommes sont mortels ; Socrate est un homme → Socrate est mortel'],
+  ['Induction', 'Du **particulier au général**', 'Marie fume et a un cancer → tout fumeur a un cancer (généralisation risquée)'],
+  ['Abduction', 'Des **effets vers les causes**', '—'],
+  ['Analogie', 'Du **particulier au particulier**', 'Raisonnement à partir de cas (ci-dessous)'],
+]);
+
+H3('Systèmes experts et raisonnement à partir de cas');
+UL([
+  '**Système expert** = une **base de faits** (problème, solution) + une **base de règles** + un **moteur d\'inférence** qui sélectionne et applique les règles jusqu\'à obtenir une solution.',
+  '**Règle de production** : « **SI** conditions **ALORS** actions » (ex. : SI importations en hausse ET exportations en baisse ALORS balance extérieure non équilibrée). Le moteur raisonne en **chaînage avant** (des faits vers les conclusions) ou **arrière** (des conclusions vers les faits).',
+  '**Raisonnement à partir de cas (RàPC)** : résoudre un nouveau problème (**cible**) en **réutilisant la solution** d\'un problème déjà résolu (**source**) : on retrouve un cas similaire dans une **base de cas** (remémoration), puis on **adapte** sa solution. Utile sans théorie du domaine ; le système **apprend** de chaque problème résolu.',
+  'Autres raisonnements : dans le temps et l\'espace, dans l\'incertitude, argumentation, révision d\'informations, systèmes multi-agents (décision collective, négociation)…',
+]);
+
+H2("4. Apprendre : l'apprentissage automatique");
+DEF("L'**apprentissage automatique** (*machine learning*) consiste à **découvrir des règles à partir d'exemples**, en évaluant les performances obtenues.");
+TBL(['Type', 'Principe', 'Méthodes'], [0.17, 0.5, 0.33], [
+  ['Supervisé', 'Un spécialiste fournit les **classes** et des exemples significatifs ; la machine en déduit un **modèle prédictif** (classifieur) qui classe de nouveaux individus', 'Arbres de décision, random forest, réseaux de neurones, k plus proches voisins, régression, réseaux bayésiens, SVM, boosting'],
+  ['Non supervisé', 'Sans assistance : la machine observe les individus, découvre **similarités et différences** et les **regroupe**', 'Clustering (k-means, CAH), réduction de dimension (ACP), réseaux de Kohonen'],
+  ['Par renforcement', 'Un **agent** agit dans un environnement qui lui renvoie une **récompense** positive ou négative ; par essais répétés, il cherche à **maximiser la somme des récompenses**', '—'],
+]);
+
+H3("Exemples d'apprentissage supervisé");
+UL([
+  '**Ciblage d\'un mailing** : 2 à 5 % des prospects répondent habituellement. Un modèle appris sur les réponses à un produit similaire fait passer le taux de réponse de **3 %** (envoi au hasard) à **15 %** (envoi ciblé).',
+  '**Credit scoring** : évaluer la capacité d\'un emprunteur à rembourser, à partir de l\'historique des prêts. Autres usages : détection des spams, des fraudes, ciblage des contrôles fiscaux.',
+  '**Arbre de décision** : on classe un nouvel exemple en suivant des tests successifs.',
+]);
+IMG('arbre_decision.png', 430, 'Arbre de décision du cours : qui achète une moto ?');
+NOTE('Lecture : une femme → non ; un homme de moins de 40 ans → oui. Jacques (30 ans) est classé acheteur… et Kevin (3 ans) aussi : un modèle ne vaut que par la pertinence de ses données et de ses critères.');
+
+H3('Réseaux de neurones et deep learning');
+UL([
+  '**Réseau de neurones artificiels** : inspiré du système nerveux. Chaque neurone reçoit des **entrées numériques** pondérées par des **poids**, calcule leur **somme pondérée**, puis applique une **fonction d\'activation**. Les poids s\'ajustent par l\'expérience.',
+  '**Deep learning** (apprentissage profond) : réseaux à **nombreuses couches** (« profond » = nombre de transformations entre l\'entrée et la sortie), utilisés en reconnaissance de formes : vision, parole, langage naturel, audio, bio-informatique.',
+]);
+
+H2('5. Extraire des connaissances des données (ECD)');
+DEF("L'**ECD** (extraction de connaissances à partir de données, ou fouille de données) relève de l'**informatique décisionnelle** : exploiter de **gros volumes de données** pour y trouver des **régularités** interprétables comme des **connaissances nouvelles**, au service de la décision.");
+IMG('ecd.png', 600, "Le processus d'ECD.");
+UL([
+  'Applications typiques : **analyse du panier de la ménagère**, fidélisation des clients, publicité ciblée, détection des fraudes.',
+  'Panier de la ménagère : à partir des tickets de caisse, on cherche les **itemsets fréquents** (produits souvent achetés ensemble) et des **règles d\'association** (exemple du cours : « si achat de couches, alors achat de bières dans 90 % des cas »).',
+]);
+
+H2('6. Le web sémantique');
+UL([
+  '2001 : faire évoluer le web pour que **machines et humains travaillent mieux ensemble**, en enrichissant les ressources de **données structurées**, identifiées de façon unique (**URI**) et **liées** entre elles (données liées).',
+  'Langages : le web classique utilise **HTML** (documents et liens) et **CSS** (présentation) ; le web sémantique utilise **RDF / RDFS** et **OWL** (*Ontology Web Language*), qui décrivent l\'information en **triplets (sujet, prédicat, objet)**, par exemple « Arthur – est un ami de – Aline ».',
+  'Application en gestion : **SCOR** (*Supply-Chain Operations Reference*), modèle standard mondial de gestion de la chaîne d\'approvisionnement, enrichi de données liées pour faciliter les échanges ; essentiel dans les **ERP**.',
+  'Perspectives : systèmes capables d\'**introspection** (observer leur propre raisonnement), étude de l\'**émotion**, applications artistiques (musique, jeux).',
+]);
+
+RETENIR([
+  'IA = doter les machines de capacités jugées « intelligentes » ; elle repose sur des **connaissances** et des **mécanismes de raisonnement** ; 4 approches (penser / agir × humain / rationnel) ; **test de Turing**.',
+  'Repères : Aristote (syllogisme), **Dartmouth 1956**, systèmes experts puis « hiver de l\'IA », **Deep Blue 1997**, **deep learning 2012**, **AlphaGo 2016**.',
+  'Problème = **(D, O, B)** ; résoudre = trouver un chemin dans l\'**espace d\'états**, souvent trop vaste pour être exploré entièrement.',
+  'Inférences : **déduction** (général → particulier), **induction** (particulier → général), **abduction** (effets → causes), **analogie** (particulier → particulier). **Système expert** = faits + règles SI… ALORS + moteur d\'inférence ; **RàPC** = réutiliser et adapter un cas résolu.',
+  'Apprentissage **supervisé** (classes connues → modèle prédictif), **non supervisé** (regroupement), **par renforcement** (récompenses) ; réseaux de neurones et **deep learning**.',
+  '**ECD** : sélection → prétraitement → transformation → fouille → interprétation → connaissance (ex. : panier de la ménagère). **Web sémantique** : données liées, triplets RDF, SCOR.',
+]);
+
+// =====================================================================
 // Assemble
 // =====================================================================
 const footer = new Footer({
@@ -699,7 +1030,7 @@ const footer = new Footer({
 const doc = new Document({
   creator: 'Cours de SI',
   title: "Systèmes d'information – L2 Économie-Gestion",
-  description: 'Cours de synthèse, séances 1 à 6',
+  description: 'Cours de synthèse, séances 1 à 9',
   styles: L.stylesConfig(),
   numbering: L.numberingConfig(),
   features: {},

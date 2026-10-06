@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff}
+svg text{font-family:Inter,'Liberation Sans',sans-serif}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="980" height="380" viewBox="0 0 980 380">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0B4F6C"/>
+    </marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B7791F"/>
+    </marker>
+  </defs>
+  <rect width="980" height="380" fill="#fff"/>
+
+  <!-- layer boxes -->
+  <g>
+    <rect x="16" y="64" width="214" height="200" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <rect x="16" y="64" width="214" height="44" rx="10" fill="#0B4F6C"/>
+    <rect x="16" y="94" width="214" height="14" fill="#0B4F6C"/>
+    <text x="123" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">1. Perception</text>
+    <text x="30" y="136" font-size="13" fill="#1F2D36">• Capteurs</text>
+    <text x="30" y="158" font-size="13" fill="#1F2D36">• Actionneurs</text>
+    <text x="30" y="180" font-size="13" fill="#1F2D36">• RFID, QR codes</text>
+    <text x="30" y="214" font-size="12" fill="#55636C">données physiques,</text>
+    <text x="30" y="231" font-size="12" fill="#55636C">biologiques, de position</text>
+  </g>
+  <g>
+    <rect x="262" y="64" width="214" height="200" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <rect x="262" y="64" width="214" height="44" rx="10" fill="#0B4F6C"/>
+    <rect x="262" y="94" width="214" height="14" fill="#0B4F6C"/>
+    <text x="369" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">2. Transmission</text>
+    <text x="276" y="136" font-size="13" fill="#1F2D36">• Wi-Fi, Bluetooth</text>
+    <text x="276" y="158" font-size="13" fill="#1F2D36">• 4G / 5G</text>
+    <text x="276" y="180" font-size="13" fill="#1F2D36">• LoRa / Sigfox</text>
+    <text x="276" y="202" font-size="13" fill="#1F2D36">• Ethernet, fibre</text>
+    <text x="276" y="236" font-size="12" fill="#55636C">selon distance, débit, énergie</text>
+  </g>
+  <g>
+    <rect x="508" y="64" width="214" height="200" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <rect x="508" y="64" width="214" height="44" rx="10" fill="#0B4F6C"/>
+    <rect x="508" y="94" width="214" height="14" fill="#0B4F6C"/>
+    <text x="615" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">3. Traitement</text>
+    <text x="522" y="136" font-size="13" fill="#1F2D36">• Cloud computing :</text>
+    <text x="536" y="155" font-size="12" fill="#55636C">centraliser et croiser</text>
+    <text x="522" y="186" font-size="13" fill="#1F2D36">• Edge computing :</text>
+    <text x="536" y="205" font-size="12" fill="#55636C">traiter sur place,</text>
+    <text x="536" y="222" font-size="12" fill="#55636C">réponse plus rapide</text>
+  </g>
+  <g>
+    <rect x="754" y="64" width="210" height="200" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <rect x="754" y="64" width="210" height="44" rx="10" fill="#0B4F6C"/>
+    <rect x="754" y="94" width="210" height="14" fill="#0B4F6C"/>
+    <text x="859" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">4. Application</text>
+    <text x="768" y="136" font-size="13" fill="#1F2D36">• Industrielles</text>
+    <text x="768" y="158" font-size="13" fill="#1F2D36">• Commerciales</text>
+    <text x="768" y="180" font-size="13" fill="#1F2D36">• Médicales</text>
+    <text x="768" y="202" font-size="13" fill="#1F2D36">• Publiques</text>
+    <text x="768" y="236" font-size="12" fill="#55636C">utilisation métier</text>
+  </g>
+
+  <!-- arrows between layers -->
+  <g stroke="#0B4F6C" stroke-width="2.4">
+    <line x1="232" y1="164" x2="258" y2="164" marker-end="url(#a)"/>
+    <line x1="478" y1="164" x2="504" y2="164" marker-end="url(#a)"/>
+    <line x1="724" y1="164" x2="750" y2="164" marker-end="url(#a)"/>
+  </g>
+
+  <!-- cycle verbs -->
+  <g font-size="16" font-weight="700" fill="#B7791F" text-anchor="middle">
+    <text x="123" y="40">Percevoir</text>
+    <text x="369" y="40">Transmettre</text>
+    <text x="615" y="40">Analyser</text>
+    <text x="859" y="40">Agir</text>
+  </g>
+
+  <!-- feedback loop: action back to the physical world -->
+  <path d="M859,266 L859,318 L123,318 L123,270" fill="none" stroke="#B7791F" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#g)"/>
+  <rect x="292" y="304" width="396" height="28" rx="6" fill="#fff"/>
+  <text x="490" y="323" text-anchor="middle" font-size="13" fill="#7A5A12">l'action modifie le monde réel, qui est de nouveau mesuré</text>
+  <text x="490" y="362" text-anchor="middle" font-size="12.5" fill="#55636C">Passerelles (gateways) entre objets et réseau d'entreprise · plateformes IoT (AWS IoT, Azure IoT Hub…) · intégration à l'ERP, CRM, BI, SCM, MES</text>
+</svg>
+</body></html>
