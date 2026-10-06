@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude — Motion Reel ’26</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  html, body { margin: 0; background: #0D0D0F; color: #EEEBE3; height: 100%; }
+  body { display: grid; place-items: center; font: 500 14px "JetBrains Mono", monospace; }
+  canvas { display: block; width: min(100vw, 177.78vh); height: auto; aspect-ratio: 16 / 9; }
+  body.render canvas { width: 1920px; height: 1080px; }
+  #play { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(13,13,15,.55); border: 0; color: inherit; font: inherit; letter-spacing: 3px; cursor: pointer; }
+  body.render #play, #play[hidden] { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<button id="play" hidden>▶ PLAY REEL (SOUND ON)</button>
+<script type="module">
+  import './src/main.js';
+  const render = new URLSearchParams(location.search).has('render');
+  if (render) document.body.classList.add('render');
+  else {
+    // Live preview: the audio clock drives the timeline.
+    const meta = await window.SR.init();
+    window.SR.frame(0);
+    const btn = document.getElementById('play');
+    btn.hidden = false;
+    const audio = new Audio('media/soundtrack.wav');
+    btn.onclick = () => {
+      btn.hidden = true;
+      audio.currentTime = 0;
+      audio.play();
+      const tick = () => {
+        const t = Math.min(audio.currentTime, meta.DUR - 1 / meta.FPS);
+        window.SR.frame(t);
+        if (!audio.ended) requestAnimationFrame(tick); else btn.hidden = false;
+      };
+      requestAnimationFrame(tick);
+    };
+  }
+</script>
+</body>
+</html>
