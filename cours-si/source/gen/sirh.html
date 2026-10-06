@@ -1,0 +1,64 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff}
+svg text{font-family:Inter,'Liberation Sans',sans-serif}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0B4F6C"/>
+    </marker>
+  </defs>
+  <rect width="960" height="400" fill="#fff"/>
+  <!-- axes -->
+  <line x1="60" y1="340" x2="940" y2="340" stroke="#0B4F6C" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="60" y1="340" x2="60" y2="20" stroke="#0B4F6C" stroke-width="2" marker-end="url(#a)"/>
+  <text transform="translate(34,180) rotate(-90)" text-anchor="middle" font-size="14" font-weight="600" fill="#0B4F6C">Productivité</text>
+
+  <!-- steps: x centers 140, 280, 420, 560, 700, 840 -->
+  <g font-size="13">
+    <rect x="76" y="282" width="128" height="44" rx="7" fill="#FFF3D6" stroke="#E0A526"/>
+    <text x="140" y="309" text-anchor="middle" font-weight="600" fill="#1F2D36">Logiciels de paie</text>
+
+    <rect x="208" y="230" width="144" height="58" rx="7" fill="#FCE3D3" stroke="#E07B3C"/>
+    <text x="280" y="252" text-anchor="middle" font-weight="600" fill="#1F2D36">Progiciels spécifiques</text>
+    <text x="280" y="270" text-anchor="middle" fill="#1F2D36">par fonction RH</text>
+
+    <rect x="356" y="180" width="128" height="58" rx="7" fill="#F8D7DA" stroke="#C0505B"/>
+    <text x="420" y="202" text-anchor="middle" font-weight="600" fill="#1F2D36">SIRH (ERP)</text>
+    <text x="420" y="220" text-anchor="middle" fill="#1F2D36">logique processus</text>
+
+    <rect x="490" y="130" width="140" height="58" rx="7" fill="#E4E2F7" stroke="#6C63C7"/>
+    <text x="560" y="152" text-anchor="middle" font-weight="600" fill="#1F2D36">Portail RH</text>
+    <text x="560" y="170" text-anchor="middle" fill="#1F2D36">et libre-service</text>
+
+    <rect x="636" y="88" width="128" height="44" rx="7" fill="#DCEBF7" stroke="#3B7DC4"/>
+    <text x="700" y="115" text-anchor="middle" font-weight="600" fill="#1F2D36">Outils nomades</text>
+
+    <rect x="776" y="36" width="128" height="44" rx="7" fill="#D3F4F7" stroke="#14A3B3"/>
+    <text x="840" y="63" text-anchor="middle" font-weight="700" fill="#1F2D36">IA</text>
+  </g>
+  <!-- step connectors -->
+  <g stroke="#7A8A94" stroke-width="1.4" fill="none">
+    <path d="M204,304 L244,304 L244,290"/>
+    <path d="M352,259 L386,259 L386,240"/>
+    <path d="M484,209 L520,209 L520,190"/>
+    <path d="M630,159 L668,159 L668,134"/>
+    <path d="M764,110 L808,110 L808,82"/>
+  </g>
+  <!-- decade labels -->
+  <g font-size="13" fill="#33414A" text-anchor="middle">
+    <text x="140" y="364">années 70</text>
+    <text x="280" y="364">années 80</text>
+    <text x="420" y="364">années 90</text>
+    <text x="560" y="364">années 2000</text>
+    <text x="700" y="364">années 2000-2010</text>
+    <text x="840" y="364">années 2020</text>
+  </g>
+  <g stroke="#0B4F6C" stroke-width="1.5">
+    <line x1="140" y1="336" x2="140" y2="344"/><line x1="280" y1="336" x2="280" y2="344"/>
+    <line x1="420" y1="336" x2="420" y2="344"/><line x1="560" y1="336" x2="560" y2="344"/>
+    <line x1="700" y1="336" x2="700" y2="344"/><line x1="840" y1="336" x2="840" y2="344"/>
+  </g>
+</svg>
+</body></html>

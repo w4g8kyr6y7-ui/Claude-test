@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff;font-family:Inter,'Liberation Sans',sans-serif}
+svg text{font-family:Inter,'Liberation Sans',sans-serif}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0B4F6C"/>
+    </marker>
+  </defs>
+  <rect width="920" height="560" fill="#fff"/>
+
+  <!-- arrows -->
+  <line x1="460" y1="128" x2="460" y2="200" stroke="#0B4F6C" stroke-width="2.2" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="460" y1="362" x2="460" y2="428" stroke="#0B4F6C" stroke-width="2.2" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="268" y1="281" x2="370" y2="281" stroke="#0B4F6C" stroke-width="2.2" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="550" y1="281" x2="652" y2="281" stroke="#0B4F6C" stroke-width="2.2" marker-start="url(#a)" marker-end="url(#a)"/>
+
+  <!-- central database (cylinder) -->
+  <g>
+    <path d="M372,222 L372,340 A88,20 0 0 0 548,340 L548,222" fill="#0B4F6C"/>
+    <ellipse cx="460" cy="222" rx="88" ry="20" fill="#1A8FB0"/>
+    <text x="460" y="276" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Base de données</text>
+    <text x="460" y="299" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">unique</text>
+    <text x="460" y="326" text-anchor="middle" fill="#CDE8F2" font-size="12.5">saisie unique · temps réel</text>
+  </g>
+
+  <!-- top: finance -->
+  <g>
+    <rect x="320" y="18" width="280" height="108" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <text x="460" y="46" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0B4F6C">Finance et comptabilité</text>
+    <text x="460" y="74" text-anchor="middle" font-size="13" fill="#33414A">Encaissements · comptes clients</text>
+    <text x="460" y="95" text-anchor="middle" font-size="13" fill="#33414A">Crédit client · revenus</text>
+  </g>
+  <!-- left: ventes -->
+  <g>
+    <rect x="12" y="222" width="256" height="118" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <text x="140" y="250" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0B4F6C">Ventes et marketing</text>
+    <text x="140" y="278" text-anchor="middle" font-size="13" fill="#33414A">Commandes</text>
+    <text x="140" y="298" text-anchor="middle" font-size="13" fill="#33414A">Prévisions des ventes · retours</text>
+    <text x="140" y="318" text-anchor="middle" font-size="13" fill="#33414A">Changements de prix</text>
+  </g>
+  <!-- right: RH -->
+  <g>
+    <rect x="652" y="222" width="256" height="118" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <text x="780" y="250" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0B4F6C">Ressources humaines</text>
+    <text x="780" y="278" text-anchor="middle" font-size="13" fill="#33414A">Heures travaillées</text>
+    <text x="780" y="298" text-anchor="middle" font-size="13" fill="#33414A">Coût de la main-d'œuvre</text>
+    <text x="780" y="318" text-anchor="middle" font-size="13" fill="#33414A">Compétences</text>
+  </g>
+  <!-- bottom: production -->
+  <g>
+    <rect x="300" y="430" width="320" height="118" rx="10" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+    <text x="460" y="458" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0B4F6C">Fabrication et production</text>
+    <text x="460" y="486" text-anchor="middle" font-size="13" fill="#33414A">Matières · achats</text>
+    <text x="460" y="506" text-anchor="middle" font-size="13" fill="#33414A">Calendriers de production</text>
+    <text x="460" y="526" text-anchor="middle" font-size="13" fill="#33414A">Dates d'expédition · capacités</text>
+  </g>
+</svg>
+</body></html>
