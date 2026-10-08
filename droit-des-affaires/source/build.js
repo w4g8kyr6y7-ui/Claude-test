@@ -127,7 +127,7 @@ add(H(2, '1. Le droit des affaires et l\'activité économique'));
 add(H(3, 'A. Un droit centré sur l\'activité économique'));
 add(P('Le [[droit des affaires]] est un droit plus large que le droit commercial. C\'est ==l\'ensemble des règles juridiques qui encadrent les activités économiques et leurs acteurs==.'));
 add(P('Le [[droit commercial]], lui, est historiquement centré sur deux notions seulement : **les commerçants** et **les actes de commerce**. Cette approche est devenue **trop étroite**, d\'où l\'émergence du droit des affaires.'));
-add(box('remarque', null, ['Dans vos notes, la définition « ensemble des règles juridiques qui encadrent les activités économiques et leurs acteurs » était attribuée au droit commercial. D\'après la slide, c\'est la définition du **droit des affaires**. Le droit commercial n\'en est qu\'une partie.']));
+add(box('remarque', 'Piège QCM', ['La définition « ensemble des règles juridiques qui encadrent les activités économiques et leurs acteurs » est celle du ==droit des affaires==, **pas du droit commercial**. Le droit commercial n\'en est qu\'une partie (commerçants et actes de commerce).']));
 add(P('[[L\'activité économique]], c\'est dès qu\'il y a une transaction. Elle recouvre cinq grandes actions :'));
 add(B('**Contracter** : conclure des contrats avec des partenaires (fournisseurs, clients…).'));
 add(B('**Financer** : obtenir des financements, gérer les paiements.'));
@@ -416,8 +416,8 @@ add(table([2400, 7238], ['Situation', 'Peut-il être commerçant ?'], [
   ['**Mineur émancipé**', '**Oui, sous condition d\'autorisation** : il doit obtenir une autorisation spécifique **du juge** (au moment de l\'émancipation) **ou du président du tribunal judiciaire** (si la demande est faite après l\'émancipation). L\'émancipation est possible à partir de 16 ans.'],
 ]));
 add(art('Article L.121-2 du Code de commerce', 'Le mineur émancipé peut être commerçant sur autorisation du juge au moment de son émancipation ou du président du tribunal judiciaire s\'il formule cette demande après avoir été émancipé.'));
-add(box('remarque', null, [
-  'Dans vos notes, vous aviez écrit « autorisation de ses responsables légaux ». Attention : d\'après l\'article L.121-2, l\'autorisation vient **d\'un juge** (le juge des tutelles au moment de l\'émancipation, ou le président du tribunal judiciaire ensuite), **pas des parents**.',
+add(box('remarque', 'Piège QCM', [
+  'L\'autorisation du mineur émancipé vient ==d\'un juge== (le juge des tutelles au moment de l\'émancipation, ou le président du tribunal judiciaire ensuite), **pas des parents** ni des responsables légaux (art. L.121-2).',
   'La slide de synthèse finale parle d\'« autorisation de son représentant légal ou du juge des tutelles ». Fiez-vous au texte de l\'article ci-dessus et demandez confirmation à Mme Wolf si besoin.',
 ]));
 add(H(4, 'Être majeur et capable suffit-il toujours ?'));
@@ -558,7 +558,7 @@ add(B('qui constitue, pris dans son ensemble, un [[bien meuble incorporel]]. Cer
 add(box('remarque', 'Le local / les murs ne font pas partie du fonds', [
   'Le local est un **immeuble** ; le fonds de commerce est un **bien meuble incorporel**. Lucas peut donc détenir l\'immeuble **et** le fonds de commerce : ce sont **deux biens distincts**.',
 ]));
-add(box('remarque', 'Correction de vos notes', ['Vous aviez noté « bien meuble **matériel** ». Les slides le confirment : le fonds de commerce est un ==bien meuble incorporel==. C\'est un point classique de QCM.']));
+add(box('remarque', 'Piège QCM', ['Le fonds de commerce est un ==bien meuble incorporel==, **pas un bien meuble matériel** (ni un immeuble), même si certains de ses éléments, comme le matériel et les marchandises, sont corporels.']));
 
 // ----- 2 -----
 add(H(2, '2. Les éléments du fonds de commerce'));
@@ -713,7 +713,7 @@ add(P('**Principe :** les négociations sont libres… mais doivent respecter la
 add(B('**Liberté** : négocier, échanger, mettre fin aux discussions.'));
 add(B('**Bonne foi** : un comportement loyal et sincère.'));
 add(B('**Responsabilité** : en cas de **rupture fautive** des négociations.'));
-add(P('//Vos notes : « Responsabilité civile / pénale ».// Les slides précisent qu\'il s\'agit de la ==responsabilité civile== : la partie fautive doit réparer le préjudice causé. Il n\'est pas question de responsabilité pénale ici.'));
+add(box('remarque', 'Piège QCM', ['La rupture fautive des négociations engage la ==responsabilité civile== : la partie fautive doit réparer le préjudice causé. Il n\'est **pas** question de responsabilité **pénale**.']));
 add(box('exemple', 'Réponse pour Lucas', ['Lucas est **libre** de rompre les négociations. Mais s\'il rompt de façon **déloyale** (tardivement, sans motif, alors que le fournisseur a engagé des frais et refusé une autre opportunité), il peut engager sa **responsabilité civile** pour rupture fautive.']));
 add(box('complement', null, ['En cas de rupture fautive, la réparation ne peut pas compenser **la perte des avantages attendus du contrat non conclu** (art. 1112, al. 2 du Code civil). On indemnise la faute dans la rupture, pas le contrat manqué.']));
 
