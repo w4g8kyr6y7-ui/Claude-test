@@ -842,13 +842,198 @@ add(box('retenir', 'Points à retenir – Chapitre 4', [
 add(pageBreak());
 
 // =====================================================================
-// CHAPITRE 5 : notes personnelles (slides à venir)
+// CHAPITRE 5
 // =====================================================================
 add(H(1, 'Chapitre 5 – Se faire payer et financer son activité'));
-add(pending(5));
-add(H(2, 'Le paiement dans les relations d\'affaires'));
-add(H(2, 'Le financement de l\'entreprise'));
-add(H(2, 'La sécurisation du financement'));
+add(box('exemple', 'Fil rouge : Lucas achète du matériel à crédit', [
+  'Lucas développe son activité ! Pour répondre à la demande de ses clients, il souhaite acheter du **matériel professionnel**.',
+  'Coût du matériel : **20 000 €** − trésorerie disponible : **5 000 €** = ==besoin de financement : 15 000 €==. **Comment financer ?**',
+]));
+add(P('Une décision économique (investir, se développer, faire face à ses besoins) entraîne plusieurs questions juridiques : ==une décision financière est aussi une décision juridique.== Le chapitre suit trois étapes :'));
+add(table([3212, 3213, 3213], ['1. Payer et se faire payer', '2. Financer', '3. Sécuriser'], [
+  ['Régler ses dettes, obtenir le paiement de ses créances', 'Trouver les ressources nécessaires à l\'activité', 'Réduire le risque de non-paiement'],
+  ['Comment organiser les flux d\'argent ? Quels moyens de paiement ? À quelle date payer ? Que faire en cas d\'impayé ?', 'Comment obtenir les ressources nécessaires ? Crédit bancaire, crédit-bail, affacturage, autres modes de financement', 'Comment limiter le risque de non-paiement ? Pourquoi une garantie ? Sûretés personnelles, sûretés réelles'],
+]));
+
+// ----- 1 -----
+add(H(2, '1. Le paiement dans les relations d\'affaires'));
+add(art('Article 1342 du Code civil', '« Le paiement est l\'exécution volontaire de la prestation due. »'));
+add(P('==Payer = exécuter l\'obligation due.== Le [[paiement]] ne se limite donc pas à verser de l\'argent : c\'est l\'exécution de ce qui est dû. Mais comment effectuer **concrètement** un paiement ?'));
+
+add(H(3, 'A. Les principaux moyens de paiement'));
+add(table([1700, 2400, 2000, 3538], ['Moyen', 'Qui déclenche le paiement ?', 'Quand ?', 'Particularités'], [
+  ['**Virement**', 'Le **débiteur** (qui donne l\'ordre de virement à sa banque)', 'Immédiat ou programmé', 'Transfert de fonds de compte à compte ; adapté aux montants importants'],
+  ['**Prélèvement**', 'Le **bénéficiaire** (sur autorisation préalable du débiteur)', 'À l\'échéance prévue (paiements réguliers ou ponctuels)', 'Nécessite un **mandat de prélèvement** ; souvent utilisé pour des paiements récurrents ; le débiteur doit disposer des fonds'],
+  ['**Carte bancaire**', 'Le **débiteur** (qui initie le paiement)', 'Lors du paiement (débit immédiat ou différé selon la carte)', 'Paiement en présentiel ou à distance ; plafonds de paiement'],
+  ['**Chèque**', 'Le **débiteur** (qui remet le chèque)', '**Payable à vue** (à la présentation)', '==La remise du chèque ≠ paiement définitif== : la créance subsiste jusqu\'au paiement effectif (art. L.131-67 C. mon. fin.)'],
+  ['**Lettre de change**', 'Le **tireur** (qui donne l\'ordre de payer au tiré)', 'À l\'échéance indiquée sur le titre', 'Instrument de **paiement et de crédit** (elle permet de différer le paiement) ; trois acteurs : **tireur, tiré, bénéficiaire** ; **acte de commerce par la forme**'],
+]));
+add(box('remarque', 'Lien avec le chapitre 2', ['Vous retrouvez la **lettre de change**, l\'exemple type de l\'**acte de commerce par la forme** (art. L.110-1, 10° C. com.) : elle est commerciale quelle que soit la personne qui la signe.']));
+
+add(H(3, 'B. L\'échéance et le retard de paiement'));
+add(...N([
+  '**La facture** constate la créance du vendeur à l\'égard de son client.',
+  '**Le délai de paiement** entre professionnels (art. L.441-10 C. com.) : **30 jours** après réception des marchandises ou exécution de la prestation à défaut d\'accord ; **60 jours maximum** à compter de l\'émission de la facture si les parties en conviennent ; ou **45 jours fin de mois** si c\'est expressément prévu et non manifestement abusif. Des régimes particuliers existent pour certaines activités ou certains produits.',
+  'L\'[[échéance]] marque le moment où le paiement doit intervenir. Tant que cette date n\'est pas dépassée, le débiteur bénéficie du délai qui lui a été accordé.',
+  '**Le retard de paiement** : si l\'échéance est dépassée sans paiement, le débiteur est en retard. Conséquences **automatiques** entre professionnels : ==pénalités de retard== (exigibles à compter du jour suivant la date de règlement figurant sur la facture) et ==indemnité forfaitaire de 40 €== pour frais de recouvrement (due de plein droit, art. D.441-5 C. com.).',
+]));
+add(P('==L\'échéance transforme la créance en somme à payer. Le retard produit des conséquences juridiques.== //(Rappel du chapitre 4, partie 2.C.)//'));
+
+add(H(3, 'C. Le recouvrement des créances impayées'));
+add(P('L\'échéance est dépassée… mais le paiement n\'arrive toujours pas. Que peut faire le créancier ? Une ==action progressive en 5 étapes== :'));
+add(table([2400, 7238], ['Étape', 'Contenu'], [
+  [['**Recouvrement amiable**', '//(obtenir le paiement sans saisir le juge)//'], ''],
+  ['**1. Relance amiable**', 'Rappel du montant dû et de la date d\'échéance, par courrier, e-mail, appel téléphonique… Objectif : obtenir une régularisation rapide. C\'est souvent un simple oubli ou un problème administratif.'],
+  ['**2.** [[Mise en demeure]]', 'Interpellation **formelle** du débiteur, par lettre recommandée, acte de commissaire de justice (huissier)… (art. 1344 C. civ.). //La mise en demeure n\'est pas nécessaire pour les pénalités de retard entre professionnels.//'],
+  [['**Recouvrement judiciaire / exécution**', '//(faire reconnaître son droit puis obtenir le paiement)//'], ''],
+  ['**3.** [[Injonction de payer]]', 'Demande au juge d\'ordonner le paiement d\'une somme due. Procédure **simple et rapide** (art. 1405 et s. du Code de procédure civile). Conditions : créance **déterminée, exigible**, généralement issue d\'un contrat.'],
+  ['**4.** [[Titre exécutoire]]', 'Décision de justice (ex. : ordonnance d\'injonction de payer non contestée) qui constate une créance **certaine, liquide et exigible** et permet de recourir à l\'exécution forcée. ==Sans titre exécutoire, pas d\'exécution forcée.=='],
+  ['**5. Exécution forcée**', 'Mise en œuvre de mesures d\'exécution (**saisies**…), selon les procédures du Code des procédures civiles d\'exécution, avec l\'intervention d\'un **commissaire de justice**.'],
+]));
+add(box('complement', null, ['Une créance **certaine** existe sans contestation possible ; **liquide**, son montant est connu (chiffré) ; **exigible**, son échéance est arrivée. Le **commissaire de justice** est le nouveau nom (depuis 2022) de l\'huissier de justice.']));
+
+// ----- 2 -----
+add(H(2, '2. Le financement de l\'entreprise'));
+add(H(3, 'A. Les besoins de financement'));
+add(P('==Le besoin de financement naît d\'un décalage entre les ressources disponibles et les besoins de l\'entreprise.== Identifier le besoin, c\'est choisir la solution la plus adaptée. Trois grands besoins :'));
+add(table([2600, 4300, 2738], ['Besoin', 'Contenu', 'Exemples'], [
+  ['**1. Investir**', 'Financer des biens destinés à être **utilisés durablement** par l\'entreprise.', 'Matériel et équipements, local, véhicule, actifs immatériels (logiciels, brevets…). //Lucas : son besoin de 15 000 € est un besoin d\'investissement.//'],
+  ['**2. Financer le cycle d\'exploitation**', 'Faire face au **décalage** entre les dépenses et les encaissements : achats → stocks → ventes → facturation → encaissements. ==Décalage dans le temps = besoin de trésorerie.== L\'entreprise doit financer ses dépenses avant d\'avoir encaissé ses recettes.', 'Payer les fournisseurs avant que les clients ne paient'],
+  ['**3. Se développer / faire face à un besoin ponctuel**', 'Accompagner une nouvelle étape de l\'activité ou faire face à une situation particulière.', 'Lancer un nouveau produit, recruter, ouvrir un point de vente, besoin temporaire de trésorerie (baisse d\'activité)'],
+]));
+add(P('**Deux sources de financement :**'));
+add(B('**Le financement interne** : l\'entreprise mobilise **ses propres ressources** : les **résultats conservés** (autofinancement : bénéfices non distribués réinvestis) et la **trésorerie disponible**. ==Pas de dette nouvelle envers un financeur externe.== //Lucas dispose de 5 000 € d\'économies, mais cela ne couvre pas les 20 000 € : il doit chercher 15 000 € à l\'extérieur.//'));
+add(B('**Le financement externe** : les ressources proviennent **de l\'extérieur** de l\'entreprise.'));
+add(table([4819, 4819], ['A. L\'endettement', 'B. Les apports en capital'], [
+  ['Des sommes mises à disposition **qui devront être remboursées** : prêt bancaire, crédit-bail, affacturage, autres financements créant une obligation de remboursement.', 'Des ressources apportées **par les associés ou des investisseurs** : apport des associés (création, augmentation de capital), investisseurs (business angels, fonds d\'investissement…).'],
+  ['→ Le financeur devient **créancier** de l\'entreprise.', '→ En contrepartie, l\'investisseur obtient **des droits dans l\'entreprise** (associé, actionnaire…).'],
+  ['==DETTE = rembourser== : le financeur récupère les sommes prêtées.', '==CAPITAL = devenir associé / investisseur== : le financeur participe au capital et **prend un risque**.'],
+]));
+
+add(H(3, 'B. Le crédit bancaire'));
+add(P('La banque prête de l\'argent, mais à quelles conditions ? Quelle est la relation juridique entre la banque et l\'entreprise ?'));
+add(art('Article L.313-1 du Code monétaire et financier', '« Une opération de crédit consiste notamment, pour une personne agissant à titre onéreux, à mettre ou promettre de mettre des fonds à la disposition d\'une autre personne. » La définition est plus large : elle vise également certains engagements par signature (aval, cautionnement, garantie…).'));
+add(table([4819, 4819], ['La banque (établissement de crédit)', 'L\'entreprise'], [
+  ['**Financeur – créancier**', '**Emprunteur – débiteur**'],
+  ['Met des fonds à la disposition de l\'entreprise, **à titre onéreux** : la banque verse le montant du crédit.', 'Reçoit les fonds et s\'engage à les rembourser (le **capital**, selon les modalités du contrat), **avec les intérêts et les frais**.'],
+]));
+add(P('**Les 5 éléments d\'un crédit :**'));
+add(table([2000, 2600, 5038], ['Élément', 'Question', 'Contenu'], [
+  ['**1. Le capital**', 'Quelle somme est empruntée ?', 'Montant mis à disposition par la banque, qui devra être remboursé.'],
+  ['**2. La durée**', 'Pendant combien de temps ?', '**Court terme** (moins d\'1 an), **moyen terme** (1 à 7 ans), **long terme** (plus de 7 ans). Durée adaptée au besoin financé.'],
+  ['**3. Les échéances**', 'Quand rembourser ?', 'Modalités de remboursement (principal et intérêts) ; échéances périodiques (mensuelles, trimestrielles…) selon un échéancier prévu au contrat.'],
+  ['**4. Les intérêts**', 'Quel est le prix du crédit ?', 'Rémunération de la banque en contrepartie de la mise à disposition des fonds. **Art. 1905 et 1907 C. civ.** : possibilité de stipuler des intérêts ; le **taux conventionnel doit être fixé par écrit**.'],
+  ['**5. Les frais**', 'Quels autres coûts ?', 'Frais de dossier, frais de garantie, assurance emprunteur éventuelle, autres frais liés au financement.'],
+]));
+add(P('**Capital + durée + échéances + coût →** ==capacité de remboursement== : la banque vérifie la capacité de l\'entreprise à honorer ses engagements dans le temps.'));
+add(box('exemple', 'Lucas emprunte 15 000 €', ['Il ne paiera pas seulement 15 000 € : il remboursera le **capital, augmenté des intérêts et des frais**, selon le calendrier prévu.', '==15 000 € empruntés ≠ 15 000 € à décaisser immédiatement.== Le crédit crée une **dette future de remboursement**. Obtenir un crédit, ce n\'est pas seulement recevoir des fonds : c\'est organiser leur remboursement dans le temps.']));
+add(box('complement', null, ['Le prêt d\'argent est un **prêt de consommation** (art. 1892 et s. C. civ.) : l\'emprunteur peut consommer la chose prêtée (l\'argent) à charge d\'en rendre autant.']));
+
+add(H(3, 'C. Panorama des autres modes de financement'));
+add(P('Le crédit bancaire est-il la seule solution ? **Non.**'));
+add(table([2400, 4400, 2838], ['Mode', 'Fonctionnement', 'À retenir'], [
+  ['**1. Le** [[crédit-bail]] //(financer l\'utilisation d\'un bien)//', 'Une **société de crédit-bail achète le bien** (matériel ou autre) ; l\'entreprise **le loue** en contrepartie de loyers, avec une **option d\'achat en fin de contrat** (art. L.313-7 C. mon. fin.).', '==L\'entreprise utilise le bien sans en être immédiatement propriétaire.=='],
+  ['**2. L\'**[[affacturage]] //(financer la trésorerie grâce aux créances clients)//', 'L\'entreprise cède ses factures clients (créances commerciales à encaisser) à un **factor** (société d\'affacturage) qui **rachète les créances** : les fonds sont disponibles plus rapidement. Le factor peut aussi assurer, selon le contrat, la gestion et le recouvrement des créances.', '==L\'entreprise mobilise ses créances sans attendre leur échéance.=='],
+  ['**3. Le** [[financement participatif]] //(crowdfunding)//', 'Collecter des fonds auprès d\'une **pluralité de contributeurs** (particuliers, investisseurs…) via une **plateforme**. Trois formes : **don** (pas de remboursement en principe), **prêt** (remboursement du capital et éventuellement d\'intérêts), **investissement** (souscription de titres donnant des droits dans l\'entreprise).', 'Les contributeurs financent un projet précis.'],
+]));
+add(box('retenir', 'Quel financement pour quel besoin ?', [
+  B('Besoin d\'un **équipement** → **crédit-bail**.'),
+  B('Besoin de **trésorerie** / créances en attente → **affacturage**.'),
+  B('Besoin de financer un **projet auprès de contributeurs** → **financement participatif**.'),
+]));
+add(P('**La logique du financement :** 1. besoin de financement → 2. choix d\'un financement (crédit bancaire, crédit-bail, affacturage, participatif, ressources propres…) → 3. mise à disposition de ressources → 4. ==créance de remboursement== (le financeur devient créancier) → 5. ==risque de non-remboursement== (baisse d\'activité, impayés, trésorerie insuffisante…). C\'est ce risque qui justifie la partie 3.'));
+
+// ----- 3 -----
+add(H(2, '3. La sécurisation du financement'));
+add(H(3, 'A. La fonction des garanties'));
+add(P('Pourquoi le créancier cherche-t-il à **se protéger** ?'));
+add(H(4, '1) Le principe : le droit de gage général'));
+add(art('Articles 2284 et 2285 du Code civil', 'Art. 2284 : « Le débiteur répond de ses engagements sur tous ses biens, présents et à venir. » Art. 2285 : « Les biens du débiteur constituent le gage commun de ses créanciers. »'));
+add(P('Le [[droit de gage général]] : tout le patrimoine du débiteur (biens présents et à venir) répond de ses dettes envers **tous** ses créanciers.'));
+add(P('Un [[créancier chirographaire]] est un créancier qui **ne bénéficie pas d\'une sûreté particulière** : il dispose d\'un droit contre le débiteur, **aucun bien déterminé n\'est affecté à son paiement**, et il est payé avec les autres créanciers, selon les règles applicables.'));
+add(H(4, '2) Les limites de cette protection'));
+add(P('**Un même patrimoine pour plusieurs créanciers** (banque, fournisseur, État, salariés…) :'));
+add(B('le patrimoine peut être **insuffisant** pour payer tous les créanciers ;'));
+add(B('certains créanciers bénéficient de **causes légitimes de préférence** (ex. : **privilèges**), ce qui **fragilise** la position du créancier chirographaire.'));
+add(H(4, '3) Le rôle d\'une sûreté'));
+add(P('**Sans sûreté** : créancier chirographaire = protection générale. **Avec sûreté** : ==position juridique renforcée en cas de défaillance du débiteur==. Comment renforcer la position du créancier ? Grâce à **une personne** ou **un bien** :'));
+add(table([4819, 4819], ['Sûreté personnelle = une PERSONNE', 'Sûreté réelle = un BIEN'], [
+  ['**Une personne supplémentaire s\'engage** envers le créancier (ex. : un proche de Lucas). La protection repose sur **l\'engagement d\'une autre personne**.', '**Un bien est affecté en garantie** (immeuble, matériel, créances, fonds de commerce…). La protection repose sur **un bien spécialement affecté** à la garantie de la créance.'],
+  ['//Exemples : cautionnement, garantie autonome, lettre d\'intention.//', '//Exemples : gage, nantissement, hypothèque.//'],
+]));
+
+add(H(3, 'B. Les principales sûretés personnelles'));
+add(H(4, '1) Le cautionnement : « Je paierai s\'il ne paie pas »'));
+add(art('Article 2288 du Code civil', '« Le cautionnement est le contrat par lequel une caution s\'oblige envers le créancier à payer la dette du débiteur en cas de défaillance de celui-ci. »'));
+add(box('exemple', null, ['**Dette principale** : Lucas (débiteur principal) doit rembourser 15 000 € à la banque. **Engagement de caution** : un proche (la [[caution]]) s\'engage envers la banque à payer la dette de Lucas en cas de défaillance de celui-ci. **Si Lucas ne paie pas**, la banque peut, dans les conditions du cautionnement, demander le paiement à la caution.']));
+add(P('**À retenir :**'));
+add(B('Le [[cautionnement]] est une **sûreté personnelle**.'));
+add(B('La caution **garantit la dette d\'un autre** (le débiteur principal).'));
+add(B('La caution **ne remplace pas** le débiteur principal : il reste tenu de rembourser.'));
+add(B('Le cautionnement est ==accessoire== : il dépend de l\'existence d\'une dette principale.'));
+add(box('remarque', 'Attention', ['==Caution ≠ débiteur principal.== La caution n\'emprunte pas l\'argent : elle s\'engage à payer **si** le débiteur principal ne paie pas.']));
+add(P('**Cautionnement simple ou solidaire ?** Lucas ne rembourse plus son crédit : que peut faire la banque ?'));
+add(table([4819, 4819], ['Cautionnement simple', 'Cautionnement solidaire'], [
+  ['Le créancier doit **d\'abord poursuivre le débiteur principal** sur ses biens. Si le débiteur ne paie pas ou si ses biens sont insuffisants, il peut alors demander le paiement à la caution.', 'Le créancier peut **agir directement contre la caution**, dans les limites de son engagement, sans devoir poursuivre préalablement le débiteur principal.'],
+  [['[[Bénéfice de discussion]] : la caution peut, sous conditions, demander au créancier de poursuivre d\'abord les biens du débiteur principal.', '[[Bénéfice de division]] : s\'il existe plusieurs cautions, chacune peut, sous conditions, demander que les poursuites soient divisées entre elles.'], 'La caution **renonce** aux bénéfices de discussion et de division.'],
+  ['→ ==Protection plus importante de la caution==', '→ ==Protection plus importante du créancier=='],
+]));
+add(box('remarque', 'Se porter caution est un véritable engagement juridique !', ['La caution s\'engage à payer la dette d\'un autre en cas de défaillance de celui-ci. Le droit encadre strictement la formation du cautionnement (**formalisme, information**) pour protéger la caution. Tous les cautionnements ne produisent pas les mêmes effets.']));
+add(H(4, '2) La garantie autonome : « Je paierai selon mon propre engagement »'));
+add(art('Article 2321 du Code civil', '« La garantie autonome est l\'engagement par lequel un garant s\'oblige, en considération d\'une obligation souscrite par un tiers, à verser une somme soit à première demande, soit selon les modalités convenues. »'));
+add(P('Le débiteur (Lucas) demande la garantie ; le **garant** (une société, un proche) s\'engage de manière autonome envers le **bénéficiaire** (la banque), à première demande ou selon les modalités convenues. ==Un engagement indépendant de l\'obligation garantie.=='));
+add(H(4, '3) La lettre d\'intention : « Je m\'engage à soutenir le débiteur »'));
+add(art('Article 2322 du Code civil', '« La lettre d\'intention est l\'engagement de faire ou de ne pas faire ayant pour objet le soutien apporté à un débiteur dans l\'exécution de son obligation envers son créancier. »'));
+add(P('Une **société mère ou un tiers** (ex. : un partenaire) s\'engage envers le débiteur à faire ou ne pas faire (soutien financier, maintien d\'un soutien…). **Effet indirect** : cela renforce la confiance du créancier. ==Un engagement de faire ou de ne pas faire ayant pour objet le soutien du débiteur.=='));
+add(box('retenir', 'Trois mécanismes, une même finalité', [
+  'Renforcer la position du créancier grâce à **l\'engagement d\'une personne**. À distinguer :',
+  B('**Cautionnement** = ==accessoire== (dépend de la dette principale).'),
+  B('**Garantie autonome** = ==autonome== (indépendante de la dette garantie).'),
+  B('**Lettre d\'intention** = ==engagement de soutien== (faire ou ne pas faire).'),
+]));
+
+add(H(3, 'C. Les principales sûretés réelles'));
+add(P('« Je peux utiliser un bien de mon entreprise pour obtenir un financement plus facilement ? » Le débiteur **affecte un bien** (ou un ensemble de biens) en garantie de la créance.'));
+add(art('Article 2323 du Code civil', 'La [[sûreté réelle]] est l\'affectation d\'un bien ou d\'un ensemble de biens, présents ou futurs, au paiement préférentiel ou exclusif du créancier.'));
+add(P('Les sûretés réelles confèrent au créancier des **prérogatives particulières**, notamment :'));
+add(B('le [[droit de préférence]] : être **payé prioritairement** sur la valeur du bien, selon le rang applicable ;'));
+add(B('le [[droit de suite]] : dans certaines sûretés, pouvoir exercer la sûreté **sur le bien même lorsqu\'il a été transmis** à un tiers.'));
+add(P('**Trois principales sûretés réelles selon la nature du bien garanti :**'));
+add(table([1900, 2580, 2580, 2578], ['', 'Gage', 'Nantissement', 'Hypothèque'], [
+  ['**Sur quoi ?**', '==Bien meuble corporel== (bien matériel)', '==Bien meuble incorporel== (droit)', '==Immeuble== (bien immobilier)'],
+  ['**Exemples**', 'Véhicule, matériel, machine, ordinateur…', 'Créance, **fonds de commerce**, marques, titres…', 'Local professionnel, bâtiment, terrain…'],
+  ['**Référence**', 'Art. 2333 C. civ.', 'Art. 2355 C. civ.', 'Art. 2393 et s. C. civ.'],
+  ['**Intérêt pour le créancier**', 'Droit de préférence ; dans certains cas, droit de suite', 'Droit de préférence ; dans certains cas, droit de suite', 'Droit de préférence ; dans certains cas, droit de suite'],
+]));
+add(box('remarque', 'Lien avec le chapitre 3', ['Le **fonds de commerce** est un **bien meuble incorporel** : il ne peut donc pas être « gagé » ou « hypothéqué », il fait l\'objet d\'un ==nantissement==. C\'est une question piège classique !']));
+add(box('exercice', 'Exercice du cours : quelle sûreté ?', [
+  '(1) Un proche de Lucas s\'engage à payer sa dette s\'il devient défaillant. (2) Une banque obtient une garantie portant sur une machine appartenant au débiteur. (3) Une société s\'engage, indépendamment de la dette principale, à verser une somme au bénéficiaire selon les modalités convenues. (4) Une créance professionnelle est affectée en garantie d\'un financement. (5) Une société mère prend un engagement de soutien à l\'égard de sa filiale débitrice. (6) Un immeuble est affecté en garantie d\'un emprunt.',
+  '**Correction :** on raisonne d\'abord : **une personne ou un bien ?** Puis on qualifie.',
+  B('(1) **Cautionnement** : une personne garantit la dette d\'un autre (sûreté personnelle, accessoire).'),
+  B('(2) **Gage** : une machine = bien meuble corporel (sûreté réelle).'),
+  B('(3) **Garantie autonome** : engagement indépendant de la dette principale (sûreté personnelle).'),
+  B('(4) **Nantissement** : une créance = bien meuble incorporel (sûreté réelle).'),
+  B('(5) **Lettre d\'intention** : engagement de soutien (sûreté personnelle).'),
+  B('(6) **Hypothèque** : un immeuble (sûreté réelle).'),
+]));
+add(P('**Sécuriser le financement, la logique à retenir :** un financement est accordé → une créance de remboursement naît → il existe un risque de défaillance → le créancier cherche à renforcer sa position grâce à une sûreté (personnelle ou réelle) → la créance est sécurisée.'));
+add(box('remarque', 'Attention', ['==Une sûreté ne garantit pas que le débiteur paiera== : elle **renforce la position du créancier** en cas de défaillance. **Sécuriser ≠ supprimer le risque** ; sécuriser = renforcer la position du créancier.']));
+
+// ----- Points à retenir ch5 -----
+add(H(2, 'Points à retenir – Chapitre 5'));
+add(box('retenir', 'Points à retenir – Chapitre 5', [
+  B('**Logique du chapitre** : ==Payer → Financer → Sécuriser==. Une décision financière est aussi une décision juridique.'),
+  B('**Paiement** = exécution volontaire de la prestation due (art. 1342). Moyens : virement, prélèvement (mandat), carte, **chèque** (la remise ≠ paiement définitif, art. L.131-67 C. mon. fin.), **lettre de change** (paiement + crédit, 3 acteurs, acte de commerce par la forme).'),
+  B('**Échéance et retard** : délais de L.441-10 C. com. (30 j / 60 j / 45 j fin de mois) ; retard → pénalités dès le lendemain + **40 €** (D.441-5), sans mise en demeure.'),
+  B('**Recouvrement progressif** : relance amiable → **mise en demeure** (art. 1344) → **injonction de payer** (art. 1405 et s. CPC) → **titre exécutoire** (créance certaine, liquide, exigible) → **exécution forcée** (saisies, commissaire de justice).'),
+  B('**Besoins de financement** : investir, financer le cycle d\'exploitation (trésorerie), se développer. Financement **interne** (autofinancement, trésorerie) ou **externe** : **dette** (rembourser) ≠ **capital** (devenir associé, prendre un risque).'),
+  B('**Crédit bancaire** (L.313-1 C. mon. fin.) : banque créancière, entreprise débitrice ; capital, durée, échéances, intérêts (art. 1905 et 1907 : taux fixé par écrit), frais → capacité de remboursement. 15 000 € empruntés ≠ 15 000 € décaissés.'),
+  B('**Autres financements** : **crédit-bail** (L.313-7 : utiliser un bien sans en être propriétaire, option d\'achat), **affacturage** (céder ses créances à un factor), **financement participatif** (don, prêt, investissement).'),
+  B('**Droit de gage général** (art. 2284-2285) : le créancier **chirographaire** n\'a aucune sûreté et subit le concours des autres créanciers.'),
+  B('**Sûretés personnelles** (une **personne**) : **cautionnement** (art. 2288, accessoire ; simple = bénéfices de discussion et de division ; solidaire = le créancier agit directement contre la caution), **garantie autonome** (art. 2321, autonome), **lettre d\'intention** (art. 2322, soutien).'),
+  B('**Sûretés réelles** (un **bien**, art. 2323) : droit de **préférence** et parfois droit de **suite**. **Gage** = meuble corporel (2333) ; **nantissement** = meuble incorporel (2355), dont le fonds de commerce ; **hypothèque** = immeuble (2393 et s.).'),
+  B('**Une sûreté ne supprime pas le risque** : elle renforce la position du créancier.'),
+]));
 add(pageBreak());
 
 // =====================================================================
@@ -878,13 +1063,24 @@ add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
   ['**1223**', 'Réduction du prix', 'Réduction proportionnelle du prix en cas d\'exécution imparfaite acceptée.', cellLinks(4)],
   ['**1224 à 1227**', 'Résolution', 'Mettre fin au contrat en cas d\'inexécution suffisamment grave (clause résolutoire, notification ou décision du juge).', cellLinks(4)],
   ['**1231-1**', 'Dommages et intérêts', 'Réparation du préjudice causé par l\'inexécution, sauf force majeure.', cellLinks(4)],
+  ['**1342**', 'Paiement', '« Le paiement est l\'exécution volontaire de la prestation due. »', cellLinks(5)],
+  ['**1344**', 'Mise en demeure', 'Le débiteur est mis en demeure par une sommation, un acte portant interpellation suffisante ou, si le contrat le prévoit, par la seule exigibilité de l\'obligation.', cellLinks(5)],
   ['**1359**', 'Preuve par écrit', 'L\'acte juridique portant sur une somme excédant un montant fixé par décret (**1 500 €**) doit être prouvé par écrit.', cellLinks(1, 2, 4)],
   ['**1603** et s.', 'Obligations du vendeur', 'Délivrer la chose (conforme) et la garantir (notamment contre les vices cachés).', cellLinks(4)],
   ['**1650** et s.', 'Obligations de l\'acheteur', 'Payer le prix au jour et au lieu convenus (et prendre livraison).', cellLinks(4)],
+  ['**1905 et 1907**', 'Intérêts du prêt', 'Il est permis de stipuler des intérêts pour un prêt d\'argent ; le taux conventionnel doit être fixé par écrit.', cellLinks(5)],
+  ['**2284 et 2285**', 'Droit de gage général', 'Le débiteur répond de ses engagements sur tous ses biens, présents et à venir ; ses biens sont le gage commun de ses créanciers.', cellLinks(5)],
+  ['**2288**', 'Cautionnement', 'Contrat par lequel une caution s\'oblige envers le créancier à payer la dette du débiteur en cas de défaillance de celui-ci.', cellLinks(5)],
+  ['**2321**', 'Garantie autonome', 'Engagement d\'un garant de verser une somme à première demande ou selon les modalités convenues, en considération de l\'obligation d\'un tiers.', cellLinks(5)],
+  ['**2322**', 'Lettre d\'intention', 'Engagement de faire ou de ne pas faire ayant pour objet le soutien apporté à un débiteur.', cellLinks(5)],
+  ['**2323**', 'Sûreté réelle', 'Affectation d\'un bien ou d\'un ensemble de biens au paiement préférentiel ou exclusif du créancier.', cellLinks(5)],
+  ['**2333**', 'Gage', 'Sûreté réelle portant sur un bien meuble corporel.', cellLinks(5)],
+  ['**2355**', 'Nantissement', 'Sûreté réelle portant sur un bien meuble incorporel (créance, fonds de commerce…).', cellLinks(5)],
+  ['**2393** et s.', 'Hypothèque', 'Sûreté réelle portant sur un immeuble.', cellLinks(5)],
 ]));
 add(H(3, 'Code de commerce'));
 add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
-  ['**L.110-1**', 'Actes de commerce', 'Liste non limitative des actes de commerce : achat de biens pour les revendre (1°), intermédiaires, manufacture, transport, banque… et lettres de change entre toutes personnes (10°).', cellLinks(2)],
+  ['**L.110-1**', 'Actes de commerce', 'Liste non limitative des actes de commerce : achat de biens pour les revendre (1°), intermédiaires, manufacture, transport, banque… et lettres de change entre toutes personnes (10°).', cellLinks(2, 5)],
   ['**L.110-3**', 'Liberté de la preuve', '« À l\'égard des commerçants, les actes de commerce peuvent se prouver par tous moyens […] »', cellLinks(1, 2, 4)],
   ['**L.121-1**', 'Commerçant', '« Sont commerçants ceux qui exercent des actes de commerce et en font leur profession habituelle. »', cellLinks(2)],
   ['**L.121-2**', 'Mineur émancipé', 'Peut être commerçant sur autorisation du juge au moment de l\'émancipation ou du président du tribunal judiciaire ensuite.', cellLinks(2)],
@@ -897,10 +1093,20 @@ add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
   ['**L.145-17**', 'Refus sans indemnité', 'Le bailleur peut, dans des cas prévus par la loi (ex. : motif grave et légitime), refuser le renouvellement sans indemnité.', cellLinks(3)],
   ['**L.441-1**', 'CGV', 'Les CGV constituent le socle unique de la négociation commerciale ; communication au professionnel qui les demande.', cellLinks(4)],
   ['**L.441-9**', 'Facturation', 'Tout achat ou prestation pour une activité professionnelle doit faire l\'objet d\'une facture (mentions obligatoires).', cellLinks(4)],
-  ['**L.441-10**', 'Délais de paiement', '30 jours par défaut ; 60 jours max. à compter de la facture ou 45 jours fin de mois ; pénalités de retard.', cellLinks(4)],
-  ['**D.441-5**', 'Indemnité forfaitaire', 'Indemnité forfaitaire pour frais de recouvrement de **40 €** en cas de retard de paiement.', cellLinks(4)],
+  ['**L.441-10**', 'Délais de paiement', '30 jours par défaut ; 60 jours max. à compter de la facture ou 45 jours fin de mois ; pénalités de retard.', cellLinks(4, 5)],
+  ['**D.441-5**', 'Indemnité forfaitaire', 'Indemnité forfaitaire pour frais de recouvrement de **40 €** en cas de retard de paiement.', cellLinks(4, 5)],
   ['**L.442-1, II**', 'Rupture brutale', 'Engage la responsabilité de son auteur la rupture brutale d\'une relation commerciale établie sans préavis écrit suffisant.', cellLinks(4)],
   ['**L.721-3**', 'Tribunal de commerce', 'Compétent pour les litiges entre commerçants, relatifs aux sociétés commerciales et aux actes de commerce.', cellLinks(2)],
+]));
+add(H(3, 'Code monétaire et financier'));
+add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
+  ['**L.131-67**', 'Chèque', 'La remise d\'un chèque en paiement n\'entraîne pas novation : la créance subsiste jusqu\'au paiement effectif.', cellLinks(5)],
+  ['**L.313-1**', 'Opération de crédit', 'Mettre ou promettre de mettre, à titre onéreux, des fonds à la disposition d\'une autre personne (ou prendre un engagement par signature).', cellLinks(5)],
+  ['**L.313-7**', 'Crédit-bail', 'Location d\'un bien acheté par une société de crédit-bail, avec option d\'achat en fin de contrat.', cellLinks(5)],
+]));
+add(H(3, 'Code de procédure civile'));
+add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
+  ['**1405** et s.', 'Injonction de payer', 'Procédure simple et rapide pour obtenir du juge qu\'il ordonne le paiement d\'une créance déterminée et exigible, d\'origine contractuelle.', cellLinks(5)],
 ]));
 add(H(3, 'Jurisprudence'));
 add(table(ART_W, ['Décision', 'Thème', 'Solution', 'Chapitre'], [
@@ -993,6 +1199,33 @@ const notions = [
   ['Résolution', 'Anéantissement du contrat en cas d\'inexécution suffisamment grave (art. 1224 à 1227).'],
   ['Rupture brutale', 'Fin d\'une relation commerciale établie sans préavis écrit suffisant ; engage la responsabilité de son auteur (L.442-1, II).'],
   ['Universalité de fait', 'Ensemble de biens juridiquement distincts réunis par une personne dans un même but économique (ex. : le fonds de commerce).'],
+  ['Affacturage', 'Cession de ses créances clients à un factor, qui en avance le montant et peut en assurer le recouvrement.'],
+  ['Autofinancement', 'Financement interne par les bénéfices non distribués réinvestis dans l\'entreprise.'],
+  ['Bénéfice de discussion', 'Droit de la caution simple d\'exiger que le créancier poursuive d\'abord les biens du débiteur principal.'],
+  ['Bénéfice de division', 'Droit, en présence de plusieurs cautions, de demander que les poursuites soient divisées entre elles.'],
+  ['Caution', 'Personne qui s\'engage envers le créancier à payer la dette du débiteur en cas de défaillance de celui-ci.'],
+  ['Cautionnement', 'Sûreté personnelle accessoire : contrat par lequel une caution s\'oblige à payer la dette d\'autrui (art. 2288).'],
+  ['Cautionnement solidaire', 'Cautionnement où la caution renonce aux bénéfices de discussion et de division : le créancier peut la poursuivre directement.'],
+  ['Commissaire de justice', 'Officier public (ex-huissier de justice) chargé notamment de l\'exécution forcée (saisies).'],
+  ['Créance certaine, liquide et exigible', 'Créance incontestable dans son principe, chiffrée, et dont l\'échéance est arrivée.'],
+  ['Créancier chirographaire', 'Créancier sans sûreté particulière, payé sur le patrimoine du débiteur en concours avec les autres.'],
+  ['Crédit-bail', 'Location d\'un bien acheté par une société de crédit-bail, avec option d\'achat en fin de contrat (L.313-7 C. mon. fin.).'],
+  ['Droit de gage général', 'Droit de tout créancier sur l\'ensemble du patrimoine de son débiteur (art. 2284-2285).'],
+  ['Droit de préférence', 'Droit d\'être payé prioritairement sur la valeur du bien grevé d\'une sûreté réelle, selon son rang.'],
+  ['Droit de suite', 'Droit d\'exercer la sûreté sur le bien même s\'il a été transmis à un tiers.'],
+  ['Échéance', 'Date à laquelle le paiement doit intervenir.'],
+  ['Financement participatif', 'Collecte de fonds auprès de nombreux contributeurs via une plateforme : don, prêt ou investissement.'],
+  ['Gage', 'Sûreté réelle portant sur un bien meuble corporel (art. 2333).'],
+  ['Garantie autonome', 'Sûreté personnelle indépendante de l\'obligation garantie : le garant paie à première demande ou selon les modalités convenues (art. 2321).'],
+  ['Hypothèque', 'Sûreté réelle portant sur un immeuble (art. 2393 et s.).'],
+  ['Injonction de payer', 'Procédure judiciaire simple et rapide pour obtenir un titre ordonnant le paiement d\'une créance (art. 1405 et s. CPC).'],
+  ['Lettre d\'intention', 'Engagement de faire ou de ne pas faire pour soutenir un débiteur (art. 2322).'],
+  ['Nantissement', 'Sûreté réelle portant sur un bien meuble incorporel : créance, fonds de commerce, marque… (art. 2355).'],
+  ['Opération de crédit', 'Mise à disposition de fonds à titre onéreux, ou engagement par signature (L.313-1 C. mon. fin.).'],
+  ['Paiement', 'Exécution volontaire de la prestation due (art. 1342).'],
+  ['Sûreté personnelle', 'Garantie reposant sur l\'engagement d\'une personne supplémentaire envers le créancier.'],
+  ['Sûreté réelle', 'Garantie reposant sur un bien affecté au paiement préférentiel du créancier (art. 2323).'],
+  ['Titre exécutoire', 'Acte (souvent une décision de justice) constatant une créance certaine, liquide et exigible, sans lequel aucune exécution forcée n\'est possible.'],
 ];
 notions.sort((a, b) => a[0].localeCompare(b[0], 'fr'));
 add(table([3000, 6638], ['Notion', 'Définition'], notions.map(([n, d]) => [`**${n}**`, d])));
@@ -1004,7 +1237,7 @@ const front = [];
 front.push(new Paragraph({ spacing: { before: 2400, after: 200 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Droit des affaires', bold: true, color: RED, size: 64 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [new TextRun({ text: 'Licence Gestion et Management – L2 S3', size: 28 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 }, children: [new TextRun({ text: 'Mme Wolf – iaelyon, Université Lyon 3', size: 24, color: GREY })] }));
-front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 à 4)', italics: true, size: 24 })] }));
+front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 à 5)', italics: true, size: 24 })] }));
 front.push(...box('remarque', 'Code couleur du document', [
   B('[[Terme en rouge souligné]] : définition à connaître.'),
   B('==Surligné jaune== : idée essentielle.'),
