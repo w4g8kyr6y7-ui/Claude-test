@@ -513,29 +513,337 @@ add(box('retenir', 'Points à retenir – Chapitre 2', [
 add(pageBreak());
 
 // =====================================================================
-// CHAPITRES 3 à 5 : notes personnelles (slides à venir)
+// CHAPITRE 3
 // =====================================================================
 const pending = (n) => box('remarque', 'À compléter', [`Ce chapitre ne contient pour l\'instant que vos notes personnelles. Il sera complété dès que vous m\'aurez envoyé les slides du chapitre ${n}.`]);
 
 add(H(1, 'Chapitre 3 – Les éléments indispensables à l\'activité commerciale'));
-add(pending(3));
-add(P('Fil rouge : Lucas ouvre son magasin.'));
+add(box('exemple', 'Fil rouge : Lucas ouvre sa boutique !', [
+  'Lucas loue un local commercial (« À louer ») et s\'apprête à ouvrir sa boutique.',
+  '**Questions :** de quoi Lucas a-t-il besoin pour exercer son activité ? Quels éléments vont **vraiment** constituer son **fonds de commerce** ?',
+]));
+add(P('Point de départ : ==tout ce dont l\'entreprise a besoin ≠ son fonds de commerce==. Certains éléments en font partie, d\'autres non : le droit fait le tri pour **protéger la valeur créée par l\'activité**.'));
+add(table([4819, 4819], ['Font partie du fonds', 'Ne font pas, en eux-mêmes, partie du fonds'], [
+  ['**La clientèle** : les personnes qui choisissent mon commerce', '**Le local / les murs** : ils appartiennent au propriétaire, pas à Lucas'],
+  ['**Le nom commercial** : il m\'identifie dans mon activité', '**Les salariés** : ils travaillent pour Lucas mais ne font pas partie de son fonds'],
+  ['**L\'enseigne** : elle identifie mon établissement', '**Les fournisseurs** : ils fournissent Lucas mais n\'appartiennent pas à son fonds'],
+  ['**Le matériel** : il me sert à exploiter mon activité', ''],
+  ['**Les marchandises** : destinées à être vendues', ''],
+]));
+
+// ----- 1 -----
 add(H(2, '1. La notion de fonds de commerce'));
 add(H(3, 'A. La définition'));
-add(P('Le [[fonds de commerce]] est un ensemble de biens mobiliers, corporels et incorporels, organisé par un commerçant pour exploiter une activité commerciale et attirer une clientèle.'));
+add(P('Le [[fonds de commerce]] est ==un ensemble de biens mobiliers, corporels et incorporels, organisés par un commerçant pour exploiter une activité commerciale et attirer une clientèle==.'));
+add(P('Décomposons la définition en **4 éléments** :'));
+add(...N([
+  '**Un ensemble de biens** : des éléments matériels ou immatériels qui ont une valeur (**corporels + incorporels**).',
+  '**Organisés** : ces biens sont réunis et coordonnés par le commerçant, **dans un même but**.',
+  '**Pour exploiter une activité commerciale** : ils permettent l\'exploitation d\'une activité commerciale de manière habituelle et indépendante ; **ils servent à l\'exploitation**.',
+  '**Et attirer une clientèle** : leur finalité est d\'**attirer et de fidéliser** la clientèle, ==élément essentiel du fonds==.',
+]));
+add(box('remarque', 'À savoir', ['Le Code de commerce **ne donne pas de définition générale** du fonds de commerce.']));
+add(P('**Ne pas confondre l\'entreprise et le fonds de commerce :**'));
+add(table([4819, 4819], ['L\'entreprise', 'Le fonds de commerce'], [
+  ['Une **activité économique organisée**', 'Un **ensemble de biens organisés** pour l\'exploitation d\'une activité commerciale'],
+  ['Des personnes (salariés, dirigeant…), des moyens financiers, des moyens matériels, des relations avec des partenaires…', 'La clientèle, le matériel / les marchandises, le nom commercial / l\'enseigne, le droit au bail…'],
+  ['→ **Une notion économique**, plus large', '→ **Une notion juridique**'],
+]));
+
 add(H(3, 'B. La nature juridique du fonds de commerce'));
-add(P('Le fonds de commerce est qualifié juridiquement de bien meuble matériel.'));
-add(box('remarque', null, ['À vérifier avec les slides : le fonds de commerce est classiquement qualifié de **bien meuble incorporel** (et non « matériel »), car c\'est un ensemble abstrait distinct des éléments qui le composent.']));
+add(P('Mais juridiquement, qu\'est-ce que le fonds lui-même ?'));
+add(P('Des **éléments distincts** (clientèle, nom commercial, enseigne, matériel, marchandises, droit au bail) sont **réunis et organisés dans un même but économique**. On obtient :'));
+add(B('une [[universalité de fait]] : des biens juridiquement distincts réunis par le commerçant dans un même but économique ;'));
+add(B('qui constitue, pris dans son ensemble, un [[bien meuble incorporel]]. Certains de ses éléments sont corporels, mais **le fonds, lui, est incorporel**.'));
+add(box('remarque', 'Le local / les murs ne font pas partie du fonds', [
+  'Le local est un **immeuble** ; le fonds de commerce est un **bien meuble incorporel**. Lucas peut donc détenir l\'immeuble **et** le fonds de commerce : ce sont **deux biens distincts**.',
+]));
+add(box('remarque', 'Correction de vos notes', ['Vous aviez noté « bien meuble **matériel** ». Les slides le confirment : le fonds de commerce est un ==bien meuble incorporel==. C\'est un point classique de QCM.']));
+
+// ----- 2 -----
 add(H(2, '2. Les éléments du fonds de commerce'));
 add(H(3, 'A. La clientèle : élément essentiel du fonds'));
+add(P('La [[clientèle]] désigne l\'ensemble des **personnes attirées par l\'activité** du commerçant et qui achètent ses biens ou services. ==Sans clients, il n\'y a pas d\'activité commerciale à exploiter.=='));
+add(P('C\'est l\'**élément essentiel** du fonds : les autres éléments n\'ont de valeur que parce qu\'ils permettent d\'**attirer et de fidéliser** une clientèle. Ils sont tous organisés autour d\'elle :'));
+add(B('**Nom commercial** : permet d\'identifier l\'entreprise sur le marché.'));
+add(B('**Enseigne** : permet d\'être repéré et d\'attirer les clients.'));
+add(B('**Matériel** : permet de servir les clients et de réaliser l\'activité.'));
+add(B('**Marchandises** : sont proposées à la vente aux clients.'));
+add(B('**Droit au bail** : permet d\'occuper un emplacement pour attirer les clients.'));
+add(P('**Pour qu\'il y ait fonds de commerce, la clientèle doit être :**'));
+add(...N([
+  '==Réelle et certaine== : elle doit **effectivement exister**. Une clientèle seulement hypothétique ou potentielle ne suffit pas.',
+  '==Propre à l\'exploitant== : elle doit pouvoir être **rattachée à l\'activité du commerçant**.',
+]));
+add(box('article', 'Jurisprudence', [
+  P('**Cass., ch. réunies, 24 avril 1970** : la clientèle propre conditionne l\'existence du fonds de commerce.', { run: { italics: true } }),
+  P('**Cass. com., 4 mai 1999, n° 97-17.049** : la clientèle propre et personnelle constitue l\'élément essentiel du fonds de commerce. Sans clientèle, il n\'y a pas de fonds de commerce.', { run: { italics: true } }),
+]));
+add(box('exercice', 'Exercice du cours : Lucas dans la salle de sport', [
+  'Lucas installe un espace de vente permanent **à l\'intérieur d\'une grande salle de sport**. La majorité de ses clients sont les **adhérents de la salle**. **Lucas a-t-il une clientèle propre ?**',
+  '**Correction (raisonnement attendu) :** la clientèle doit être **propre** à l\'exploitant. Ici, les clients viennent d\'abord **pour la salle de sport** : la clientèle est attachée à la salle plutôt qu\'à Lucas. Si Lucas ne peut pas démontrer une clientèle **personnelle**, attirée par sa propre activité, il **n\'a pas de clientèle propre**, donc **pas de fonds de commerce**. C\'est exactement la situation de l\'arrêt du 24 avril 1970.',
+]));
+
+add(H(3, 'B. Le nom commercial et l\'enseigne'));
+add(P('Lucas utilise « **Lucas Factory** » sur son site, ses documents et ses réseaux, puis l\'appose sur la façade de sa boutique. Comment qualifier ce signe ?'));
+add(table([2500, 3700, 3438], ['Signe', 'Fonction', 'Exemple'], [
+  ['[[Nom commercial]]', 'Identifie **l\'activité commerciale** : c\'est le nom sous lequel le commerçant exerce son activité et est connu de sa clientèle.', '« Lucas Factory » sur le site, les documents, les réseaux'],
+  ['[[Enseigne]]', 'Identifie **l\'établissement** : elle permet notamment de repérer physiquement le lieu d\'exploitation.', '« Lucas Factory » sur la façade de la boutique'],
+  ['[[Dénomination sociale]]', 'Identifie juridiquement **la société** : c\'est le nom sous lequel la société est immatriculée et agit.', 'Lucas crée une société : « LCM DISTRIBUTION SAS »'],
+]));
+add(P('==Un même signe peut remplir les deux fonctions== : « Lucas Factory » peut être à la fois le nom commercial de Lucas et l\'enseigne apposée sur sa boutique.'));
+add(P('**Des signes protégés :** le nom commercial et l\'enseigne peuvent être protégés contre les usages créant un risque de confusion (notamment sur le terrain de la **concurrence déloyale**). //La protection des actifs immatériels sera étudiée plus tard (chapitre 9).//'));
+add(box('retenir', 'Moyen mnémotechnique', [
+  B('**Nom commercial** = activité commerciale → //qui exerce ? sous quel nom ?//'),
+  B('**Enseigne** = établissement → //où est situé le commerce ?//'),
+  B('**Dénomination sociale** = société → //qui est la personne morale ?//'),
+]));
+
+add(H(3, 'C. Le matériel et les marchandises'));
+add(P('Tous les biens de la boutique sont **corporels**… mais ils n\'ont pas la même fonction :'));
+add(table([4819, 4819], ['Le matériel / outillage', 'Les marchandises'], [
+  ['Biens **utilisés durablement pour exploiter** l\'activité', 'Biens **destinés à être vendus**'],
+  ['Chez Lucas : ordinateur, caisse, rayonnages / étagères, présentoir, mobilier', 'Chez Lucas : sacs à dos, gourdes, vêtements, accessoires, cartons de produits'],
+  ['==Matériel = sert à exploiter==', '==Marchandises = destinées à être vendues=='],
+]));
+add(P('Deux fonctions **différentes et complémentaires**, avec un **objectif commun** : permettre à l\'entreprise d\'attirer et de satisfaire sa clientèle.'));
+add(box('remarque', 'Attention', ['**Pour entrer dans le fonds, ces biens doivent appartenir au commerçant.** S\'ils sont seulement loués ou prêtés, ils n\'en font pas partie.']));
+add(box('exercice', 'À vous de jouer : construisons le fonds de commerce de Lucas', [
+  'Classez chaque élément : **dans le fonds** ou **pas dans le fonds** ? (1) Clientèle, (2) Nom commercial « Lucas Factory », (3) Enseigne « Lucas Factory », (4) Ordinateur appartenant à Lucas, (5) Stock de sacs à dos, (6) Murs de la boutique, (7) Salarié de Lucas, (8) Droit au bail.',
+  '**Correction :**',
+  B('**Dans le fonds** : 1, 2, 3, 4, 5 et **8** (clientèle, nom commercial, enseigne, matériel appartenant à Lucas, marchandises, droit au bail).'),
+  B('**Pas dans le fonds** : 6 (les murs : le local n\'appartient pas à Lucas) et 7 (le salarié participe à l\'activité mais n\'est pas un bien du fonds).'),
+  '**Zoom :** le local (les murs) n\'entre pas dans le fonds, **mais le droit au bail, oui**. Pourquoi ? Parce que le droit d\'occuper un emplacement peut avoir une valeur économique essentielle pour attirer et fidéliser la clientèle.',
+]));
+
+// ----- 3 -----
+add(H(2, '3. Le droit au bail'));
+add(H(3, 'A. Le bail commercial'));
+add(P('Lucas n\'est pas propriétaire de sa boutique : il la **loue** pour y exploiter son commerce. Quel contrat lui permet d\'occuper ce local ?'));
+add(table([4819, 4819], ['Bail commercial', 'Droit au bail'], [
+  ['Le **contrat** conclu entre le propriétaire (**bailleur**) et le commerçant (**preneur** / locataire)', 'Le **droit** dont bénéficie le locataire dans le cadre de ce contrat'],
+  ['Le bailleur met le local à disposition ; le preneur paie un loyer', 'Il peut constituer **un élément du fonds de commerce**'],
+]));
+add(P('==Bail commercial ≠ droit au bail== : l\'un est le contrat, l\'autre est le droit qui en découle.'));
+add(P('**Un statut protecteur pour le commerçant** (articles L.145-1 et suivants du Code de commerce) :'));
+add(B('[[Durée minimale du bail : 9 ans]] (art. L.145-4).'));
+add(B('**Résiliation triennale** : le preneur peut, **en principe**, donner congé à l\'expiration de chaque période triennale (**3 ans, 6 ans**).'));
+add(B('À **9 ans** : se pose la question du **renouvellement** du bail.'));
+add(box('remarque', null, ['La faculté de résiliation triennale peut être écartée par certaines clauses prévues par la loi ou par accord des parties. Des exceptions existent.']));
+add(art('Articles L.145-1 et suivants du Code de commerce', 'Les baux relatifs aux locaux dans lesquels est exploité un fonds de commerce sont soumis à un statut spécial et protecteur pour le locataire commerçant.'));
+add(art('Article L.145-4 du Code de commerce', 'Le bail commercial est conclu pour une durée minimale de 9 ans. Le preneur peut, en principe, donner congé à l\'expiration de chaque période triennale.'));
+
+add(H(3, 'B. Le droit au renouvellement'));
+add(box('exemple', null, ['Lucas exploite sa boutique **depuis 9 ans**. Sa clientèle connaît bien l\'adresse et fréquente régulièrement ce local. Le propriétaire lui annonce : « Le bail est terminé. Je souhaite récupérer mon local. » **Que peut faire Lucas ?**']));
+add(art('Article L.145-8 du Code de commerce', 'Le locataire commerçant qui remplit les conditions du statut bénéficie d\'un droit au renouvellement de son bail.'));
+add(P('**À l\'expiration du bail (en principe après 9 ans), deux issues :**'));
+add(table([4819, 4819], ['Renouvellement', 'Refus de renouvellement'], [
+  ['Lucas **reste dans les lieux**', 'Lucas **doit quitter les lieux**'],
+  ['→ **Continuité** de l\'exploitation de son commerce', '→ [[Indemnité d\'éviction]] ==en principe== (art. L.145-14)'],
+]));
+add(art('Article L.145-14 du Code de commerce', 'Le bailleur qui refuse le renouvellement du bail doit, en principe, verser au locataire une indemnité d\'éviction.'));
+add(P('**Exception** : le bailleur peut, dans certaines hypothèses prévues par la loi, refuser le renouvellement **sans indemnité d\'éviction** (art. L.145-17). Exemples de motifs légaux (liste non exhaustive) : **reprise pour habiter**, **reconstruction de l\'immeuble**, **motif grave et légitime**, **transformation ou surélévation**…'));
+add(box('complement', null, ['Précision : l\'article L.145-17 vise principalement le **motif grave et légitime** et l\'immeuble insalubre devant être démoli ; les autres hypothèses (reconstruction, reprise pour habiter…) sont réglées par les articles voisins (L.145-18 et suivants), parfois avec des conditions. Pour le QCM, retenez la présentation de la slide : **des exceptions limitativement prévues par la loi**.']));
+add(P('**Pourquoi cette protection ?** Bon emplacement (attractif pour la clientèle) → clientèle fidèle (qui connaît et fréquente le lieu) → valeur du fonds (liée notamment à l\'emplacement). ==Le droit au renouvellement protège la stabilité de l\'exploitation commerciale.=='));
+add(box('remarque', 'À ne pas confondre', ['==Droit au renouvellement ≠ renouvellement automatique.== Le bailleur peut refuser de renouveler le bail, mais il devra **en principe** verser une indemnité d\'éviction au locataire.', 'La valeur du droit au bail découle notamment de ce droit au renouvellement et de l\'indemnité d\'éviction en cas de refus.']));
+add(box('exemple', 'Réponse pour Lucas', ['Lucas, commerçant qui remplit les conditions du statut, bénéficie d\'un **droit au renouvellement** (L.145-8). Si le propriétaire refuse, il doit **en principe** lui verser une **indemnité d\'éviction** (L.145-14), sauf motif légal de refus sans indemnité (L.145-17).']));
+
+add(H(3, 'C. La valeur du droit au bail'));
+add(box('exemple', null, ['Lucas envisage de **céder son fonds de commerce**. Un autre commerçant est prêt à payer davantage pour reprendre sa boutique située dans une rue très fréquentée. **Pourquoi est-il prêt à payer pour reprendre le droit au bail ?**']));
+add(P('Le **droit au bail** = le droit d\'occuper un local dans le cadre d\'un bail commercial. ==Ce droit peut avoir une valeur économique pour l\'entreprise.== Elle dépend de **4 facteurs** :'));
+add(...N([
+  '**Emplacement** : un local bien situé (très passant, centre-ville, proximité d\'autres commerces…) peut favoriser l\'activité et son développement.',
+  '**Clientèle** : la clientèle peut s\'être attachée à l\'emplacement au fil du temps. Perdre cette adresse peut faire perdre une partie de la clientèle.',
+  '**Conditions du bail** : un loyer avantageux ou des conditions particulières (durée, charges, travaux à la charge du bailleur…) renforcent la valeur du droit au bail. //Ex. : loyer inférieur aux loyers pratiqués dans le secteur.//',
+  '**Stabilité** : le statut des baux commerciaux protège le locataire (droit au renouvellement et, en principe, indemnité d\'éviction en cas de refus). Cette stabilité sécurise l\'exploitation.',
+]));
+add(P('==Cette valeur contribue à la valeur du fonds de commerce.== Le local (les murs) n\'appartient pas au fonds, mais **le droit de l\'occuper** peut avoir une valeur essentielle pour l\'exploitation.'));
+add(art('Article L.145-16 du Code de commerce', 'Le droit au bail peut accompagner la cession du fonds de commerce. Les clauses qui interdisent au locataire de céder son bail avec le fonds sont réputées non écrites.'));
+add(box('exercice', 'Exercice du cours : deux emplacements, deux valeurs ?', [
+  '**Boutique A** : centre-ville, rue très passante, bonne visibilité, loyer de **1 200 €/mois**. **Boutique B** : rue peu fréquentée, visibilité limitée, loyer de **2 000 €/mois**. À activité identique, dans laquelle le droit au bail a-t-il le plus de valeur ?',
+  '**Correction :** la **boutique A**. Elle cumule un **bon emplacement** (attractif pour la clientèle) et des **conditions de bail avantageuses** (loyer plus bas). Deux des quatre facteurs de valeur jouent en sa faveur.',
+]));
+
+// ----- Points à retenir ch3 -----
+add(H(2, 'Points à retenir – Chapitre 3'));
+add(box('retenir', 'Points à retenir – Chapitre 3', [
+  B('**Fonds de commerce** : ensemble de biens mobiliers, corporels et incorporels, organisés par un commerçant pour exploiter une activité commerciale et **attirer une clientèle**. Le Code de commerce n\'en donne pas de définition générale.'),
+  B('**Nature** : une **universalité de fait** (biens distincts réunis dans un même but) qui constitue un **bien meuble incorporel**.'),
+  B('**Fonds de commerce ≠ entreprise** (notion économique plus large) **≠ local / murs** (un immeuble) **≠ salariés** **≠ fournisseurs**.'),
+  B('**Éléments incorporels** : la **clientèle** (élément essentiel, qui doit être **réelle, certaine et propre** ; Cass. 24 avril 1970), le **nom commercial** (identifie l\'activité), l\'**enseigne** (identifie l\'établissement), le **droit au bail**. À distinguer de la **dénomination sociale** (identifie la société).'),
+  B('**Éléments corporels** : le **matériel / outillage** (sert à exploiter) et les **marchandises** (destinées à être vendues). Ils doivent **appartenir** au commerçant.'),
+  B('**Bail commercial** (le contrat) **≠ droit au bail** (le droit qui en découle, élément du fonds). Statut protecteur : art. **L.145-1** et s. ; durée minimale de **9 ans** avec résiliation **triennale** du preneur (L.145-4).'),
+  B('**Droit au renouvellement** (L.145-8) **≠ renouvellement automatique** : en cas de refus, **indemnité d\'éviction** en principe (L.145-14), sauf exceptions légales (L.145-17).'),
+  B('**Valeur du droit au bail** : emplacement, clientèle, conditions du bail, stabilité. Il peut être cédé avec le fonds : les clauses contraires sont **réputées non écrites** (L.145-16).'),
+]));
 add(pageBreak());
 
-add(H(1, 'Chapitre 4 – Les contrats dans la vie des affaires'));
-add(pending(4));
+// =====================================================================
+// CHAPITRE 4
+// =====================================================================
+add(H(1, 'Chapitre 4 – Contracter avec ses partenaires'));
+add(box('exemple', 'Fil rouge : Lucas signe son premier contrat avec un fournisseur', [
+  'Lucas est devenu commerçant (chapitre 2) et exploite un fonds de commerce (chapitre 3). Il doit maintenant **faire fonctionner son entreprise** : acheter des marchandises (fournisseur), faire créer son site (prestataire), livrer (transporteur), s\'équiper (fournisseur / loueur), se financer (banque) et vendre (clients professionnels et particuliers). **Point commun de toutes ces relations : le contrat.**',
+  'Lucas choisit son premier fournisseur : **200 produits** (sacs et accessoires) à **20 € l\'unité**, **livraison le 15 octobre**, **paiement à 30 jours**. **À partir de quand Lucas et son fournisseur sont-ils juridiquement engagés ?**',
+]));
+add(P('Le chapitre suit la vie d\'une relation commerciale : ==Négocier → Contracter → Encadrer → Exécuter → Réagir → Rompre==.'));
+
+// ----- 1 -----
+add(H(2, '1. Les contrats dans la vie des affaires'));
+add(P('Trois étapes : **discuter** (la négociation : prix, quantités, délais, modalités de paiement…) → **s\'accorder** (la formation du contrat : une offre est faite et acceptée) → **s\'engager** (le contrat produit ses effets : les parties sont juridiquement liées et doivent exécuter leurs engagements).'));
+add(H(3, 'A. La liberté contractuelle'));
+add(art('Article 1102 du Code civil', '« Chacun est libre de contracter ou de ne pas contracter, de choisir son cocontractant et de déterminer le contenu et la forme du contrat dans les limites fixées par la loi. »'));
+add(P('La [[liberté contractuelle]] a **quatre dimensions** :'));
+add(B('**Contracter ou non** (« Suis-je obligé de signer ? ») : Lucas est libre de décider s\'il conclut ou non un contrat.'));
+add(B('**Choisir son partenaire** (« Avec quel fournisseur travailler ? ») : Lucas est libre de choisir son cocontractant.'));
+add(B('**Déterminer le contenu** (prix, quantité, livraison, paiement) : Lucas et son partenaire sont libres de négocier les conditions de leur accord.'));
+add(B('**Choisir la forme** (écrit, échange de mails, accord oral…) : le contrat peut en principe être conclu sous la forme choisie par les parties.'));
+add(box('remarque', 'Une liberté qui n\'est pas absolue', [
+  'La liberté contractuelle s\'exerce **dans les limites de la loi et du respect de l\'ordre public** :',
+  B('**Discrimination interdite** : ex. refus de contracter en raison de l\'origine, du sexe…'),
+  B('**Clause contraire à l\'ordre public** : ex. clause portant atteinte à une règle impérative.'),
+  '==Liberté de contracter ≠ liberté de tout prévoir.==',
+]));
+
 add(H(3, 'B. La négociation et la formation du contrat'));
-add(P('Responsabilité civile / pénale.'));
+add(H(4, '1) La négociation et sa rupture'));
+add(box('exemple', 'La rupture des négociations', ['(1) Lucas contacte un fournisseur : il recherche 200 produits. (2) Plusieurs échanges pendant **3 semaines** (prix, quantités, délais, paiement). (3) Le fournisseur **s\'engage** : il prépare la commande et **refuse une autre opportunité commerciale**. (4) **Lucas change d\'avis** et choisit un autre fournisseur. **Peut-il le faire ?**']));
+add(art('Article 1112 du Code civil', '« L\'initiative, le déroulement et la rupture des négociations précontractuelles sont libres, mais ils doivent respecter les exigences de la bonne foi. »'));
+add(P('**Principe :** les négociations sont libres… mais doivent respecter la ==bonne foi==.'));
+add(B('**Liberté** : négocier, échanger, mettre fin aux discussions.'));
+add(B('**Bonne foi** : un comportement loyal et sincère.'));
+add(B('**Responsabilité** : en cas de **rupture fautive** des négociations.'));
+add(P('//Vos notes : « Responsabilité civile / pénale ».// Les slides précisent qu\'il s\'agit de la ==responsabilité civile== : la partie fautive doit réparer le préjudice causé. Il n\'est pas question de responsabilité pénale ici.'));
+add(box('exemple', 'Réponse pour Lucas', ['Lucas est **libre** de rompre les négociations. Mais s\'il rompt de façon **déloyale** (tardivement, sans motif, alors que le fournisseur a engagé des frais et refusé une autre opportunité), il peut engager sa **responsabilité civile** pour rupture fautive.']));
+add(box('complement', null, ['En cas de rupture fautive, la réparation ne peut pas compenser **la perte des avantages attendus du contrat non conclu** (art. 1112, al. 2 du Code civil). On indemnise la faute dans la rupture, pas le contrat manqué.']));
+
+add(H(4, '2) Les devoirs pendant la négociation'));
+add(table([4819, 4819], ['L\'obligation d\'information (art. 1112-1 C. civ.)', 'Le devoir de confidentialité (art. 1112-2 C. civ.)'], [
+  ['Celui qui connaît une information dont l\'importance est **déterminante pour le consentement** de l\'autre partie doit l\'en informer dès lors que, légitimement, cette dernière ignore cette information ou fait confiance à son cocontractant.', 'Celle des parties qui reçoit une **information confidentielle** à l\'occasion des négociations doit en **conserver le caractère confidentiel**.'],
+  ['//Exemples : caractéristiques essentielles du produit, risques connus (vices, défauts), contraintes réglementaires.//', '//Exemples : projet commercial de Lucas, données financières, stratégie de développement.//'],
+]));
+add(P('**Conséquences en cas de manquement :** la partie qui ne respecte pas ces obligations peut voir sa ==responsabilité civile== engagée. //Comportements fautifs : dissimuler une information déterminante, réutiliser des informations confidentielles.//'));
+
+add(H(4, '3) La formation du contrat : l\'offre et l\'acceptation'));
+add(table([3212, 3213, 3213], ['1. L\'offre', '2. L\'acceptation', '3. Le contrat est formé'], [
+  ['Une **proposition ferme et précise**. //« Je vous propose 200 produits à 20 € l\'unité, livraison sous 15 jours. »//', 'Un **accord sans réserve**. //« J\'accepte votre proposition. »//', 'Les parties sont **juridiquement liées**.'],
+  ['Volonté d\'être lié ; contenu suffisamment précis ; destinataire déterminé ; délai de validité (éventuel)', 'Conforme à l\'offre ; expresse ou tacite ; dans le délai de validité ; sans modification', 'La rencontre d\'une offre et d\'une acceptation crée un lien juridique entre les parties.'],
+]));
+add(art('Articles 1113 et 1114 du Code civil', '« Le contrat est formé par la rencontre d\'une offre et d\'une acceptation. » L\'acceptation doit être pure et simple. Elle peut être expresse ou tacite.'));
+add(P('**Réponse à la question du fil rouge :** Lucas et son fournisseur sont engagés ==dès la rencontre de l\'offre et de l\'acceptation==, sans qu\'il soit nécessaire de signer un document.'));
+
+add(H(3, 'C. La souplesse des formes et la liberté de la preuve'));
+add(box('exemple', null, ['Lucas : « Je n\'ai rien signé… mais nous avons échangé plusieurs mails ! » Le fournisseur : « La commande était bien confirmée ! » (échanges de mails, bon de commande, facture).']));
+add(table([4819, 4819], ['1. Le contrat est-il valable ? (la forme)', '2. Peut-on prouver le contrat ? (la preuve)'], [
+  [['**Principe :** le [[consensualisme]] (art. 1172 C. civ.) : ==l\'accord des volontés suffit en principe==.', '**L\'écrit n\'est pas une condition générale de validité**, sous réserve des contrats pour lesquels la loi impose une forme particulière (ex. : acte notarié, écrit obligatoire…).'],
+   ['**Droit civil** (principe général) : écrit en principe exigé au-delà du seuil légal (**art. 1359 C. civ.**, 1 500 €). Certaines preuves peuvent être admises (commencement de preuve par écrit, exceptions…).', '**Vie des affaires** (actes de commerce) : ==preuve par tous moyens== à l\'égard des commerçants (**art. L.110-3 C. com.**). //Exemples : mails, facture, bon de commande, échanges de messages, documents commerciaux.//']],
+]));
+add(box('remarque', 'À ne pas confondre', ['==Validité du contrat ≠ preuve du contrat.== La validité répond à la question « le contrat existe-t-il juridiquement ? » ; la preuve à la question « puis-je démontrer son existence et son contenu ? ». //(Lien avec le chapitre 1 : la preuve, et le chapitre 2 : la liberté de la preuve entre commerçants.)//']));
+
+// ----- 2 -----
+add(H(2, '2. L\'encadrement de la relation commerciale'));
+add(H(3, 'A. Les conditions générales de vente (CGV)'));
+add(P('Lucas reçoit les CGV de son fournisseur : « Je dois vraiment lire tout ça ? » Oui ! Elles contiennent les **prix et réductions** (prix unitaire, remises, conditions tarifaires), les **conditions de paiement** (délai, modes de règlement, escompte), la **livraison** (délais, transport, transfert des risques) et les règles en cas de **retard de paiement** (pénalités, indemnité forfaitaire).'));
+add(...N([
+  '**Un cadre commun** : les [[CGV]] organisent les conditions applicables aux ventes de produits ou de services. Elles constituent ==le socle unique de la négociation commerciale== (art. L.441-1 C. com.).',
+  '**Une communication au client professionnel** : lorsqu\'elles sont établies, les CGV doivent être communiquées au professionnel qui en fait la demande pour les besoins de son activité, **sur un support durable** (papier, e-mail, espace client…).',
+  '**Pour être opposables**, les CGV doivent avoir été ==portées à la connaissance de Lucas== **et** ==acceptées par lui== (art. 1119 C. civ.).',
+]));
+
+add(H(3, 'B. Les principales obligations des parties'));
+add(P('Le contrat crée des **obligations réciproques** : des marchandises contre un prix. C\'est un échange équilibré et encadré par le droit.'));
+add(table([4819, 4819], ['Le fournisseur (vendeur) : art. 1603 et s. C. civ.', 'Lucas (acheteur) : art. 1650 et s. C. civ.'], [
+  ['**Délivrer** : remettre les biens convenus', '**Payer le prix** : au montant convenu'],
+  ['**Conformément au contrat** : produit, quantité, qualité, délai', '**Payer à l\'échéance** : respecter le délai prévu'],
+  ['**Garantir** : notamment contre les vices cachés', '**Prendre livraison** : réceptionner les marchandises'],
+]));
+add(art('Article 1103 du Code civil', 'Le contrat fait la loi des parties : les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits. Ce qui a été convenu doit être exécuté (**force obligatoire**).'));
+add(art('Article 1104 du Code civil', 'Les contrats doivent être négociés, formés et exécutés de bonne foi : loyauté, coopération, comportement conforme aux engagements.'));
+add(box('exemple', 'Exemple concret', ['Contrat : 200 produits, 20 €/unité, livraison le 15 octobre. Le fournisseur livre les 200 produits… **le 25 octobre**. A-t-il correctement exécuté le contrat ? **Non** : c\'est une exécution **tardive** (voir partie 3). ==Conclure un contrat = prendre des engagements juridiquement obligatoires.==']));
+
+add(H(3, 'C. Les relations avec les fournisseurs et les clients professionnels : facturation et délais de paiement'));
+add(P('Le circuit : **livraison** (remise des marchandises) → **facture** (établie par le fournisseur, ex. 200 × 20 € = 4 000 €) → **échéance** (date limite de paiement) → **paiement** (par Lucas). « Payer mon fournisseur, oui… mais pas n\'importe quand ! »'));
+add(H(4, '1) La facture : une obligation entre professionnels'));
+add(P('Tout achat de produits ou toute prestation de services **pour une activité professionnelle** doit faire l\'objet d\'une **facturation** (art. L.441-9 C. com.). Le **vendeur délivre** la facture, l\'**acheteur la réclame**.'));
+add(P('Principales mentions : identité, date, produits/services, quantité, prix, échéance. ==Facture ≠ contrat== : elle constate et accompagne l\'opération commerciale.'));
+add(H(4, '2) Quand Lucas doit-il payer ? (art. L.441-10 C. com.)'));
+add(P('==Entre professionnels, le délai de paiement n\'est pas illimité.=='));
+add(table([3212, 6426], ['Situation', 'Délai'], [
+  ['**Si rien n\'est prévu**', '**30 jours** après réception des marchandises ou exécution de la prestation'],
+  ['**Si les parties conviennent d\'un délai**', '**60 jours maximum** à compter de la date d\'émission de la facture, **ou 45 jours fin de mois** si ce délai est expressément prévu et ne constitue pas un abus manifeste'],
+]));
+add(H(4, '3) Et si Lucas paie en retard ?'));
+add(P('Le retard de paiement entraîne des **conséquences automatiques** : ==pénalités de retard + indemnité forfaitaire de 40 € pour frais de recouvrement==, **exigibles sans rappel préalable** (art. L.441-10 et D.441-5 C. com.).'));
+
+// ----- 3 -----
+add(H(2, '3. L\'exécution de la relation commerciale'));
+add(P('Et si tout ne se passe pas comme prévu (livraison en retard, marchandises non livrées, prestation mal exécutée, facture impayée) ? Trois temps : **A. Exécuter** (qu\'a-t-on promis ?) → **B. Réagir** (quels moyens d\'action ?) → **C. Rompre** (peut-on arrêter librement ?).'));
+add(H(3, 'A. L\'exécution des engagements contractuels'));
+add(H(4, '1) L\'exécution doit être conforme à ce qui a été convenu'));
+add(table([2400, 4838, 2400], ['Type d\'exécution', 'Exemple (commande : 200 produits pour le 15 octobre)', 'Résultat'], [
+  ['**Conforme**', '200 produits livrés le 15 octobre, conformes à la commande', '✓ Contrat exécuté'],
+  ['**Partielle**', '180 produits au lieu de 200', '✗ Mal exécuté'],
+  ['**Imparfaite**', '200 produits, mais pas ceux commandés (mauvaise qualité, produits différents)', '✗ Mal exécuté'],
+  ['**Tardive**', '200 produits livrés le 25 octobre au lieu du 15', '✗ Mal exécuté'],
+]));
+add(H(4, '2) Le contrat doit être exécuté de bonne foi (art. 1104 C. civ.)'));
+add(P('Comportement loyal, coopération, information en cas de difficulté, recherche de solutions. **Mais attention :** la bonne foi ne permet pas de réécrire librement le contrat ; elle s\'exerce dans le respect des engagements pris.'));
+add(H(4, '3) La mise en demeure : demander l\'exécution de l\'obligation'));
+add(P('La [[mise en demeure]] : le créancier **interpelle formellement** le débiteur pour lui demander d\'exécuter.'));
+add(B('**Comment ?** Par écrit (lettre, e-mail…), avec une demande claire d\'exécution et le rappel de l\'obligation non respectée.'));
+add(B('**À quoi ça sert ?** Constater l\'inexécution, donner une dernière chance d\'exécuter. Elle est souvent nécessaire avant d\'autres actions.'));
+add(B('**À retenir** : pas de formalisme imposé ; ce qui compte, c\'est une interpellation suffisamment claire. Un écrit est fortement conseillé pour conserver la preuve.'));
+
+add(H(3, 'B. Les conséquences de l\'inexécution'));
+add(P('« Mon fournisseur n\'a pas respecté ses engagements… Que puis-je faire ? » ==La boîte à outils du créancier (art. 1217 C. civ.)== offre **5 solutions** :'));
+add(table([2600, 4100, 2938], ['Sanction', 'Contenu', 'Exemple'], [
+  ['**1. Suspendre sa propre obligation** : l\'[[exception d\'inexécution]] (art. 1219)', 'Refuser d\'exécuter sa propre obligation tant que l\'autre partie n\'exécute pas la sienne. Suppose une inexécution **suffisamment grave**.', 'Le fournisseur n\'a pas livré : Lucas peut refuser de payer.'],
+  ['**2. Exiger l\'exécution** : l\'[[exécution forcée en nature]] (art. 1221)', 'Obtenir exactement ce qui était prévu dans le contrat, **en principe après mise en demeure**.', 'Lucas peut demander la livraison des 200 produits.'],
+  ['**3. Obtenir une** [[réduction du prix]] (art. 1223)', 'Lorsque la prestation est imparfaite mais acceptée : réduction **proportionnelle** du prix.', '180 produits livrés au lieu de 200 : Lucas peut demander une réduction du prix.'],
+  ['**4. Mettre fin au contrat** : la [[résolution]] (art. 1224 à 1227)', 'En cas d\'inexécution **suffisamment grave**. Peut résulter d\'une **clause résolutoire**, d\'une **notification** ou d\'une **décision du juge**.', 'Le fournisseur ne livre toujours pas malgré la mise en demeure : Lucas peut demander la résolution.'],
+  ['**5. Obtenir réparation** : les [[dommages et intérêts]] (art. 1231-1)', 'Indemnisation du préjudice subi. Il faut prouver **le préjudice, le lien de causalité et la faute** du débiteur (sauf force majeure).', 'Le retard de livraison a empêché Lucas d\'ouvrir sa boutique à la date prévue.'],
+]));
+add(box('retenir', 'À retenir', [
+  B('L\'inexécution **n\'entraîne pas automatiquement** la disparition du contrat.'),
+  B('Le créancier dispose de **plusieurs moyens d\'action**, qu\'il choisit en fonction de sa situation.'),
+  B('Certaines solutions **peuvent se cumuler** (ex. : résolution + dommages et intérêts).'),
+  B('**Et la** [[force majeure]] **?** Le débiteur n\'est pas responsable si l\'inexécution résulte d\'un événement **extérieur, imprévisible et irrésistible** (art. 1218 C. civ.).'),
+]));
+
+add(H(3, 'C. La rupture de la relation commerciale établie'));
+add(box('exemple', null, ['Lucas travaille avec son fournisseur depuis **5 ans** (commandes régulières de 2021 à 2025 : une relation stable, régulière et habituelle). Il trouve un autre fournisseur avec de meilleures conditions : « Puis-je arrêter du jour au lendemain ? » → **Arrêt immédiat des commandes ?**']));
+add(art('Article L.442-1, II du Code de commerce', 'Engage la responsabilité de son auteur le fait de rompre brutalement, même partiellement, une relation commerciale établie, en l\'absence d\'un préavis écrit suffisant.'));
+add(...N([
+  '**Qu\'est-ce qu\'une** [[relation commerciale établie]] **?** Une relation **stable** (dans la durée), **régulière** (des commandes répétées) et **habituelle** (une certaine continuité). ==Une commande isolée ne suffit pas.==',
+  '**Le principe :** un ==préavis écrit suffisant==. Informer son partenaire à l\'avance pour lui permettre de s\'organiser : rechercher de nouveaux clients, adapter sa production, réorganiser ses approvisionnements, éventuellement ses effectifs.',
+  '**Combien de temps ?** Pas de durée unique, tout dépend de la situation : durée de la relation, usages du commerce ou accords interprofessionnels, circonstances de l\'espèce. **Le chiffre de 18 mois** n\'est pas un délai obligatoire : c\'est un **seuil de sécurisation**. Lorsqu\'un préavis de 18 mois est respecté, la responsabilité de l\'auteur de la rupture ne peut pas être engagée au titre d\'une durée insuffisante.',
+  '**Des exceptions : rupture sans préavis** en cas d\'**inexécution par l\'autre partie de ses obligations** ou de **force majeure**.',
+  '**Les conséquences d\'une rupture brutale** : l\'auteur de la rupture peut voir sa responsabilité engagée et être condamné à réparer le préjudice causé par le **caractère brutal** de la rupture, notamment en raison de l\'insuffisance du préavis. ==On n\'indemnise pas la rupture en elle-même, mais la brutalité de la rupture.==',
+]));
+add(box('remarque', 'À bien distinguer', [
+  '**Inexécution d\'un contrat** (que faire face au manquement ?) → **Code civil** (art. 1217 et s.).',
+  '**≠ Rupture d\'une relation établie** (comment mettre fin à une relation durable ?) → **Code de commerce** (art. L.442-1, II).',
+]));
+add(box('exemple', 'Réponse pour Lucas', ['Après 5 ans de commandes régulières, la relation est **établie**. Lucas peut changer de fournisseur, mais **pas du jour au lendemain** : il doit respecter un **préavis écrit suffisant**, sinon il engage sa responsabilité pour **rupture brutale**.']));
+
+// ----- Points à retenir ch4 -----
+add(H(2, 'Points à retenir – Chapitre 4'));
+add(box('retenir', 'Points à retenir – Chapitre 4', [
+  B('**Problématique** : le droit accompagne la relation commerciale de sa **négociation** jusqu\'à son **exécution** et, le cas échéant, jusqu\'à sa **rupture** (Négocier → Contracter → Encadrer → Exécuter → Réagir).'),
+  B('**Liberté contractuelle** (art. 1102) : contracter ou non, choisir son partenaire, le contenu et la forme… **dans les limites de la loi et de l\'ordre public**.'),
+  B('**Négociations** libres mais de **bonne foi** (art. 1112) ; **obligation d\'information** (1112-1) et **confidentialité** (1112-2). Rupture fautive → **responsabilité civile**.'),
+  B('**Formation** : le contrat naît de la **rencontre d\'une offre et d\'une acceptation** (art. 1113-1114). **Consensualisme** (art. 1172) : l\'écrit n\'est pas une condition de validité. **Validité ≠ preuve** ; entre commerçants, **preuve libre** (L.110-3).'),
+  B('**CGV** : socle unique de la négociation commerciale (L.441-1) ; **opposables** si connues et acceptées (art. 1119).'),
+  B('**Obligations** : le vendeur délivre une chose conforme et la garantit (1603) ; l\'acheteur paie et prend livraison (1650). **Force obligatoire** (1103) et **bonne foi** (1104).'),
+  B('**Facture** obligatoire entre pros (L.441-9). **Délais** (L.441-10) : 30 jours par défaut, 60 jours max. date de facture ou 45 jours fin de mois. Retard → pénalités + **40 €** d\'indemnité forfaitaire (D.441-5).'),
+  B('**Inexécution** (art. 1217) : exception d\'inexécution (1219), exécution forcée (1221), réduction du prix (1223), résolution (1224-1227), dommages et intérêts (1231-1), cumulables. Exonération en cas de **force majeure** (1218). Mise en demeure souvent préalable.'),
+  B('**Rupture d\'une relation commerciale établie** (L.442-1, II) : **préavis écrit suffisant** (18 mois = seuil de sécurisation) ; on indemnise la **brutalité**, pas la rupture.'),
+]));
 add(pageBreak());
 
+// =====================================================================
+// CHAPITRE 5 : notes personnelles (slides à venir)
+// =====================================================================
 add(H(1, 'Chapitre 5 – Se faire payer et financer son activité'));
 add(pending(5));
 add(H(2, 'Le paiement dans les relations d\'affaires'));
@@ -548,28 +856,66 @@ add(pageBreak());
 // =====================================================================
 add(H(1, 'Glossaire'));
 add(H(2, 'Les articles de loi'));
-add(P('Articles **cités dans les slides** (à connaître pour le QCM) :'));
-const ch1 = () => link(toc.find(t => t.text.startsWith('Chapitre 1')).id, 'Ch. 1');
-const ch2 = () => link(toc.find(t => t.text.startsWith('Chapitre 2')).id, 'Ch. 2');
-const cellLinks = (...ls) => new Paragraph({ children: ls.flatMap((l, i) => i ? [new TextRun(' · '), l] : [l]) });
-add(table([1900, 1700, 4938, 1100], ['Article', 'Code', 'Contenu', 'Chapitre'], [
-  ['**L.110-1**', 'Code de commerce', 'Liste les **actes de commerce** (liste non limitative) : achat de biens pour les revendre (1°), opérations d\'intermédiaire, entreprises de manufacture, de transport, opérations de banque… et, entre toutes personnes, les **lettres de change** (10°).', cellLinks(ch2())],
-  ['**L.110-3**', 'Code de commerce', '« À l\'égard des commerçants, les actes de commerce peuvent se prouver par tous moyens […] » → **liberté de la preuve**.', cellLinks(ch1(), ch2())],
-  ['**L.121-1**', 'Code de commerce', '« Sont commerçants ceux qui exercent des actes de commerce et en font leur profession habituelle. » → **définition du commerçant**.', cellLinks(ch2())],
-  ['**L.121-2**', 'Code de commerce', 'Le **mineur émancipé** peut être commerçant sur autorisation du juge au moment de son émancipation ou du président du tribunal judiciaire s\'il formule la demande après avoir été émancipé.', cellLinks(ch2())],
-  ['**L.721-3**', 'Code de commerce', '**Compétence du tribunal de commerce** : litiges relatifs aux obligations nées à l\'occasion d\'actes de commerce entre commerçants, aux sociétés commerciales, aux actes de commerce entre toutes personnes.', cellLinks(ch2())],
-  ['**R.123-220**', 'Code de commerce', 'Les déclarations relatives aux entreprises sont accomplies, sauf dispositions contraires, au moyen d\'un formulaire dématérialisé unique, sur le **guichet unique**.', cellLinks(ch2())],
+const chLink = (n) => link(toc.find(t => t.text.startsWith(`Chapitre ${n}`)).id, `Ch. ${n}`);
+const cellLinks = (...ns) => new Paragraph({ children: ns.flatMap((n, i) => i ? [new TextRun(' · '), chLink(n)] : [chLink(n)]) });
+const ART_W = [1500, 2000, 4938, 1200];
+add(P('Articles **cités dans les slides** (à connaître pour le QCM), classés par code :'));
+add(H(3, 'Code civil'));
+add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
+  ['**1102**', 'Liberté contractuelle', '« Chacun est libre de contracter ou de ne pas contracter, de choisir son cocontractant et de déterminer le contenu et la forme du contrat dans les limites fixées par la loi. »', cellLinks(4)],
+  ['**1103**', 'Force obligatoire', 'Les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits.', cellLinks(4)],
+  ['**1104**', 'Bonne foi', 'Les contrats doivent être négociés, formés et exécutés de bonne foi.', cellLinks(4)],
+  ['**1112**', 'Négociations', 'L\'initiative, le déroulement et la rupture des négociations sont libres mais doivent respecter la bonne foi.', cellLinks(4)],
+  ['**1112-1**', 'Devoir d\'information', 'Obligation d\'informer l\'autre partie d\'une information déterminante pour son consentement, qu\'elle ignore légitimement.', cellLinks(4)],
+  ['**1112-2**', 'Confidentialité', 'Celui qui reçoit une information confidentielle pendant les négociations doit la garder confidentielle.', cellLinks(4)],
+  ['**1113-1114**', 'Offre et acceptation', 'Le contrat est formé par la rencontre d\'une offre et d\'une acceptation ; l\'acceptation est pure et simple, expresse ou tacite.', cellLinks(4)],
+  ['**1119**', 'Opposabilité des CGV', 'Les conditions générales ne sont opposables que si elles ont été portées à la connaissance de l\'autre partie et acceptées par elle.', cellLinks(4)],
+  ['**1172**', 'Consensualisme', 'Les contrats sont en principe consensuels : l\'échange des consentements suffit.', cellLinks(4)],
+  ['**1217**', 'Sanctions de l\'inexécution', 'Liste des moyens d\'action du créancier face à l\'inexécution (la « boîte à outils »).', cellLinks(4)],
+  ['**1218**', 'Force majeure', 'Événement extérieur, imprévisible et irrésistible qui exonère le débiteur.', cellLinks(4)],
+  ['**1219**', 'Exception d\'inexécution', 'Suspendre sa propre obligation si l\'autre n\'exécute pas la sienne et que l\'inexécution est suffisamment grave.', cellLinks(4)],
+  ['**1221**', 'Exécution forcée', 'Obtenir l\'exécution en nature de l\'obligation, après mise en demeure.', cellLinks(4)],
+  ['**1223**', 'Réduction du prix', 'Réduction proportionnelle du prix en cas d\'exécution imparfaite acceptée.', cellLinks(4)],
+  ['**1224 à 1227**', 'Résolution', 'Mettre fin au contrat en cas d\'inexécution suffisamment grave (clause résolutoire, notification ou décision du juge).', cellLinks(4)],
+  ['**1231-1**', 'Dommages et intérêts', 'Réparation du préjudice causé par l\'inexécution, sauf force majeure.', cellLinks(4)],
+  ['**1359**', 'Preuve par écrit', 'L\'acte juridique portant sur une somme excédant un montant fixé par décret (**1 500 €**) doit être prouvé par écrit.', cellLinks(1, 2, 4)],
+  ['**1603** et s.', 'Obligations du vendeur', 'Délivrer la chose (conforme) et la garantir (notamment contre les vices cachés).', cellLinks(4)],
+  ['**1650** et s.', 'Obligations de l\'acheteur', 'Payer le prix au jour et au lieu convenus (et prendre livraison).', cellLinks(4)],
+]));
+add(H(3, 'Code de commerce'));
+add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
+  ['**L.110-1**', 'Actes de commerce', 'Liste non limitative des actes de commerce : achat de biens pour les revendre (1°), intermédiaires, manufacture, transport, banque… et lettres de change entre toutes personnes (10°).', cellLinks(2)],
+  ['**L.110-3**', 'Liberté de la preuve', '« À l\'égard des commerçants, les actes de commerce peuvent se prouver par tous moyens […] »', cellLinks(1, 2, 4)],
+  ['**L.121-1**', 'Commerçant', '« Sont commerçants ceux qui exercent des actes de commerce et en font leur profession habituelle. »', cellLinks(2)],
+  ['**L.121-2**', 'Mineur émancipé', 'Peut être commerçant sur autorisation du juge au moment de l\'émancipation ou du président du tribunal judiciaire ensuite.', cellLinks(2)],
+  ['**R.123-220**', 'Guichet unique', 'Les déclarations relatives aux entreprises se font par un formulaire dématérialisé unique sur le guichet unique.', cellLinks(2)],
+  ['**L.145-1** et s.', 'Statut des baux commerciaux', 'Statut spécial et protecteur pour le locataire commerçant qui exploite un fonds dans les locaux loués.', cellLinks(3)],
+  ['**L.145-4**', 'Durée du bail', 'Durée minimale de 9 ans ; le preneur peut en principe donner congé à chaque période triennale.', cellLinks(3)],
+  ['**L.145-8**', 'Droit au renouvellement', 'Le locataire qui remplit les conditions du statut a droit au renouvellement de son bail.', cellLinks(3)],
+  ['**L.145-14**', 'Indemnité d\'éviction', 'Le bailleur qui refuse le renouvellement doit en principe verser une indemnité d\'éviction.', cellLinks(3)],
+  ['**L.145-16**', 'Cession du bail', 'Les clauses interdisant de céder le bail avec le fonds sont réputées non écrites.', cellLinks(3)],
+  ['**L.145-17**', 'Refus sans indemnité', 'Le bailleur peut, dans des cas prévus par la loi (ex. : motif grave et légitime), refuser le renouvellement sans indemnité.', cellLinks(3)],
+  ['**L.441-1**', 'CGV', 'Les CGV constituent le socle unique de la négociation commerciale ; communication au professionnel qui les demande.', cellLinks(4)],
+  ['**L.441-9**', 'Facturation', 'Tout achat ou prestation pour une activité professionnelle doit faire l\'objet d\'une facture (mentions obligatoires).', cellLinks(4)],
+  ['**L.441-10**', 'Délais de paiement', '30 jours par défaut ; 60 jours max. à compter de la facture ou 45 jours fin de mois ; pénalités de retard.', cellLinks(4)],
+  ['**D.441-5**', 'Indemnité forfaitaire', 'Indemnité forfaitaire pour frais de recouvrement de **40 €** en cas de retard de paiement.', cellLinks(4)],
+  ['**L.442-1, II**', 'Rupture brutale', 'Engage la responsabilité de son auteur la rupture brutale d\'une relation commerciale établie sans préavis écrit suffisant.', cellLinks(4)],
+  ['**L.721-3**', 'Tribunal de commerce', 'Compétent pour les litiges entre commerçants, relatifs aux sociétés commerciales et aux actes de commerce.', cellLinks(2)],
+]));
+add(H(3, 'Jurisprudence'));
+add(table(ART_W, ['Décision', 'Thème', 'Solution', 'Chapitre'], [
+  ['**Cass., ch. réunies, 24 avril 1970**', 'Clientèle propre', 'La clientèle propre conditionne l\'existence du fonds de commerce.', cellLinks(3)],
+  ['**Cass. com., 4 mai 1999, n° 97-17.049**', 'Clientèle propre', 'La clientèle propre et personnelle est l\'élément essentiel du fonds : sans clientèle, pas de fonds de commerce.', cellLinks(3)],
 ]));
 add(P('**Compléments** : articles **non cités dans les slides**, ajoutés pour éclairer vos notes de cours :'));
-add(table([1900, 1700, 4938, 1100], ['Article', 'Code', 'Contenu', 'Chapitre'], [
-  ['**Art. 55**', 'Constitution', 'Les traités régulièrement ratifiés ont une **autorité supérieure à celle des lois** (sous réserve de réciprocité).', cellLinks(ch1())],
-  ['**Art. 1353**', 'Code civil', '**Charge de la preuve** : celui qui réclame l\'exécution d\'une obligation doit la prouver ; celui qui se prétend libéré doit justifier le paiement ou le fait qui a éteint son obligation.', cellLinks(ch1())],
-  ['**Art. 1358**', 'Code civil', 'Hors les cas où la loi en dispose autrement, la preuve peut être apportée **par tout moyen**.', cellLinks(ch1())],
-  ['**Art. 1359**', 'Code civil', 'L\'acte juridique portant sur une somme excédant un montant fixé par décret (**1 500 €**) doit être prouvé **par écrit**.', cellLinks(ch1(), ch2())],
-  ['**Art. 1360**', 'Code civil', 'Exceptions à l\'écrit : **impossibilité matérielle ou morale** de se procurer un écrit, usage, perte de l\'écrit par force majeure.', cellLinks(ch1())],
-  ['**Art. 413-2**', 'Code civil', 'Le mineur peut être **émancipé** à partir de **16 ans** révolus, par décision du juge des tutelles.', cellLinks(ch2())],
-  ['**L.210-1**', 'Code de commerce', 'Sont **commerciales par leur forme**, quel que soit leur objet : SNC, sociétés en commandite simple, SARL et sociétés par actions (SA, SAS…).', cellLinks(ch2())],
-  ['**L.526-22**', 'Code de commerce', 'L\'**entrepreneur individuel** a un **patrimoine professionnel** (biens, droits, obligations et sûretés utiles à son activité) distinct de son patrimoine personnel.', cellLinks(ch2())],
+add(table(ART_W, ['Article', 'Code', 'Contenu', 'Chapitre'], [
+  ['**Art. 55**', 'Constitution', 'Les traités régulièrement ratifiés ont une **autorité supérieure à celle des lois** (sous réserve de réciprocité).', cellLinks(1)],
+  ['**Art. 413-2**', 'Code civil', 'Le mineur peut être **émancipé** à partir de **16 ans** révolus, par décision du juge des tutelles.', cellLinks(2)],
+  ['**Art. 1353**', 'Code civil', '**Charge de la preuve** : celui qui réclame l\'exécution d\'une obligation doit la prouver ; celui qui se prétend libéré doit justifier le paiement ou le fait qui a éteint son obligation.', cellLinks(1)],
+  ['**Art. 1358**', 'Code civil', 'Hors les cas où la loi en dispose autrement, la preuve peut être apportée **par tout moyen**.', cellLinks(1)],
+  ['**Art. 1360**', 'Code civil', 'Exceptions à l\'écrit : **impossibilité matérielle ou morale** de se procurer un écrit, usage, perte de l\'écrit par force majeure.', cellLinks(1)],
+  ['**L.210-1**', 'Code de commerce', 'Sont **commerciales par leur forme**, quel que soit leur objet : SNC, sociétés en commandite simple, SARL et sociétés par actions (SA, SAS…).', cellLinks(2)],
+  ['**L.526-22**', 'Code de commerce', 'L\'**entrepreneur individuel** a un **patrimoine professionnel** (biens, droits, obligations et sûretés utiles à son activité) distinct de son patrimoine personnel.', cellLinks(2)],
 ]));
 
 add(H(2, 'Les notions clés'));
@@ -615,7 +961,40 @@ const notions = [
   ['RNE', 'Répertoire national des entreprises : identifie toutes les entreprises, quel que soit leur statut ou leur activité.'],
   ['Tribunal de commerce', 'Juridiction spécialisée dans les litiges liés à la vie des affaires (engagements entre commerçants, sociétés commerciales, actes de commerce).'],
   ['Usages professionnels', 'Pratiques répétées, non écrites, reconnues comme obligatoires dans un secteur ou une profession.'],
+  ['Acceptation', 'Accord pur et simple à une offre, exprès ou tacite, dans le délai de validité ; forme le contrat.'],
+  ['Bail commercial', 'Contrat par lequel le bailleur (propriétaire) met un local à disposition d\'un commerçant (preneur) contre un loyer ; durée minimale de 9 ans.'],
+  ['Bien meuble incorporel', 'Bien qui n\'est ni un immeuble ni une chose matérielle ; c\'est la nature juridique du fonds de commerce.'],
+  ['Bonne foi', 'Exigence de loyauté et de sincérité dans la négociation, la formation et l\'exécution du contrat (art. 1104).'],
+  ['CGV', 'Conditions générales de vente : socle unique de la négociation commerciale ; opposables si connues et acceptées.'],
+  ['Clientèle', 'Ensemble des personnes attirées par l\'activité du commerçant ; élément essentiel du fonds, qui doit être réelle, certaine et propre.'],
+  ['Consensualisme', 'Principe selon lequel l\'accord des volontés suffit à former le contrat, sans forme particulière (art. 1172).'],
+  ['Dénomination sociale', 'Nom qui identifie juridiquement une société, sous lequel elle est immatriculée et agit.'],
+  ['Devoir de confidentialité', 'Obligation de ne pas divulguer ni réutiliser une information confidentielle reçue pendant les négociations (art. 1112-2).'],
+  ['Dommages et intérêts', 'Somme versée pour réparer le préjudice causé par l\'inexécution (art. 1231-1).'],
+  ['Droit au bail', 'Droit du locataire d\'occuper le local dans le cadre d\'un bail commercial ; élément du fonds de commerce, qui a une valeur économique.'],
+  ['Droit au renouvellement', 'Droit du locataire commerçant d\'obtenir le renouvellement de son bail à son expiration (L.145-8) ; pas un renouvellement automatique.'],
+  ['Enseigne', 'Signe qui identifie l\'établissement et permet de repérer physiquement le lieu d\'exploitation.'],
+  ['Exception d\'inexécution', 'Droit de suspendre sa propre obligation tant que l\'autre partie n\'exécute pas la sienne (art. 1219).'],
+  ['Exécution forcée en nature', 'Possibilité pour le créancier d\'obtenir exactement ce qui était prévu, après mise en demeure (art. 1221).'],
+  ['Force majeure', 'Événement extérieur, imprévisible et irrésistible qui exonère le débiteur de sa responsabilité (art. 1218).'],
+  ['Force obligatoire', 'Le contrat légalement formé s\'impose aux parties comme une loi (art. 1103).'],
+  ['Indemnité d\'éviction', 'Somme due en principe par le bailleur qui refuse le renouvellement du bail commercial (L.145-14).'],
+  ['Liberté contractuelle', 'Liberté de contracter ou non, de choisir son cocontractant, le contenu et la forme du contrat, dans les limites de la loi (art. 1102).'],
+  ['Marchandises', 'Biens corporels du fonds destinés à être vendus.'],
+  ['Matériel / outillage', 'Biens corporels du fonds utilisés durablement pour exploiter l\'activité.'],
+  ['Mise en demeure', 'Interpellation formelle du débiteur pour lui demander d\'exécuter son obligation ; écrit conseillé pour la preuve.'],
+  ['Nom commercial', 'Nom sous lequel le commerçant exerce son activité et est connu de sa clientèle ; identifie l\'activité.'],
+  ['Obligation d\'information', 'Devoir de révéler à l\'autre partie une information déterminante pour son consentement (art. 1112-1).'],
+  ['Offre', 'Proposition ferme et précise, adressée à un destinataire, exprimant la volonté d\'être lié en cas d\'acceptation.'],
+  ['Préavis', 'Délai d\'information laissé au partenaire avant la fin d\'une relation commerciale établie ; doit être écrit et suffisant.'],
+  ['Réduction du prix', 'Diminution proportionnelle du prix en cas d\'exécution imparfaite acceptée (art. 1223).'],
+  ['Relation commerciale établie', 'Relation stable, régulière et habituelle entre partenaires ; une commande isolée ne suffit pas.'],
+  ['Résiliation triennale', 'Faculté du preneur de donner congé à l\'expiration de chaque période de 3 ans du bail commercial.'],
+  ['Résolution', 'Anéantissement du contrat en cas d\'inexécution suffisamment grave (art. 1224 à 1227).'],
+  ['Rupture brutale', 'Fin d\'une relation commerciale établie sans préavis écrit suffisant ; engage la responsabilité de son auteur (L.442-1, II).'],
+  ['Universalité de fait', 'Ensemble de biens juridiquement distincts réunis par une personne dans un même but économique (ex. : le fonds de commerce).'],
 ];
+notions.sort((a, b) => a[0].localeCompare(b[0], 'fr'));
 add(table([3000, 6638], ['Notion', 'Définition'], notions.map(([n, d]) => [`**${n}**`, d])));
 
 // =====================================================================
@@ -625,7 +1004,7 @@ const front = [];
 front.push(new Paragraph({ spacing: { before: 2400, after: 200 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Droit des affaires', bold: true, color: RED, size: 64 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [new TextRun({ text: 'Licence Gestion et Management – L2 S3', size: 28 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 }, children: [new TextRun({ text: 'Mme Wolf – iaelyon, Université Lyon 3', size: 24, color: GREY })] }));
-front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 et 2)', italics: true, size: 24 })] }));
+front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 à 4)', italics: true, size: 24 })] }));
 front.push(...box('remarque', 'Code couleur du document', [
   B('[[Terme en rouge souligné]] : définition à connaître.'),
   B('==Surligné jaune== : idée essentielle.'),
