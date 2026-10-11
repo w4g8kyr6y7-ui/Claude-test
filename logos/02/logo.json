@@ -1,0 +1,96 @@
+{
+  "id": "02",
+  "name": "Coq Tricolore",
+  "concept": "Version épurée du « U-coq » : sans traits de vitesse, les trois rubans bleu-blanc-rouge forment un « U » dont la branche droite devient le cou du coq, coiffé de sa crête et de ses barbillons.",
+  "keywords": [
+    "Coq gaulois",
+    "Tricolore",
+    "Élégance",
+    "Lisibilité"
+  ],
+  "crop": [
+    222,
+    150,
+    590,
+    604
+  ],
+  "quantize": [
+    {
+      "hex": "#FFFFFF",
+      "bg": true
+    },
+    {
+      "hex": "#BABDD1",
+      "bg": true
+    },
+    {
+      "hex": "#1B5392",
+      "as": "blue"
+    },
+    {
+      "hex": "#193E66",
+      "as": "blue"
+    },
+    {
+      "hex": "#B42029",
+      "as": "red"
+    },
+    {
+      "hex": "#863948",
+      "as": "red"
+    }
+  ],
+  "palette": [
+    {
+      "key": "navy",
+      "name": "Bleu nuit",
+      "hex": "#0B1E45",
+      "role": "Typographie"
+    },
+    {
+      "key": "blue",
+      "name": "Bleu France",
+      "hex": "#16529A",
+      "role": "Rubans"
+    },
+    {
+      "key": "red",
+      "name": "Rouge coq",
+      "hex": "#BA2229",
+      "role": "Ruban, crête, barbillons"
+    },
+    {
+      "key": "white",
+      "name": "Blanc",
+      "hex": "#FFFFFF",
+      "role": "Respirations, fond"
+    }
+  ],
+  "wordmark": {
+    "color": "navy",
+    "cx": 382.5,
+    "items": [
+      {
+        "text": "FFSU",
+        "weight": 800,
+        "width": 443,
+        "baseline": 766,
+        "tracking": 0
+      },
+      {
+        "text": "FÉDÉRATION FRANÇAISE",
+        "weight": 600,
+        "width": 441,
+        "baseline": 823,
+        "tracking": 0.01
+      },
+      {
+        "text": "DU SPORT UNIVERSITAIRE",
+        "weight": 600,
+        "width": 461,
+        "baseline": 864,
+        "tracking": 0.01
+      }
+    ]
+  }
+}

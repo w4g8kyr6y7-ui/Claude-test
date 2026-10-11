@@ -1,0 +1,106 @@
+{
+  "id": "01",
+  "name": "Coq Élan",
+  "concept": "Un « U » tricolore formé de trois rubans qui se croisent. À gauche, des traits de vitesse évoquent la course ; à droite, le ruban s'élance vers le haut pour dessiner le cou et la crête du coq gaulois.",
+  "keywords": [
+    "Vitesse",
+    "Coq gaulois",
+    "Tricolore",
+    "Dynamisme"
+  ],
+  "crop": [
+    70,
+    150,
+    590,
+    604
+  ],
+  "quantize": [
+    {
+      "hex": "#FFFFFF",
+      "bg": true
+    },
+    {
+      "hex": "#BABDD1",
+      "bg": true
+    },
+    {
+      "hex": "#1B5392",
+      "as": "blue"
+    },
+    {
+      "hex": "#193E66",
+      "as": "blue"
+    },
+    {
+      "hex": "#B42029",
+      "as": "red"
+    },
+    {
+      "hex": "#863948",
+      "as": "red"
+    }
+  ],
+  "palette": [
+    {
+      "key": "navy",
+      "name": "Bleu nuit",
+      "hex": "#0B1E45",
+      "role": "Typographie"
+    },
+    {
+      "key": "blue",
+      "name": "Bleu France",
+      "hex": "#16529A",
+      "role": "Ruban, traits de vitesse"
+    },
+    {
+      "key": "red",
+      "name": "Rouge coq",
+      "hex": "#BA2229",
+      "role": "Ruban, crête"
+    },
+    {
+      "key": "white",
+      "name": "Blanc",
+      "hex": "#FFFFFF",
+      "role": "Respirations, fond"
+    }
+  ],
+  "wordmark": {
+    "color": "navy",
+    "cx": 382.5,
+    "items": [
+      {
+        "text": "FFSU",
+        "weight": 800,
+        "width": 443,
+        "baseline": 766,
+        "tracking": 0
+      },
+      {
+        "text": "FÉDÉRATION FRANÇAISE",
+        "weight": 600,
+        "width": 441,
+        "baseline": 823,
+        "tracking": 0.01
+      },
+      {
+        "text": "DU SPORT UNIVERSITAIRE",
+        "weight": 600,
+        "width": 461,
+        "baseline": 864,
+        "tracking": 0.01
+      }
+    ]
+  },
+  "extras": [
+    {
+      "key": "blue",
+      "d": "M76 386.5 L243 371 L241.5 393.5 Z",
+      "fade": [
+        0.05,
+        0.75
+      ]
+    }
+  ]
+}
