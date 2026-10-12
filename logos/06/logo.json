@@ -1,0 +1,121 @@
+{
+  "id": "06",
+  "name": "L'Envol",
+  "concept": "Le sigle « FFSU » en italique sportive se prolonge en un athlète qui s'élance : le « U » devient son corps, une trajectoire rouge souligne le mouvement. Un filet tricolore et la devise « Sport · Études · Avenir » complètent l'identité.",
+  "keywords": [
+    "Sigle fort",
+    "Athlète",
+    "Élan",
+    "Devise"
+  ],
+  "crop": [
+    115,
+    262,
+    1195,
+    740
+  ],
+  "quantize": [
+    {
+      "hex": "#FEFEFE",
+      "bg": true
+    },
+    {
+      "hex": "#0C3058",
+      "as": "navy"
+    },
+    {
+      "hex": "#CB222E",
+      "as": "red"
+    }
+  ],
+  "palette": [
+    {
+      "key": "navy",
+      "name": "Bleu marine",
+      "hex": "#0C3058",
+      "role": "Sigle, athlète, typographie"
+    },
+    {
+      "key": "red",
+      "name": "Rouge",
+      "hex": "#CC222E",
+      "role": "Barre du F, trajectoire"
+    },
+    {
+      "key": "silver",
+      "name": "Gris perle",
+      "hex": "#E6E6E6",
+      "role": "Filet tricolore"
+    },
+    {
+      "key": "white",
+      "name": "Blanc",
+      "hex": "#FFFFFF",
+      "role": "Fond"
+    }
+  ],
+  "protection": {
+    "unit": 130,
+    "label": "½ hauteur des lettres « FFSU »"
+  },
+  "wordmark": {
+    "color": "navy",
+    "cx": 630,
+    "items": [
+      {
+        "text": "FÉDÉRATION FRANÇAISE",
+        "weight": 400,
+        "width": 846,
+        "capHeight": 36,
+        "baseline": 806
+      },
+      {
+        "text": "DU SPORT UNIVERSITAIRE",
+        "weight": 400,
+        "width": 922,
+        "capHeight": 35,
+        "baseline": 866,
+        "cx": 629
+      },
+      {
+        "text": "SPORT • ÉTUDES • AVENIR",
+        "weight": 500,
+        "width": 589,
+        "capHeight": 18,
+        "baseline": 987,
+        "cx": 616.5,
+        "role": "devise"
+      }
+    ],
+    "decor": [
+      {
+        "key": "navy",
+        "rect": [
+          469,
+          916,
+          573,
+          927
+        ]
+      },
+      {
+        "key": "silver",
+        "rect": [
+          573,
+          916,
+          678,
+          927
+        ],
+        "mono": 0.3
+      },
+      {
+        "key": "red",
+        "rect": [
+          678,
+          916,
+          783,
+          927
+        ]
+      }
+    ]
+  }
+}

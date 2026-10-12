@@ -89,7 +89,7 @@ function typographyHtml(logo) {
   const label = { 400: 'Regular', 500: 'Medium', 600: 'SemiBold', 700: 'Bold', 800: 'ExtraBold' };
   const usage = weights.map((w) => {
     const its = logo.cfg.wordmark.items.filter((i) => i.weight === w);
-    const what = its.some((i) => i.text === 'FFSU') ? 'sigle « FFSU »' : 'nom développé';
+    const what = its.some((i) => i.text === 'FFSU') ? 'sigle « FFSU »' : (its[0].role || 'nom développé');
     return `${label[w]} — ${what}${its.length > 1 && what === 'sigle « FFSU »' ? ' et nom' : ''}`;
   });
   return `<div class="typo">
@@ -121,20 +121,22 @@ function place(svg, x, y, w, h) {
   return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${vb}" preserveAspectRatio="xMidYMid meet">${body}</svg>`;
 }
 
-function mockJersey(logo) {
-  const c = variantColors(logo, 'color');
+function mockPolo(logo) {
   const navy = logo.ink;
-  const red = logo.pal.red || logo.pal.crimson || '#C8102E';
   const sym = logoSvg(logo, { symbolOnly: true });
   return frame('#E9EDF3', `
-    <g transform="translate(70 18)">
-      <path d="M70 6 L102 0 Q110 18 128 18 Q146 18 154 0 L186 6 L232 36 L214 84 L190 74 L190 222 Q128 232 66 222 L66 74 L42 84 L24 36 Z" fill="#fff" stroke="#CBD2DC" stroke-width="1.5"/>
-      <path d="M102 0 Q110 18 128 18 Q146 18 154 0 L146 -1 Q139 11 128 11 Q117 11 110 -1 Z" fill="${navy}"/>
-      <path d="M24 36 L42 84 L48 81 L30 33 Z" fill="${navy}"/><path d="M232 36 L214 84 L208 81 L226 33 Z" fill="${navy}"/>
-      <rect x="66" y="208" width="124" height="5" fill="${navy}"/><rect x="66" y="213" width="124" height="3" fill="${red}"/>
-      ${place(sym, 136, 52, 40, 46)}
-      <text x="128" y="150" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="40" fill="${navy}">10</text>
-    </g>`, 'Maillot');
+    <g transform="translate(70 16)">
+      <path d="M72 8 L106 0 L128 24 L150 0 L184 8 L232 38 L216 82 L190 72 L190 224 Q128 232 66 224 L66 72 L40 82 L24 38 Z" fill="#fff" stroke="#CBD2DC" stroke-width="1.5"/>
+      <path d="M24 38 L40 82 L46 79 L30 35 Z" fill="${navy}"/><path d="M232 38 L216 82 L210 79 L226 35 Z" fill="${navy}"/>
+      <path d="M106 0 Q128 -6 150 0 L146 5 Q128 0 110 5 Z" fill="${navy}"/>
+      <path d="M106 0 L128 24 L117 38 L97 7 Z" fill="#fff" stroke="#CBD2DC" stroke-width="1.2"/>
+      <path d="M150 0 L128 24 L139 38 L159 7 Z" fill="#fff" stroke="#CBD2DC" stroke-width="1.2"/>
+      <path d="M97 7 L117 38" stroke="${navy}" stroke-width="2.4"/><path d="M159 7 L139 38" stroke="${navy}" stroke-width="2.4"/>
+      <rect x="123" y="24" width="10" height="42" fill="#fff" stroke="#CBD2DC" stroke-width="1.2"/>
+      <circle cx="128" cy="36" r="2" fill="#B8C2D1"/><circle cx="128" cy="50" r="2" fill="#B8C2D1"/><circle cx="128" cy="62" r="2" fill="#B8C2D1"/>
+      <path d="M66 210 L66 224 Q128 232 190 224 L190 210" fill="none" stroke="#CBD2DC" stroke-width="1"/>
+      ${place(sym, 148, 46, 28, 24)}
+    </g>`, 'Polo');
 }
 
 function mockCard(logo) {
@@ -315,7 +317,7 @@ footer { position: absolute; left: 40px; right: 40px; bottom: 16px; display: fle
     <div class="row3">
       <section class="card"><h2>Zone de protection</h2>
         <div class="protect">${protectionSvg(logo)}
-          <div class="legend">Aucun élément ne doit pénétrer la zone de protection.<br><br><b>X</b> = hauteur de capitale ${cfg.wordmark.items[0].text === 'FFSU' ? 'du sigle « FFSU »' : 'de la première ligne'}.<br>Marge minimale : <b>1 X</b> sur chaque côté.</div>
+          <div class="legend">Aucun élément ne doit pénétrer la zone de protection.<br><br><b>X</b> = ${cfg.protection?.label ?? `hauteur de capitale ${cfg.wordmark.items[0].text === 'FFSU' ? 'du sigle « FFSU »' : 'de la première ligne'}`}.<br>Marge minimale : <b>1 X</b> sur chaque côté.</div>
         </div>
       </section>
       <section class="card"><h2>Tailles minimales</h2>
@@ -330,7 +332,7 @@ footer { position: absolute; left: 40px; right: 40px; bottom: 16px; display: fle
   </div>
 </main>
 <section class="card mocks"><h2>Mises en situation</h2>
-  <div class="mockrow">${mockJersey(logo)}${mockCard(logo)}${mockSocial(logo)}${mockBanner(logo)}</div>
+  <div class="mockrow">${mockPolo(logo)}${mockCard(logo)}${mockSocial(logo)}${mockBanner(logo)}</div>
 </section>
 <footer><span>Fédération Française du Sport Universitaire · Concours logo · Planche ${cfg.id}${total ? ` / ${String(total).padStart(2, '0')}` : ''}</span><span>Logo vectoriel · Montserrat (OFL) · Format A3 paysage</span></footer>
 </body></html>`;

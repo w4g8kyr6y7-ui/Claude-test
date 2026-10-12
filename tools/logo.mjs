@@ -53,9 +53,19 @@ function layout(text, weight, size, tracking) {
 }
 
 // Ligne de texte dont la largeur d'encre vaut `width`, centrée sur cx, posée sur baseline.
-export function textLine({ text, weight, width, cx, baseline, tracking = 0 }) {
-  const probe = layout(text, weight, 100, tracking);
-  const size = (100 * width) / (probe.box.x2 - probe.box.x1);
+// Si capHeight est donné, le corps est fixé par la hauteur de capitale et l'approche
+// (tracking) est calculée pour atteindre la largeur voulue.
+export function textLine({ text, weight, width, cx, baseline, tracking = 0, capHeight: cap }) {
+  let size;
+  if (cap) {
+    size = cap / (font(weight).tables.os2.sCapHeight / font(weight).unitsPerEm);
+    const ink = (t) => { const b = layout(text, weight, size, t).box; return b.x2 - b.x1; };
+    const w0 = ink(0);
+    tracking = (width - w0) / (ink(0.1) - w0) * 0.1;
+  } else {
+    const probe = layout(text, weight, 100, tracking);
+    size = (100 * width) / (probe.box.x2 - probe.box.x1);
+  }
   const { parts, box } = layout(text, weight, size, tracking);
   const dx = cx - (box.x1 + box.x2) / 2;
   const d = parts.map(pathData).join('');
@@ -83,7 +93,7 @@ export function loadLogo(folder) {
   const symbol = JSON.parse(fs.readFileSync(path.join(folder, 'build/symbol.json'), 'utf8'));
   const pal = Object.fromEntries(cfg.palette.map((p) => [p.key, p.hex]));
   const wm = cfg.wordmark;
-  const lines = (wm.items || []).map((it) => textLine({ ...it, cx: wm.cx }));
+  const lines = (wm.items || []).map((it) => textLine({ cx: wm.cx, ...it }));
   const ink = pal[wm.color];
   return { cfg, symbol, pal, lines, ink, folder };
 }
@@ -92,6 +102,7 @@ export function loadLogo(folder) {
 export function variantColors(logo, variant) {
   const { cfg, pal, ink, symbol } = logo;
   const keys = [...new Set(symbol.layers.map((l) => l.key))];
+  for (const e of cfg.extras || []) if (!keys.includes(e.key)) keys.push(e.key);
   if (variant === 'color') return { ...pal, text: ink };
   const tints = cfg.monoTints;
   // Teintes ordonnées de la plus foncée à la plus claire.
@@ -144,20 +155,33 @@ export function symbolBox(logo) {
   return box;
 }
 
+// Décors du bloc texte (ex. filet tricolore) : rectangles [x1, y1, x2, y2] en unités source.
+// Hors version couleur, ils prennent la couleur du texte avec l'opacité `mono`.
+function decorSvg(logo, variant, colors) {
+  return (logo.cfg.wordmark.decor || []).map(({ key, rect: [x1, y1, x2, y2], mono = 1 }) => {
+    const fill = variant === 'color' ? logo.pal[key] : colors.text;
+    const op = variant === 'color' || mono === 1 ? '' : ` fill-opacity="${mono}"`;
+    return `<rect x="${x1}" y="${y1}" width="${x2 - x1}" height="${y2 - y1}" fill="${fill}"${op}/>`;
+  }).join('');
+}
+
 // Boîte englobante du logo complet (unités de l'image source).
 export function logoBox(logo, { symbolOnly = false } = {}) {
   const b = { ...symbolBox(logo) };
   if (!symbolOnly) {
-    for (const l of logo.lines) {
-      b.x1 = Math.min(b.x1, l.box.x1); b.x2 = Math.max(b.x2, l.box.x2);
-      b.y1 = Math.min(b.y1, l.box.y1); b.y2 = Math.max(b.y2, l.box.y2);
+    const boxes = logo.lines.map((l) => l.box).concat((logo.cfg.wordmark.decor || [])
+      .map(({ rect: [x1, y1, x2, y2] }) => ({ x1, y1, x2, y2 })));
+    for (const l of boxes) {
+      b.x1 = Math.min(b.x1, l.x1); b.x2 = Math.max(b.x2, l.x2);
+      b.y1 = Math.min(b.y1, l.y1); b.y2 = Math.max(b.y2, l.y2);
     }
   }
   return b;
 }
 
-// Unité X de la zone de protection : hauteur de capitale de la première ligne.
-export const protectionUnit = (logo) => logo.lines[0].capHeight;
+// Unité X de la zone de protection : valeur imposée par logo.json (unités source),
+// sinon hauteur de capitale de la première ligne.
+export const protectionUnit = (logo) => logo.cfg.protection?.unit ?? logo.lines[0].capHeight;
 
 /** Renvoie un SVG autonome. opts: { variant, symbolOnly, pad, bg } */
 export function logoSvg(logo, { variant = 'color', symbolOnly = false, pad = 0, bg = null, title } = {}) {
@@ -165,7 +189,8 @@ export function logoSvg(logo, { variant = 'color', symbolOnly = false, pad = 0, 
   const b = logoBox(logo, { symbolOnly });
   const vb = [b.x1 - pad, b.y1 - pad, b.x2 - b.x1 + 2 * pad, b.y2 - b.y1 + 2 * pad].map((v) => +v.toFixed(2));
   const text = symbolOnly ? '' : logo.lines
-    .map((l) => `<path fill="${colors.text}" transform="translate(${l.dx.toFixed(2)} ${l.dy.toFixed(2)})" d="${l.d}"/>`).join('');
+    .map((l) => `<path fill="${colors.text}" transform="translate(${l.dx.toFixed(2)} ${l.dy.toFixed(2)})" d="${l.d}"/>`).join('')
+    + decorSvg(logo, variant, colors);
   const bgRect = bg ? `<rect x="${vb[0]}" y="${vb[1]}" width="${vb[2]}" height="${vb[3]}" fill="${bg}"/>` : '';
   const t = title ? `<title>${title}</title>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}">${t}${bgRect}${symbolGroup(logo, colors)}${text}</svg>`;

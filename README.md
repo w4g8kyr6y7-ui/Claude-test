@@ -16,7 +16,7 @@ Fédération Française du Sport Universitaire, avec les logos redessinés en SV
 
 Chaque planche présente : logo principal, concept, déclinaisons (monochrome, négatif,
 symbole seul, icône d'application), palette (HEX, RVB, CMJN, Pantone approchant),
-typographie, zone de protection, tailles minimales et mises en situation (maillot,
+typographie, zone de protection, tailles minimales et mises en situation (polo,
 carte de licence, réseaux sociaux, kakémono).
 
 > Les valeurs CMJN et Pantone sont des conversions indicatives à valider sur nuancier.
