@@ -1,0 +1,106 @@
+{
+  "id": "05",
+  "name": "Ruban Tricolore",
+  "concept": "Des rubans bleu, blanc et rouge s'enroulent pour former un « U » fluide, comme une flamme ou un drapeau au vent. Le mouvement continu évoque le parcours des étudiants-athlètes et l'esprit d'équipe.",
+  "keywords": [
+    "Mouvement",
+    "Flamme",
+    "Drapeau",
+    "Unité"
+  ],
+  "crop": [
+    120,
+    150,
+    645,
+    692
+  ],
+  "quantize": [
+    {
+      "hex": "#FFFFFF",
+      "bg": true
+    },
+    {
+      "hex": "#D2CED3",
+      "bg": true
+    },
+    {
+      "hex": "#D51219",
+      "as": "red"
+    },
+    {
+      "hex": "#AD1A1E",
+      "as": "garnet"
+    },
+    {
+      "hex": "#04589F",
+      "as": "blue"
+    },
+    {
+      "hex": "#0D3E7C",
+      "as": "navy"
+    },
+    {
+      "hex": "#5B4467",
+      "as": "navy"
+    }
+  ],
+  "palette": [
+    {
+      "key": "royal",
+      "name": "Bleu roi",
+      "hex": "#0A4489",
+      "role": "Typographie"
+    },
+    {
+      "key": "navy",
+      "name": "Bleu profond",
+      "hex": "#0D3E7C",
+      "role": "Ruban, ombres"
+    },
+    {
+      "key": "blue",
+      "name": "Bleu France",
+      "hex": "#05589F",
+      "role": "Ruban"
+    },
+    {
+      "key": "red",
+      "name": "Rouge vif",
+      "hex": "#D51219",
+      "role": "Ruban"
+    },
+    {
+      "key": "garnet",
+      "name": "Grenat",
+      "hex": "#AD1A1E",
+      "role": "Ruban, ombres"
+    },
+    {
+      "key": "white",
+      "name": "Blanc",
+      "hex": "#FFFFFF",
+      "role": "Ruban central"
+    }
+  ],
+  "wordmark": {
+    "color": "royal",
+    "cx": 382,
+    "items": [
+      {
+        "text": "FFSU",
+        "weight": 500,
+        "width": 424,
+        "baseline": 845,
+        "tracking": 0.03
+      },
+      {
+        "text": "FÉDÉRATION FRANÇAISE DU SPORT UNIVERSITAIRE",
+        "weight": 500,
+        "width": 424,
+        "baseline": 883,
+        "tracking": 0.02
+      }
+    ]
+  },
+  "monoTints": true
+}

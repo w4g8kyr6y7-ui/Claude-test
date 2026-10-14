@@ -1,0 +1,5 @@
+node_modules
+__pycache__/
+# Fichiers intermédiaires de vectorisation (seul symbol.json est conservé)
+logos/*/build/*
+!logos/*/build/symbol.json

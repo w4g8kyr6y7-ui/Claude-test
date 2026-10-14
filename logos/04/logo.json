@@ -1,0 +1,145 @@
+{
+  "id": "04",
+  "name": "Le Sprinteur",
+  "concept": "Un athlète en pleine course jaillit d'un « U » monumental bleu et rouge. Le traitement en facettes (low-poly) apporte modernité et énergie ; les éclats à l'arrière traduisent la vitesse.",
+  "keywords": [
+    "Athlète",
+    "Performance",
+    "Modernité",
+    "Facettes"
+  ],
+  "crop": [
+    122,
+    194,
+    618,
+    710
+  ],
+  "bg": "#F5FAFA",
+  "quantize": [
+    {
+      "hex": "#F5FAFA",
+      "bg": true
+    },
+    {
+      "hex": "#FFFFFF",
+      "bg": true
+    },
+    {
+      "hex": "#0C3472",
+      "as": "navy"
+    },
+    {
+      "hex": "#064EA5",
+      "as": "blue"
+    },
+    {
+      "hex": "#087CC2",
+      "as": "sky"
+    },
+    {
+      "hex": "#6698C2",
+      "as": "sky"
+    },
+    {
+      "hex": "#B0CDE7",
+      "as": "ice"
+    },
+    {
+      "hex": "#E42E39",
+      "as": "red"
+    },
+    {
+      "hex": "#E6A3AA",
+      "as": "blush"
+    },
+    {
+      "hex": "#BC1427",
+      "as": "crimson"
+    },
+    {
+      "hex": "#8D0E28",
+      "as": "garnet"
+    },
+    {
+      "hex": "#8E415F",
+      "as": "garnet"
+    }
+  ],
+  "palette": [
+    {
+      "key": "royal",
+      "name": "Bleu roi",
+      "hex": "#0E468C",
+      "role": "Typographie"
+    },
+    {
+      "key": "navy",
+      "name": "Bleu profond",
+      "hex": "#0C3472",
+      "role": "Facettes d'ombre"
+    },
+    {
+      "key": "blue",
+      "name": "Bleu France",
+      "hex": "#0650A6",
+      "role": "Jambage gauche"
+    },
+    {
+      "key": "sky",
+      "name": "Bleu ciel",
+      "hex": "#127FC4",
+      "role": "Facettes de lumière"
+    },
+    {
+      "key": "ice",
+      "name": "Glace",
+      "hex": "#C9DCEE",
+      "role": "Reflets"
+    },
+    {
+      "key": "red",
+      "name": "Rouge vif",
+      "hex": "#E3283A",
+      "role": "Jambage droit, éclats"
+    },
+    {
+      "key": "crimson",
+      "name": "Rouge carmin",
+      "hex": "#BC1427",
+      "role": "Facettes"
+    },
+    {
+      "key": "garnet",
+      "name": "Grenat",
+      "hex": "#8D0E28",
+      "role": "Facettes d'ombre"
+    },
+    {
+      "key": "blush",
+      "name": "Rose reflet",
+      "hex": "#EDB4BA",
+      "role": "Reflets"
+    }
+  ],
+  "wordmark": {
+    "color": "royal",
+    "cx": 382.5,
+    "items": [
+      {
+        "text": "Fédération Française",
+        "weight": 600,
+        "width": 493,
+        "baseline": 782,
+        "tracking": 0
+      },
+      {
+        "text": "du Sport Universitaire",
+        "weight": 600,
+        "width": 514,
+        "baseline": 833,
+        "tracking": 0
+      }
+    ]
+  },
+  "monoTints": true
+}

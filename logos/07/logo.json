@@ -1,0 +1,111 @@
+{
+  "id": "07",
+  "name": "La Victoire",
+  "concept": "Variante « victoire » : l'athlète lève le bras au-dessus du sigle « FFSU », geste du vainqueur et de la réussite étudiante. La grande trajectoire rouge dynamise l'ensemble ; un filet tricolore signe l'identité française.",
+  "keywords": [
+    "Victoire",
+    "Réussite",
+    "Sigle fort",
+    "Dynamisme"
+  ],
+  "crop": [
+    120,
+    290,
+    1195,
+    786
+  ],
+  "quantize": [
+    {
+      "hex": "#FEFEFE",
+      "bg": true
+    },
+    {
+      "hex": "#0C3058",
+      "as": "navy"
+    },
+    {
+      "hex": "#CB222E",
+      "as": "red"
+    }
+  ],
+  "palette": [
+    {
+      "key": "navy",
+      "name": "Bleu marine",
+      "hex": "#0C3058",
+      "role": "Sigle, athlète, typographie"
+    },
+    {
+      "key": "red",
+      "name": "Rouge",
+      "hex": "#CC222E",
+      "role": "Barre du F, trajectoire"
+    },
+    {
+      "key": "silver",
+      "name": "Gris perle",
+      "hex": "#E6E6E6",
+      "role": "Filet tricolore"
+    },
+    {
+      "key": "white",
+      "name": "Blanc",
+      "hex": "#FFFFFF",
+      "role": "Fond"
+    }
+  ],
+  "protection": {
+    "unit": 112,
+    "label": "½ hauteur des lettres « FFSU »"
+  },
+  "wordmark": {
+    "color": "navy",
+    "cx": 602.5,
+    "items": [
+      {
+        "text": "FÉDÉRATION FRANÇAISE",
+        "weight": 400,
+        "width": 763,
+        "capHeight": 33,
+        "baseline": 829
+      },
+      {
+        "text": "DU SPORT UNIVERSITAIRE",
+        "weight": 400,
+        "width": 791,
+        "capHeight": 33,
+        "baseline": 884
+      }
+    ],
+    "decor": [
+      {
+        "key": "navy",
+        "rect": [
+          459,
+          925,
+          563,
+          937
+        ]
+      },
+      {
+        "key": "silver",
+        "rect": [
+          563,
+          925,
+          667,
+          937
+        ],
+        "mono": 0.3
+      },
+      {
+        "key": "red",
+        "rect": [
+          667,
+          925,
+          771,
+          937
+        ]
+      }
+    ]
+  }
+}
