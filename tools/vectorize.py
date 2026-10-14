@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 from scipy import ndimage
 
 SCALE = 4
@@ -60,6 +60,14 @@ def main(folder):
     votes = np.stack([ndimage.uniform_filter((lab == c).astype(float), SMOOTH)
                       for c in range(len(classes))])
     lab = votes.argmax(0)
+
+    # Recolorations manuelles : zones (polygones en unités source) où une couleur
+    # doit être remplacée, par ex. un dégradé de l'original ramené à une seule teinte.
+    for rc in cfg.get("recolor", []):
+        zone = Image.new("L", (px.shape[1], px.shape[0]), 0)
+        ImageDraw.Draw(zone).polygon([((x - x0) * SCALE, (y - y0) * SCALE) for x, y in rc["poly"]], fill=1)
+        zone = np.asarray(zone).astype(bool)
+        lab[zone & (lab == classes.index(rc["from"]))] = classes.index(rc["to"])
 
     # Supprime les îlots minuscules (bruit de compression JPEG/IA).
     for c in range(len(classes)):
