@@ -5,7 +5,7 @@ const {
   Document, Packer, Paragraph, TextRun, Footer, PageNumber, Tab, TabStopType, BorderStyle,
 } = require('docx');
 const L = require('./lib');
-const { C, MARGIN, PAGE_W, runs, body, toc, H1, H2, H3, SRC, P, UL, OL, DEF, KEY, NOTE, IMG, TBL, SWOT, RETENIR } = L;
+const { C, MARGIN, PAGE_W, runs, body, toc, H1, H2, H3, SRC, P, UL, OL, DEF, KEY, NOTE, IMG, TBL, SWOT, HEAT, RETENIR } = L;
 
 // =====================================================================
 // Page de titre + sommaire
@@ -13,7 +13,7 @@ const { C, MARGIN, PAGE_W, runs, body, toc, H1, H2, H3, SRC, P, UL, OL, DEF, KEY
 const cover = [
   new Paragraph({ spacing: { after: 40 }, children: runs('LICENCE 2 ÉCONOMIE-GESTION · COURS DE SYNTHÈSE', { bold: true, size: 18, color: C.accent }) }),
   new Paragraph({ spacing: { after: 40 }, children: runs("Systèmes d'information", { bold: true, size: 56, color: C.primary }) }),
-  new Paragraph({ spacing: { after: 60 }, children: runs('Fondamentaux des SI · Séances 1 à 9', { size: 26, color: C.muted }) }),
+  new Paragraph({ spacing: { after: 60 }, children: runs('Fondamentaux des SI · Séances 1 à 11', { size: 26, color: C.muted }) }),
   new Paragraph({ spacing: { after: 320 }, children: runs('Document évolutif : les séances suivantes seront ajoutées à la suite.', { italics: true, size: 18, color: C.muted }) }),
   new Paragraph({
     spacing: { after: 60 },
@@ -1015,6 +1015,321 @@ RETENIR([
 ]);
 
 // =====================================================================
+// SÉANCE 10
+// =====================================================================
+H1('Séance 10 – Fondamentaux de la cybersécurité');
+SRC('Support : « Fondamentaux en cybersécurité », E. Disson.');
+
+H2('1. Un enjeu majeur');
+TBL(['Chiffre clé', 'Signification', 'Source'], [0.16, 0.56, 0.28], [
+  ['8 000 Md$', 'Coût mondial cumulé de la cybercriminalité en 2023-2024', 'Cybersecurity Ventures 2024'],
+  ['+70 %', 'Hausse des attaques par déni de service (DDoS) dans l\'UE en 2024', 'ENISA 2024'],
+  ['68 %', 'Part des compromissions qui impliquent un **humain** (non malveillant)', 'Verizon DBIR 2024'],
+  ['2,9 Md€', 'Amendes RGPD cumulées en Europe fin 2024', 'EDPB 2024'],
+]);
+NOTE('Attention : plus loin, la diapo consacrée au RGPD donne un cumul d\'amendes d\'environ 5,88 Md€ fin 2024. Les deux chiffres figurent dans le support ; demande à ton enseignant lequel retenir.');
+
+H2('2. Concepts fondamentaux');
+H3('Définition');
+DEF("La **cybersécurité** est l'**ensemble des technologies, des processus et des règles** utilisés pour **protéger** les ordinateurs, les réseaux, les programmes et les données **contre les attaques numériques**. C'est l'« art de défendre les données d'une organisation ainsi que les systèmes qui les supportent ».");
+
+H3('La triade CIA');
+TBL(['Confidentialité', 'Intégrité', 'Disponibilité'], [0.333, 0.333, 0.334], [
+  ['Seules les **personnes autorisées** accèdent à l\'information', 'Les données ne sont **pas altérées** de manière non autorisée', 'Le service est **accessible quand on en a besoin**'],
+  ['*Moyens* : chiffrement, contrôle d\'accès, classification, DLP, accords de confidentialité (NDA)', '*Moyens* : hachage, signatures, codes d\'authentification (MAC), journalisation, signature du code', '*Moyens* : redondance, PRA / PCA, sauvegardes 3-2-1, protection anti-DDoS'],
+], { firstColBold: false });
+NOTE('CIA vient de l\'anglais Confidentiality, Integrity, Availability ; on parle aussi de triade DIC en français.');
+
+H3('Vocabulaire essentiel');
+TBL(['Terme', 'Définition'], [0.22, 0.78], [
+  ['Actif', 'Tout élément ayant de la **valeur** : données, matériel, logiciel, personne, processus'],
+  ['Menace', '**Cause potentielle** d\'un incident ; interne ou externe, intentionnelle ou accidentelle'],
+  ['Vulnérabilité', '**Faiblesse** d\'un actif exploitable par une menace (faille non corrigée, mot de passe faible)'],
+  ['Risque', 'Croisement d\'une menace, d\'une vulnérabilité et de la valeur de l\'actif : **Risque = Probabilité × Impact**'],
+  ['Impact', 'Conséquence **financière, juridique, réputationnelle ou opérationnelle**'],
+  ['Contre-mesure', 'Moyen de **réduire le risque** : **préventif**, **détectif** ou **correctif**'],
+  ['Résilience', 'Capacité à **continuer d\'opérer malgré un incident** (PRA / PCA, gestion de crise)'],
+]);
+
+H3("Les types d'attaques");
+TBL(['Famille', 'Principe', 'Exemples et contre-mesures'], [0.2, 0.44, 0.36], [
+  ['Phishing et ingénierie sociale', ['**Phishing** : e-mail avec pièce jointe piégée ou lien vers une fausse page de connexion', '**Spear phishing** : ciblage précis (dirigeant, comptable) ; **whaling** : ciblage de la direction', '**Smishing** (SMS), **vishing** (appel)', '**Ingénierie sociale** : manipulation (urgence, autorité, appât du gain, peur) ; **pretexting** : faux scénario (faux support informatique, faux président)'], 'Phishing présent dans ≈ **36 %** des violations (Verizon 2024) ; **vecteur initial n° 1** (ENISA 2024). L\'**OSINT** (renseignement en sources ouvertes) aide l\'attaquant à préparer son ciblage'],
+  ['Malware et ransomware', ['**Malware** : terme générique (virus, ver, cheval de Troie, spyware, keylogger, rootkit)', '**Ransomware** : chiffre ou vole les données et exige une **rançon** (double ou triple extorsion), souvent vendu « as a Service » (**RaaS**)', 'Canaux : e-mail, site compromis, fournisseur, clé USB'], 'LockBit 3.0, Cl0p (faille MOVEit 2023 : 2 600 organisations, 60 M de personnes). Parades : **EDR**, sauvegardes 3-2-1 immuables, segmentation du réseau, **moindre privilège**'],
+  ['DDoS, zero-day, supply chain', ['**DDoS** : saturer un service pour le rendre indisponible', '**Zero-day** : faille **inconnue de l\'éditeur** (≈ 50 exploitées par an)', '**Attaque supply chain** : compromettre un **fournisseur** pour atteindre ses nombreux clients'], 'Record DDoS de 5,6 Tbps (Cloudflare 2024) ; SolarWinds (2020), Kaseya (2021). Parades : services anti-DDoS, inventaire des composants logiciels (SBOM), attestations fournisseurs'],
+]);
+
+H3('La défense en profondeur');
+P('Principe : **aucune protection n\'est parfaite**. On empile donc plusieurs couches de défense : chacune **ralentit l\'attaquant** et offre une occasion de le **détecter**.');
+IMG('defense.png', 560, 'La défense en profondeur : cinq couches autour des données.');
+
+H2('3. La gestion des risques');
+H3('La démarche en 5 étapes');
+OL([
+  '**Identification** : actifs, menaces, vulnérabilités, scénarios.',
+  '**Analyse** : probabilité, impact, scénarios (méthode **EBIOS RM** de l\'ANSSI).',
+  '**Évaluation** : criticité, matrice, seuils d\'acceptation.',
+  '**Traitement** : réduire, transférer, accepter ou éviter.',
+  '**Suivi et revue** : indicateurs, tests, retour d\'expérience.',
+]);
+NOTE('Normes de référence : ISO 31000 (management du risque), ISO/IEC 27005 (risque lié à la sécurité de l\'information), NIST SP 800-30 et NIST RMF (États-Unis).');
+
+H3('La matrice des risques (probabilité × impact)');
+{
+  const F = ['Faible', 'C8E6C9'], M = ['Modéré', 'FFE0B2'], E = ['Élevé', 'F8C4C0'], K = ['**Critique**', 'EF9A9A'];
+  HEAT(['Probabilité ↓ / Impact →', 'Insignifiant', 'Mineur', 'Modéré', 'Majeur', 'Catastrophique'], [0.2, 0.16, 0.16, 0.16, 0.16, 0.16], [
+    ['Quasi certain', E, E, K, K, K],
+    ['Probable', M, E, E, K, K],
+    ['Possible', M, M, E, E, K],
+    ['Improbable', F, M, M, E, E],
+    ['Très improbable', F, F, M, M, E],
+  ]);
+}
+UL([
+  '**Vert** (faible) : risque **acceptable**.',
+  '**Orange** (modéré) : à **traiter en priorité**.',
+  '**Rouge** (élevé, critique) : **traitement immédiat**. Au-delà de la matrice : **refuser l\'activité**.',
+]);
+
+H3('Les 4 stratégies de traitement');
+TBL(['Réduire', 'Transférer', 'Accepter', 'Éviter'], [0.25, 0.25, 0.25, 0.25], [
+  ['Mettre en place des **contre-mesures** pour abaisser la probabilité ou l\'impact', 'Faire porter le risque par un tiers : **assurance cyber**, contrats cloud à responsabilité partagée, SOC externalisé', 'Garder le risque **résiduel** s\'il est sous le seuil d\'appétence, par une **décision documentée** de la direction', '**Supprimer l\'activité** ou le système qui porte le risque (ex. : ne pas stocker la donnée)'],
+], { firstColBold: false });
+NOTE('Le marché français de l\'assurance cyber a doublé entre 2020 et 2024 (≈ 180 M€ → ≈ 380 M€ de primes, France Assureurs).');
+
+H3('Appétence, tolérance et capacité');
+TBL(['Notion', 'Définition'], [0.24, 0.76], [
+  ['Appétence au risque', 'Niveau de risque que l\'organisation est **prête à accepter** pour atteindre ses objectifs'],
+  ['Tolérance au risque', '**Variation acceptable** autour de l\'appétence, pour un domaine précis'],
+  ['Capacité au risque', 'Niveau **maximal** de risque supportable **sans menacer la survie** de l\'organisation'],
+]);
+P('L\'appétence est formalisée dans un **Risk Appetite Statement (RAS)** validé par le conseil d\'administration ou le COMEX, avec des seuils concrets : « aucune perte de données clients », « interruption < 4 h », « budget cyber < 1,5 % du CA ».');
+
+H2('4. Gouvernance et management de la sécurité');
+H3('Les acteurs');
+TBL(["Dans l'organisation", "Dans l'écosystème"], [0.5, 0.5], [[
+  ['**Direction générale** : responsable en dernier ressort (RGPD, NIS2)', '**RSSI** (CISO) : pilote la sécurité opérationnelle, rend compte au CODIR / CA', '**DPO** : obligatoire (RGPD) en cas de traitement de données à grande échelle', '**DSI** : garant des actifs techniques', '**Risk manager** : interface avec l\'assurance, la finance, l\'audit', '**Utilisateurs** : **première ligne de défense**'],
+  ['**ANSSI** : autorité nationale (rattachée au Premier ministre via le SGDSN) ; le **CERT-FR** y répond aux incidents', '**ENISA** : agence européenne, renforcée par NIS2', '**NIST** (États-Unis) et **ISO/IEC** (normes 27000, **27001**, 27002, 27005) : référentiels', 'Prestataires : SOC, MSSP, auditeurs qualifiés **PASSI**'],
+]], { firstColBold: false });
+
+H3('La PSSI');
+DEF("La **PSSI** (politique de sécurité des systèmes d'information) est le **document de référence** qui formalise les **objectifs, règles et responsabilités** en matière de sécurité.");
+UL([
+  'Hiérarchie : **politique générale** → règles sectorielles → procédures → **chartes utilisateurs** (BYOD, nomadisme).',
+  'Contenu : périmètre, rôles, exigences CIA, gestion des accès, gestion des incidents, conformité.',
+  'Cycle de vie : rédaction → **validation par le COMEX / CA** → diffusion → sensibilisation → **révision annuelle**.',
+  'Indicateurs : taux de lecture et d\'acceptation de la charte, respect des règles d\'accès.',
+]);
+
+H3('La sensibilisation : le facteur humain');
+UL([
+  '**68 %** des compromissions impliquent un humain non malveillant : la sensibilisation est donc indispensable.',
+  'Programme : e-learning mensuel, **campagnes de phishing simulé**, points sécurité trimestriels ; cibles prioritaires : nouveaux arrivants, dirigeants, sous-traitants.',
+  'Indicateurs : taux de clic au phishing simulé (**< 5 %** visé), taux de complétion des modules (**> 95 %**).',
+  'Leviers : gamification et reconnaissance, sanctions en cas de violation grave, **soutien visible de la direction** (culture sécurité).',
+]);
+
+H2('5. GRC : gouvernance, risque, conformité');
+DEF("La **GRC** consiste à **aligner stratégie, risques et conformité** pour une prise de décision éclairée. Trois piliers : la **gouvernance** (cadre de décision, politiques, rôles, indicateurs), le **risque** (identification, analyse, traitement, appétence) et la **conformité** (respect des obligations internes et externes).");
+
+H3('Les cadres réglementaires');
+TBL(['Texte', 'Qui est concerné ?', 'Date clé', 'Sanctions / exigences'], [0.16, 0.36, 0.2, 0.28], [
+  ['**RGPD** (UE)', 'Toute organisation qui traite des données personnelles de résidents de l\'UE', '25 mai 2018', 'Jusqu\'à **4 % du CA mondial** ou 20 M€'],
+  ['**NIS2** (UE)', 'Entités **essentielles** et **importantes** : énergie, transport, santé, numérique…', 'Application en France : oct. 2025', 'Essentielles : 10 M€ ou 2 % du CA ; importantes : 7 M€ ou 1,4 %'],
+  ['**LPM 2024-2030** (France)', 'Opérateurs de services essentiels, télécoms, hébergeurs cloud', '31 déc. 2023', '≈ 7 Md€ pour la cyber sur 2024-2030'],
+  ['**DORA** (UE)', '**Secteur financier** : banques, assurances, fonds, fintech', '17 janv. 2025', 'Gouvernance des risques informatiques obligatoire'],
+  ['**Cyber Resilience Act** (UE)', '**Produits connectés** (IoT, logiciels)', 'Application 2027', 'Jusqu\'à 15 M€ ou 2,5 % du CA'],
+]);
+
+H3('Focus RGPD');
+UL([
+  '**Principes** : licéité, loyauté, transparence, **minimisation**, exactitude, limitation de la conservation, intégrité et confidentialité.',
+  '**Droits des personnes** : accès, rectification, **effacement**, opposition, **portabilité**, limitation, retrait du consentement.',
+  '**Obligations** : registre des traitements, analyse d\'impact (PIA / DPIA), **notification à la CNIL sous 72 h** en cas de violation, DPO si nécessaire.',
+  'Lien avec la cybersécurité : l\'**article 32** impose des « mesures techniques et organisationnelles appropriées ».',
+  'Amendes marquantes : Meta 1,2 Md€, TikTok 345 M€, Cdiscount 10 M€.',
+]);
+
+H3('Audit et conformité continue');
+UL([
+  '**Audit interne** (efficacité des contrôles) et **audit externe** (assurance indépendante pour le COMEX, le CA, les régulateurs ; auditeurs PASSI pour l\'État).',
+  '**Test d\'intrusion** : en **boîte noire** (aucune information), **grise** (informations partielles) ou **blanche** (accès complet).',
+  '**Red Team** : simulation d\'une attaque réelle par plusieurs vecteurs.',
+  '**Conformité continue** : outils de surveillance et cartographie des contrôles ; reporting aux autorités (ANSSI pour NIS2, CNIL pour le RGPD, ACPR / AMF pour DORA).',
+]);
+
+H3('Les acteurs publics de la cybersécurité en France');
+TBL(['Sphère civile', 'Sphère militaire et renseignement'], [0.5, 0.5], [[
+  ['**ANSSI** : autorité nationale ; prévention, protection des opérateurs vitaux, réponse aux incidents majeurs, certification', '**SGDSN** : coordonne la sécurité nationale pour le Premier ministre ; l\'ANSSI lui est rattachée', '**CNIL** : données personnelles, notification des violations', 'Ministères de l\'Intérieur et de la Justice, parquet de Paris', '**Cybermalveillance.gouv.fr** : assistance aux victimes'],
+  ['**ComCyber** : commandement de la cyberdéfense, rattaché au chef d\'état-major des armées', '**DGA-MI** : expertise technique et R&D', '**DGSE** : renseignement extérieur, volet cyber', '**DRSD** : contre-ingérence dans les armées et l\'industrie de défense', '**DGSI** : contre-espionnage, menaces cyber contre les intérêts nationaux'],
+]], { firstColBold: false });
+
+H3('Sigles utiles');
+TBL(['Sigle', 'Signification'], [0.2, 0.8], [
+  ['PRA / PCA', 'Plan de **reprise** d\'activité (redémarrer après un sinistre) / plan de **continuité** d\'activité (continuer pendant)'],
+  ['Sauvegarde 3-2-1', '**3** copies des données, sur **2** supports différents, dont **1** hors site'],
+  ['DLP', '*Data Loss Prevention* : outils qui empêchent la fuite de données'],
+  ['IAM, MFA, PAM', 'Gestion des identités et des accès ; authentification **multifacteur** ; gestion des comptes à privilèges'],
+  ['EDR', '*Endpoint Detection and Response* : détection et réponse sur les postes et serveurs'],
+  ['IDS / IPS', 'Système de **détection** / de **prévention** d\'intrusion sur le réseau'],
+  ['SOC', '*Security Operations Center* : centre de surveillance de la sécurité'],
+]);
+NOTE('Ce tableau de sigles est un ajout de ma part pour t\'aider à lire les diapos : leurs développements n\'y figurent pas.');
+
+RETENIR([
+  'Cybersécurité = technologies, processus et règles pour protéger systèmes et données ; triade **CIA** : confidentialité, intégrité, disponibilité.',
+  '**Risque = probabilité × impact** ; il naît d\'une **menace** qui exploite une **vulnérabilité** d\'un **actif**.',
+  'Attaques : **phishing** (vecteur n° 1) et ingénierie sociale, **ransomware**, **DDoS**, **zero-day**, **supply chain**. Le facteur humain intervient dans **68 %** des cas.',
+  '**Défense en profondeur** : gouvernance → identités → réseau → hôte → données.',
+  'Gestion des risques : identifier → analyser → évaluer (matrice) → traiter (**réduire, transférer, accepter, éviter**) → suivre ; **appétence** < **capacité**.',
+  'Gouvernance : direction, **RSSI**, **DPO**, DSI ; **PSSI** ; sensibilisation. **GRC** et textes : **RGPD**, **NIS2**, LPM, **DORA**, CRA ; acteur central en France : l\'**ANSSI**.',
+]);
+
+// =====================================================================
+// SÉANCE 11
+// =====================================================================
+H1('Séance 11 – Réseaux, infrastructures et cloud');
+SRC('Support : « Réseaux, infrastructures & cloud », E. Disson.');
+P('Fil conducteur du cours : comprendre **comment une requête traverse les couches et les ressources**, du câble jusqu\'à l\'application.');
+
+H2('1. Les fondamentaux des réseaux');
+H3('Équipements et flux');
+UL([
+  'Un **réseau** relie des **hôtes** (clients, serveurs, objets) par des liens **filaires** ou **radio**.',
+  'Une **trame** circule sur un segment local ; un **paquet** peut traverser plusieurs réseaux.',
+  'Le **switch** (commutateur) transmet **au niveau local** ; le **routeur** fait passer les paquets **d\'un réseau à l\'autre**.',
+  'Supports (couche 1) : **matériels** (fibre optique, câble cuivre) ou **immatériels** (satellites, Wi-Fi, réseaux mobiles 3G, 4G, 5G).',
+]);
+
+H3('Le modèle OSI en 7 couches');
+TBL(['Couche', 'Rôle', 'Exemples'], [0.2, 0.5, 0.3], [
+  ['7. Application', 'Le sens « métier » et les formats échangés', 'HTTP, DNS, SMTP'],
+  ['6. Présentation', 'Encodage, compression, **chiffrement**', 'TLS'],
+  ['5. Session', 'Ouverture, maintien et reprise des échanges', '—'],
+  ['4. Transport', 'Fiabilité, **ports**, multiplexage', 'TCP, UDP'],
+  ['3. Réseau', '**Adressage et routage** des paquets entre sous-réseaux', 'IP'],
+  ['2. Liaison', 'Transmission des **trames** sur le réseau local, adresses MAC', 'Ethernet, Wi-Fi, VLAN'],
+  ['1. Physique', 'Transmission des **bits** : signal, débit', 'Cuivre, fibre, radio'],
+]);
+KEY("**Encapsulation** : à l'envoi, chaque couche ajoute ses propres informations de contrôle aux données de la couche du dessus.");
+
+H3("L'adressage IPv4");
+UL([
+  'Une adresse **IPv4** compte **32 bits**, écrits en **quatre octets** (ex. : 192.168.10.24).',
+  'La notation **CIDR /24** réserve **24 bits au réseau** et **8 bits aux hôtes**, soit un masque **255.255.255.0**.',
+  'Dans cet exemple : adresse du **réseau** 192.168.10.0, adresse de **diffusion** (*broadcast*) 192.168.10.255 ; les adresses utilisables pour les hôtes sont **entre les deux**.',
+]);
+
+H3('Commutation et routage ; TCP et UDP');
+TBL(['Commutation (switch)', 'Routage (routeur)'], [0.5, 0.5], [[
+  ['Le switch **apprend les adresses MAC** et transmet une trame **dans le même réseau local** (niveau 2)', 'Le **VLAN** segmente logiquement un switch : un VLAN = un domaine de diffusion'],
+  ['Le routeur consulte sa **table de routage** (le préfixe le plus précis l\'emporte) et envoie le paquet au **prochain saut**', 'La **passerelle par défaut** permet à un hôte de joindre un autre sous-réseau'],
+]], { firstColBold: false });
+TBL(['TCP', 'UDP'], [0.5, 0.5], [
+  ['**Orienté connexion** : séquencement, accusés de réception, retransmission, contrôle de congestion → **livraison fiable**', '**Sans connexion**, faible surcharge, **aucune garantie** de livraison ni d\'ordre → **rapidité**'],
+  ['Usages : web (HTTP / HTTPS), SSH, bases de données', 'Usages : DNS, DHCP, streaming en temps réel, QUIC'],
+], { firstColBold: false });
+
+H3('Ports, sockets et services essentiels');
+UL([
+  'Un **port** (de 0 à 65 535) identifie un **service** sur une machine. Ports bien connus (0-1023) : **DNS 53**, **HTTP 80**, **HTTPS 443**, **SSH 22**, **DHCP 67/68**.',
+  'Une **socket** associe un protocole, une adresse IP et un port. Un **pare-feu** filtre souvent sur l\'adresse IP, le protocole, le port et l\'état de la connexion.',
+]);
+TBL(['Service', 'Rôle'], [0.2, 0.8], [
+  ['DNS', 'Traduit un **nom de domaine en adresse IP** (et publie d\'autres informations, comme le serveur de messagerie)'],
+  ['DHCP', '**Distribue automatiquement** adresse IP, masque, passerelle et DNS, pour une durée limitée (bail)'],
+  ['NAT / PAT', '**Traduit** adresses et ports, notamment pour sortir d\'un réseau privé vers Internet'],
+  ['ARP', 'Associe une adresse IP à une **adresse MAC** sur le réseau local (NDP joue ce rôle en IPv6)'],
+]);
+
+H2('2. Les fondamentaux des infrastructures');
+H3("Anatomie d'un système informatique");
+TBL(['Composant', 'Rôle'], [0.24, 0.76], [
+  ['Processeur (CPU)', '**Exécute les instructions** ; le nombre de cœurs et la fréquence déterminent le parallélisme'],
+  ['Mémoire vive (RAM)', 'Contient les **données actives** : rapide mais **volatile** (effacée à l\'extinction)'],
+  ['Stockage (SSD / HDD)', '**Conserve** données et systèmes ; performances mesurées en IOPS (opérations par seconde) et en latence'],
+  ['Carte réseau', 'Relie la machine au réseau (débit, latence)'],
+  ['Alimentation, refroidissement', 'Avec la **redondance**, ils participent à la **disponibilité**'],
+]);
+
+H3('Les types de stockage');
+TBL(['Bloc', 'Fichier', 'Objet'], [0.333, 0.333, 0.334], [
+  ['Volume vu comme un **disque** ; adapté aux systèmes de fichiers et aux bases de données', 'Partage avec **répertoires et permissions** ; adapté aux contenus partagés', '**Clé + métadonnées** dans un espace plat ; adapté aux **sauvegardes**, médias et data lakes'],
+], { firstColBold: false });
+
+H3('Système, processus et services');
+UL([
+  'Le **système d\'exploitation** (OS) arbitre l\'usage du processeur, de la mémoire, des fichiers et des périphériques.',
+  'Un **processus** est un programme en cours d\'exécution ; un **service** est un processus géré en continu pour assurer une fonction (il écoute sur une adresse et un port).',
+  'Les **permissions** (utilisateur, groupe, listes de contrôle d\'accès) limitent l\'accès aux ressources ; **journaux** et **métriques** rendent l\'état du système observable.',
+]);
+
+H3('Virtualisation : VM et conteneurs');
+DEF("La **virtualisation** fait abstraction du matériel : un **hyperviseur** partage le processeur, la mémoire, le stockage et le réseau d'une machine physique entre plusieurs **machines virtuelles (VM)**, chacune avec son propre système d'exploitation invité, isolé.");
+TBL(['Machine virtuelle (VM)', 'Conteneur'], [0.5, 0.5], [
+  ['Virtualise une **machine complète**, avec son propre OS', 'Isole des **processus** au niveau de l\'OS et **partage le noyau** de la machine hôte'],
+  ['**Isolation forte**, mais empreinte plus lourde', '**Léger**, **démarrage rapide**'],
+], { firstColBold: false });
+NOTE('Le sur-provisionnement (allouer aux VM plus de ressources qu\'il n\'en existe physiquement) améliore le taux d\'utilisation mais peut dégrader les performances.');
+
+H3('Disponibilité, sauvegarde et observabilité');
+TBL(['Notion', 'Définition'], [0.24, 0.76], [
+  ['Disponibilité', 'Capacité à rendre le service accessible ; la **redondance** et la **bascule** évitent les points uniques de panne'],
+  ['Sauvegarde', 'Copie récupérable des données ; on fixe sa fréquence, sa durée de conservation, le **RPO** (perte de données acceptable) et le **RTO** (temps de reprise)'],
+  ['Observabilité', '**Logs**, **métriques** et **traces** qui expliquent ce qui se passe'],
+  ['Scalabilité verticale', 'Ajouter de la puissance (CPU, RAM) à **une même machine**'],
+  ['Scalabilité horizontale', 'Ajouter **plusieurs machines** derrière un répartiteur de charge'],
+  ['SLA', 'Contrat qui fixe un **niveau de service mesurable** (pas une absence totale de panne)'],
+]);
+
+H2('3. Le cloud');
+H3('Définition et caractéristiques');
+DEF("Le **cloud** fournit des **ressources informatiques à la demande**, accessibles par le **réseau** et pilotables par **API**. Le fournisseur opère une **infrastructure mutualisée** ; le client choisit la configuration, les données et le niveau de service.");
+UL([
+  '**Élasticité** : augmenter ou réduire les ressources selon la charge.',
+  '**Facturation à l\'usage** et **automatisation** : les choix techniques deviennent mesurables en coûts.',
+]);
+
+H3('IaaS, PaaS, SaaS');
+TBL(['Modèle', 'Le fournisseur livre…', 'Le client gère…', 'Exemples'], [0.12, 0.3, 0.26, 0.32], [
+  ['**IaaS**', 'L\'**infrastructure** : VM, réseaux virtuels, volumes', 'L\'OS et les applications', 'AWS EC2, Azure Virtual Machines, Google Compute Engine'],
+  ['**PaaS**', 'Une **plateforme** : environnement d\'exécution et services managés', 'Son **code**', 'AWS Elastic Beanstalk, Azure App Service, Google App Engine'],
+  ['**SaaS**', 'Une **application complète**, consommée comme un service', 'Ses données et ses utilisateurs', 'Microsoft 365, Salesforce, Google Workspace'],
+]);
+IMG('cloud.png', 520, 'Qui gère quoi ? Plus on va vers le SaaS, plus le fournisseur opère, et plus le contrôle et la responsabilité se déplacent vers lui.');
+
+H3("Architecture : régions, zones, répartition de charge");
+UL([
+  '**Région** : zone géographique regroupant plusieurs datacenters, choisie selon la latence, le coût et la réglementation. **Zone de disponibilité** : domaine de panne isolé à l\'intérieur d\'une région.',
+  'Un déploiement **multi-zone** limite l\'impact d\'une panne locale ; le **multi-région** répond à d\'autres objectifs.',
+  'Le **load balancer** (répartiteur de charge) distribue les requêtes entre les instances et retire celles qui sont défaillantes (**health checks**).',
+  'L\'**auto scaling** ajoute ou retire automatiquement des instances selon la charge, un planning ou des événements.',
+]);
+
+H3('La responsabilité partagée');
+TBL(['Le fournisseur protège…', 'Le client protège…'], [0.5, 0.5], [
+  ['Les **datacenters**, le **matériel** et les services fondamentaux du cloud', 'Les **identités**, les configurations réseau, les **données**, les secrets et, selon le modèle, l\'OS et l\'application'],
+], { firstColBold: false });
+KEY('Une mauvaise règle d\'accès ou un espace de stockage laissé **public** reste une **erreur de configuration du client**. Le cloud ne supprime pas les choix : il **déplace l\'exploitation** vers des services et des contrats.');
+NOTE('Lien avec la séance 10 : la sécurité dans le cloud repose sur la segmentation, le moindre privilège, le chiffrement, la journalisation et des sauvegardes testées. La synthèse du cours cite aussi l\'IaC (Infrastructure as Code : décrire l\'infrastructure dans du code pour l\'automatiser).');
+
+H2("4. Bonus : l'informatique quantique");
+UL([
+  'La **physique quantique** décrit la matière à l\'échelle de l\'infiniment petit, où les lois classiques ne s\'appliquent plus. Trois principes : **superposition** (plusieurs états à la fois avant la mesure), **dualité onde-particule**, **intrication** (deux particules liées, quelle que soit la distance).',
+  'L\'ordinateur classique utilise des **bits** (0 ou 1) ; l\'ordinateur quantique des **qubits**, qui peuvent valoir **0 et 1 en même temps** (superposition) et être **intriqués** entre eux : il explore de nombreuses solutions **en parallèle**.',
+  'Contraintes : températures **proches du zéro absolu**, **correction d\'erreurs** encore indispensable.',
+  'Enjeux : **défi pour le chiffrement** actuel (cybersécurité) ; recherche en médecine, chimie, météo ; acteurs comme IBM.',
+]);
+
+RETENIR([
+  'Modèle **OSI** en 7 couches : physique, liaison, réseau, transport, session, présentation, application ; chaque couche **encapsule** les données.',
+  '**IP** = adressage et routage (IPv4 : 32 bits, CIDR /24 = masque 255.255.255.0) ; **switch** = réseau local, **routeur** = entre réseaux ; **TCP** fiable vs **UDP** rapide ; DNS, DHCP, NAT.',
+  'Infrastructure : CPU, RAM (volatile), stockage (bloc, fichier, objet), OS, processus et services.',
+  '**VM** (machine complète, isolation forte) vs **conteneur** (partage le noyau, léger) ; **RPO** = perte acceptable, **RTO** = temps de reprise ; scalabilité **verticale** vs **horizontale** ; **SLA**.',
+  '**Cloud** : ressources à la demande, élastiques, facturées à l\'usage ; **IaaS** (infrastructure) → **PaaS** (plateforme) → **SaaS** (application) : le fournisseur opère de plus en plus.',
+  '**Responsabilité partagée** : le fournisseur protège l\'infrastructure, le client ses identités, configurations et données.',
+]);
+
+// =====================================================================
 // Assemble
 // =====================================================================
 const footer = new Footer({
@@ -1030,7 +1345,7 @@ const footer = new Footer({
 const doc = new Document({
   creator: 'Cours de SI',
   title: "Systèmes d'information – L2 Économie-Gestion",
-  description: 'Cours de synthèse, séances 1 à 9',
+  description: 'Cours de synthèse, séances 1 à 11',
   styles: L.stylesConfig(),
   numbering: L.numberingConfig(),
   features: {},

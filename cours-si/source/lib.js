@@ -220,6 +220,29 @@ function SWOT(cells) {
   body.push(new Paragraph({ spacing: { after: 100 }, children: [] }));
 }
 
+// Heat-map table (risk matrix): rows of [label, ...cells]; each cell is [text, fillHex].
+function HEAT(headers, fracs, rows) {
+  const ws = widthsFrom(fracs);
+  const cell = (w, fill, text, opts = {}) => new TableCell({
+    width: { size: w, type: WidthType.DXA }, borders: cellBorders, margins: cellMargins,
+    shading: { type: ShadingType.CLEAR, color: 'auto', fill }, verticalAlign: VerticalAlign.CENTER,
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, children: runs(text, { size: 18, ...opts }) })],
+  });
+  const trs = [new TableRow({
+    tableHeader: true,
+    children: headers.map((h, i) => cell(ws[i], C.primary, h, { bold: true, color: C.white })),
+  })];
+  for (const [label, ...cells] of rows) {
+    trs.push(new TableRow({
+      cantSplit: true,
+      children: [cell(ws[0], C.light, label, { bold: true, color: C.primary }),
+        ...cells.map(([t, fill], i) => cell(ws[i + 1], fill, t))],
+    }));
+  }
+  body.push(new Table({ width: { size: CONTENT, type: WidthType.DXA }, columnWidths: ws, rows: trs }));
+  body.push(new Paragraph({ spacing: { after: 100 }, children: [] }));
+}
+
 // "À retenir" call-out: single-cell table, gold left rule, heading inside (appears in the TOC).
 function RETENIR(items) {
   const gold = { style: BorderStyle.SINGLE, size: 4, color: C.gold };
@@ -294,6 +317,6 @@ function stylesConfig() {
 
 module.exports = {
   C, FONT, PAGE_W, MARGIN, CONTENT, fr, runs, body, toc,
-  H1, H2, H3, SRC, P, UL, OL, DEF, KEY, NOTE, IMG, TBL, SWOT, RETENIR,
+  H1, H2, H3, SRC, P, UL, OL, DEF, KEY, NOTE, IMG, TBL, SWOT, HEAT, RETENIR,
   numberingConfig, stylesConfig,
 };

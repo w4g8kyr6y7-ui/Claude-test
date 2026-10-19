@@ -1,0 +1,70 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff}
+svg text{font-family:Inter,'Liberation Sans',sans-serif}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="900" height="466" viewBox="0 0 900 466">
+  <rect width="900" height="466" fill="#fff"/>
+  <!-- column headers: x = 250, 470, 690 (width 200) -->
+  <g text-anchor="middle" font-weight="700">
+    <text x="350" y="30" font-size="17" fill="#0B4F6C">IaaS</text>
+    <text x="570" y="30" font-size="17" fill="#0B4F6C">PaaS</text>
+    <text x="790" y="30" font-size="17" fill="#0B4F6C">SaaS</text>
+  </g>
+  <g text-anchor="middle" font-size="11.5" fill="#55636C">
+    <text x="350" y="48">ex. AWS EC2, Azure VM</text>
+    <text x="570" y="48">ex. Azure App Service</text>
+    <text x="790" y="48">ex. Microsoft 365, Salesforce</text>
+  </g>
+
+  <!-- row labels -->
+  <g font-size="13.5" fill="#1F2D36" font-weight="600" text-anchor="end">
+    <text x="236" y="86">Identités, données, accès</text>
+    <text x="236" y="128">Application</text>
+    <text x="236" y="170">Code et runtime</text>
+    <text x="236" y="212">Système d'exploitation</text>
+    <text x="236" y="254">Virtualisation</text>
+    <text x="236" y="296">Serveurs et stockage</text>
+    <text x="236" y="338">Réseau physique</text>
+    <text x="236" y="380">Datacenter</text>
+  </g>
+
+  <!-- cells: client = gold, fournisseur = blue. rows y start 64, step 42, height 36 -->
+  <g stroke="#fff" stroke-width="0">
+    <!-- IaaS: client rows 0-3, provider 4-7 -->
+    <rect x="252" y="64" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="252" y="106" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="252" y="148" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="252" y="190" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="252" y="232" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="252" y="274" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="252" y="316" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="252" y="358" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <!-- PaaS: client rows 0-2 -->
+    <rect x="472" y="64" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="472" y="106" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="472" y="148" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="472" y="190" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="472" y="232" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="472" y="274" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="472" y="316" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="472" y="358" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <!-- SaaS: client row 0 only -->
+    <rect x="692" y="64" width="196" height="36" rx="5" fill="#F2C14E"/>
+    <rect x="692" y="106" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="148" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="190" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="232" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="274" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="316" width="196" height="36" rx="5" fill="#1A8FB0"/>
+    <rect x="692" y="358" width="196" height="36" rx="5" fill="#1A8FB0"/>
+  </g>
+
+  <!-- legend -->
+  <rect x="252" y="410" width="18" height="18" rx="3" fill="#F2C14E"/>
+  <text x="278" y="424" font-size="13.5" fill="#1F2D36">géré par le client</text>
+  <rect x="440" y="410" width="18" height="18" rx="3" fill="#1A8FB0"/>
+  <text x="466" y="424" font-size="13.5" fill="#1F2D36">géré par le fournisseur</text>
+  <text x="888" y="454" text-anchor="end" font-size="12.5" fill="#55636C">plus on va vers le SaaS, plus le fournisseur opère</text>
+</svg>
+</body></html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff}
+svg text{font-family:Inter,'Liberation Sans',sans-serif}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="980" height="440" viewBox="0 0 980 440">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C62828"/>
+    </marker>
+  </defs>
+  <rect width="980" height="440" fill="#fff"/>
+
+  <!-- nested layers, outermost first -->
+  <rect x="150" y="14" width="680" height="412" rx="18" fill="#E6F2F7" stroke="#1A8FB0" stroke-width="1.6"/>
+  <rect x="200" y="62" width="580" height="316" rx="16" fill="#D4EAF2" stroke="#1A8FB0" stroke-width="1.6"/>
+  <rect x="250" y="110" width="480" height="220" rx="14" fill="#BFDFEB" stroke="#1A8FB0" stroke-width="1.6"/>
+  <rect x="300" y="158" width="380" height="124" rx="12" fill="#9ACBDD" stroke="#1A8FB0" stroke-width="1.6"/>
+  <rect x="350" y="192" width="280" height="56" rx="10" fill="#0B4F6C"/>
+
+  <g text-anchor="middle">
+    <text x="490" y="38" font-size="14.5" font-weight="700" fill="#0B4F6C">Gouvernance : politiques, sensibilisation, audit</text>
+    <text x="490" y="86" font-size="14.5" font-weight="700" fill="#0B4F6C">Identité et accès : IAM, MFA, PAM, moindre privilège</text>
+    <text x="490" y="134" font-size="14.5" font-weight="700" fill="#0B4F6C">Réseau : segmentation, IDS/IPS, VPN, anti-DDoS</text>
+    <text x="490" y="182" font-size="14" font-weight="700" fill="#0B4F6C">Hôte : EDR, durcissement, correctifs</text>
+    <text x="490" y="217" font-size="15" font-weight="700" fill="#fff">Données</text>
+    <text x="490" y="237" font-size="12" fill="#CDE8F2">chiffrement, classification, DLP, sauvegardes</text>
+  </g>
+
+  <!-- attacker path -->
+  <g>
+    <circle cx="62" cy="220" r="18" fill="#FDECEA" stroke="#C62828" stroke-width="1.8"/>
+    <text x="62" y="226" text-anchor="middle" font-size="16" font-weight="700" fill="#C62828">!</text>
+    <text x="62" y="260" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">Attaquant</text>
+    <path d="M82,220 L344,220" stroke="#C62828" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#a)"/>
+    <g fill="#fff" stroke="#C62828" stroke-width="2">
+      <circle cx="150" cy="220" r="6"/><circle cx="200" cy="220" r="6"/><circle cx="250" cy="220" r="6"/><circle cx="300" cy="220" r="6"/>
+    </g>
+  </g>
+  <text x="900" y="200" text-anchor="middle" font-size="12.5" fill="#33414A">Chaque couche</text>
+  <text x="900" y="218" text-anchor="middle" font-size="12.5" fill="#33414A">ralentit l'attaquant</text>
+  <text x="900" y="236" text-anchor="middle" font-size="12.5" fill="#33414A">et permet de</text>
+  <text x="900" y="254" text-anchor="middle" font-size="12.5" fill="#33414A">le détecter</text>
+</svg>
+</body></html>
