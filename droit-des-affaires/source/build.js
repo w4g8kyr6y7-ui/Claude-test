@@ -14,7 +14,7 @@ const W = 9638; // largeur utile A4 avec marges de 2 cm
 // ---------- Mise en forme inline ----------
 // **gras**  //italique//  __souligné__  ==surligné==  [[définition]] (rouge, gras, souligné)
 function runs(text, base = {}) {
-  const re = /\*\*(.+?)\*\*|\/\/(.+?)\/\/|__(.+?)__|==(.+?)==|\[\[(.+?)\]\]/g;
+  const re = /\*\*(.+?)\*\*|\/\/(.+?)\/\/|__(.+?)__|==(.+?)==|\[\[(.+?)\]\]|~~(.+?)~~/g;
   const out = []; let last = 0, m;
   while ((m = re.exec(text))) {
     if (m.index > last) out.push(new TextRun({ text: text.slice(last, m.index), ...base }));
@@ -23,6 +23,7 @@ function runs(text, base = {}) {
     else if (m[3]) out.push(new TextRun({ text: m[3], ...base, underline: {} }));
     else if (m[4]) out.push(new TextRun({ text: m[4], ...base, highlight: 'yellow' }));
     else if (m[5]) out.push(new TextRun({ text: m[5], ...base, bold: true, underline: {}, color: RED }));
+    else if (m[6]) out.push(new TextRun({ text: m[6], ...base, strike: true }));
     last = re.lastIndex;
   }
   if (last < text.length) out.push(new TextRun({ text: text.slice(last), ...base }));
@@ -1037,6 +1038,308 @@ add(box('retenir', 'Points à retenir – Chapitre 5', [
 add(pageBreak());
 
 // =====================================================================
+// CHAPITRE 6
+// =====================================================================
+add(H(1, 'Chapitre 6 – Vendre à des consommateurs'));
+add(box('exemple', 'Fil rouge : Lucas vend désormais à des particuliers', [
+  'Lucas a ouvert sa boutique **NOVA**. Il vend des ordinateurs à des entreprises **et** à des particuliers. Exemple : la société **NOVA Conseil** achète un ordinateur à 800 € pour équiper un salarié ; **Emma** achète le même ordinateur, au même prix, pour son usage personnel.',
+  '**Même produit + même vendeur + même prix = mêmes règles ?** Non : avec Emma, Lucas entre dans une **relation de consommation** et doit respecter des règles protectrices supplémentaires.',
+]));
+add(P('Les chapitres 6, 7 et 8 répondent à une même question : ==comment le droit encadre-t-il le comportement de l\'entreprise sur son marché ?== Face aux **consommateurs** (ch. 6), aux **concurrents** (ch. 7) et dans l\'environnement **numérique** (ch. 8).'));
+add(P('**Problématique du chapitre :** comment le droit encadre-t-il les relations entre l\'entreprise et ses clients consommateurs ? Trois étapes : ==Identifier== (la relation de consommation) → ==Informer et protéger== (lors de la conclusion du contrat) → ==Protéger== (lors de l\'exécution et après la conclusion).'));
+
+add(box('exercice', 'Remédiation : les chapitres 1 à 5 appliqués à Lucas', [
+  'Associez chaque situation à sa qualification : (1) Lucas achète régulièrement du matériel pour le revendre dans sa boutique NOVA. (2) Il dispose d\'une clientèle régulière, d\'une enseigne, de matériel et exploite son activité dans un local loué. (3) Il commande 50 produits à un fournisseur : aucun contrat signé, mais la commande et son acceptation figurent dans des courriels. (4) Une facture de 4 800 €, payable par un client professionnel le 15 septembre, n\'a pas été réglée. (5) Sa banque accepte de lui prêter 30 000 € si une autre personne s\'engage à payer s\'il ne rembourse pas.',
+  '**Correction :**',
+  B('(1) → **Activité commerciale habituelle et qualité de commerçant** (ch. 2).'),
+  B('(2) → **Fonds de commerce** : clientèle, enseigne, matériel, droit au bail (ch. 3).'),
+  B('(3) → **Formation du contrat et preuve par tous moyens** entre commerçants (ch. 4).'),
+  B('(4) → **Créance exigible impayée** et recouvrement (ch. 5).'),
+  B('(5) → **Cautionnement**, sûreté personnelle (ch. 5).'),
+]));
+
+// ----- 1 -----
+add(H(2, '1. Identifier la relation de consommation'));
+add(H(3, 'A. Le consommateur et le professionnel'));
+add(art('Article liminaire du Code de la consommation', 'Le **consommateur** est toute personne physique qui agit à des fins qui n\'entrent pas dans le cadre de son activité commerciale, industrielle, artisanale, libérale ou agricole. Le **professionnel** est toute personne physique ou morale, publique ou privée, qui agit à des fins entrant dans le cadre de son activité commerciale, industrielle, artisanale, libérale ou agricole, y compris lorsqu\'elle agit au nom ou pour le compte d\'un autre professionnel.'));
+add(table([4819, 4819], ['Le consommateur', 'Le professionnel'], [
+  ['1. Une **personne physique** (jamais une société)', '1. Une **personne physique ou morale**'],
+  ['2. qui agit à des fins qui **n\'entrent pas** dans le cadre de son activité professionnelle (commerciale, industrielle, artisanale, libérale, agricole)', '2. qui agit à des fins **entrant** dans le cadre de son activité professionnelle, y compris lorsqu\'elle agit au nom ou pour le compte d\'un autre professionnel'],
+]));
+add(P('La [[relation de consommation]] relie un **professionnel** et un **consommateur**. ==Ce n\'est pas la personne seule qui compte : il faut rechercher en quelle qualité elle agit dans l\'opération considérée.=='));
+add(box('exercice', 'Exercice du cours : qui est consommateur ?', [
+  '(1) **Emma**, étudiante, achète un ordinateur pour regarder des films, travailler et l\'utiliser chez elle. (2) **Hugo**, boulanger, achète un ordinateur pour gérer les commandes et la comptabilité de sa boulangerie. (3) Le même soir, **Hugo** achète une tablette pour que ses enfants l\'utilisent à la maison. (4) La société **NOVA Conseil** achète un ordinateur pour équiper son service commercial.',
+  '**Correction :**',
+  B('(1) Emma = **consommatrice** : personne physique, usage personnel.'),
+  B('(2) Hugo = **professionnel** : l\'achat entre dans le cadre de son activité artisanale.'),
+  B('(3) Hugo = **consommateur** : même personne, mais achat pour sa vie privée. C\'est la **qualité dans l\'opération** qui compte.'),
+  B('(4) NOVA Conseil = **professionnel** : une personne morale ne peut pas être consommatrice, et l\'achat est fait pour son activité.'),
+]));
+
+add(H(3, 'B. Pourquoi protéger le consommateur ?'));
+add(P('Il existe ==un risque de déséquilibre== entre les deux parties :'));
+add(table([4819, 4819], ['Le consommateur', 'Le professionnel'], [
+  ['Information parfois limitée sur le produit ou le service ; connaissances techniques souvent moindres ; contrat souvent préparé par le professionnel ; faible pouvoir de négociation individuel', 'Maîtrise de son produit ou service ; expérience du marché ; maîtrise des informations commerciales ; rédaction fréquente des conditions contractuelles (CGV…)'],
+]));
+add(P('D\'où **des règles protectrices** en trois temps : **informer** (permettre un choix éclairé), **encadrer** (certaines pratiques commerciales et clauses) et **protéger** (lors de l\'exécution et après la conclusion : garantie, droit de rétractation).'));
+add(box('remarque', 'À retenir', ['==Protéger le consommateur ne supprime pas sa liberté de contracter== : le droit cherche à lui permettre de décider de manière éclairée et à encadrer certains déséquilibres.']));
+add(P('**Synthèse — la méthode :** 1. Qui sont les parties ? → 2. Dans quel but agissent-elles ? → 3. Quelle relation ? (professionnel ↔ consommateur = relation de consommation) → 4. Quelles règles ? ==Droit commun des contrats + règles protectrices du droit de la consommation== (information, clauses abusives, rétractation, garantie…). En résumé : **qualifier les parties → identifier la relation → déterminer les règles applicables**.'));
+
+// ----- 2 -----
+add(H(2, '2. Informer et protéger le consommateur lors de la conclusion du contrat'));
+add(H(3, 'A. L\'obligation précontractuelle d\'information'));
+add(P('Avant d\'acheter, que sait Emma ? Sur le site NOVA, elle voit « NOVA BOOK X5 – 799 € – Un ordinateur exceptionnel ! ». Dispose-t-elle de suffisamment d\'informations pour décider ?'));
+add(art('Article L.111-1 du Code de la consommation', '« Le professionnel communique au consommateur, avant que celui-ci ne soit lié par un contrat, une information claire et compréhensible sur les caractéristiques essentielles du bien ou du service, son prix, l\'identité du professionnel, les délais et conditions d\'exécution, ainsi que sur les garanties et autres droits prévus par les textes. »'));
+add(P('Cinq informations à donner **avant** l\'engagement :'));
+add(...N([
+  '**Caractéristiques essentielles** (qu\'est-ce que j\'achète ?) : description du bien ou du service, fonctionnalités principales…',
+  '**Prix** (combien vais-je réellement payer ?) : prix TTC, frais supplémentaires obligatoires (livraison, mise en service…), conditions de paiement.',
+  '**Identité et coordonnées du professionnel** (avec qui je contracte ?) : nom ou dénomination sociale, adresse, téléphone, e-mail…',
+  '**Délai et conditions d\'exécution** (quand et comment vais-je recevoir le bien ?) : délai et modalités de livraison, conditions particulières.',
+  '**Garanties et autres informations requises** (quels sont mes droits ?) : garanties légales (conformité), droit de rétractation selon les cas…',
+]));
+add(P('==Objectif : permettre au consommateur de prendre sa décision en connaissance de cause== (un **consentement éclairé**).'));
+
+add(H(3, 'B. Les pratiques commerciales trompeuses'));
+add(art('Article L.121-2 du Code de la consommation', '« Une pratique commerciale est trompeuse lorsqu\'elle repose sur des allégations, indications ou présentations fausses ou de nature à induire en erreur le consommateur et qu\'elle est susceptible d\'altérer son comportement économique. »'));
+add(P('==Informer ne suffit pas== : les informations communiquées ne doivent pas être fausses ou de nature à induire le consommateur en erreur.'));
+add(box('exercice', 'Exercice du cours : trois publicités NOVA', [
+  '(1) « NOVA BOOK X5 – Autonomie **jusqu\'à 10 heures*** » (*selon les conditions d\'utilisation précisées) – 799 €. (2) « **Offre exceptionnelle !** ~~999 €~~ **799 €** » alors que le prix habituel est 799 €. (3) « **Plus que 2 en stock ! Dépêchez-vous !** » alors que ce n\'est pas vrai.',
+  '**Correction :**',
+  B('(1) **Information licite**, si elle est exacte et claire.'),
+  B('(2) **Publicité trompeuse** : fausse réduction de prix (le « prix barré » n\'est pas le prix habituel).'),
+  B('(3) **Publicité trompeuse** : fausse rareté, pour pousser à acheter dans l\'urgence.'),
+]));
+
+add(H(3, 'C. Les clauses abusives'));
+add(P('Emma a accepté les CGV de NOVA. Article 12 : « En cas de défaut du produit imputable à NOVA, le consommateur renonce à toute demande de réparation ou d\'indemnisation. » ==Toutes les clauses acceptées s\'imposent-elles au consommateur ?== Non.'));
+add(art('Article L.212-1 du Code de la consommation', '« Est abusive la clause qui a pour objet ou pour effet de créer, au détriment du consommateur, un déséquilibre significatif entre les droits et obligations des parties. »'));
+add(P('Une [[clause abusive]] crée un ==déséquilibre significatif== au détriment du consommateur. Comment l\'identifier ?'));
+add(table([2400, 7238], ['Catégorie', 'Régime'], [
+  ['**Liste « noire »** (art. R.212-1)', 'Clauses **irréfragablement présumées abusives** : le professionnel **ne peut pas** apporter la preuve contraire. Elles sont interdites.'],
+  ['**Liste « grise »** (art. R.212-2)', 'Clauses **présumées abusives** : le professionnel **peut** apporter la preuve contraire.'],
+  ['**Autres clauses**', 'Appréciation **au cas par cas**, au regard du critère du déséquilibre significatif (art. L.212-1).'],
+]));
+add(P('**Conséquence :** la clause abusive est ==réputée non écrite== (art. L.241-1 C. conso.). ==Le contrat subsiste en principe sans cette clause.=='));
+add(box('remarque', 'Piège QCM', ['Une clause abusive **n\'annule pas tout le contrat** : seule la clause disparaît (« réputée non écrite »), le reste du contrat continue de s\'appliquer. Et peu importe que le consommateur ait coché « J\'accepte les CGV ».']));
+
+// ----- 3 -----
+add(H(2, '3. Protéger le consommateur après la conclusion du contrat'));
+add(box('remarque', 'Numérotation des slides', ['Dans les slides, ces trois sous-parties sont rattachées au titre II (et numérotées A, B, C). Le plan d\'introduction du chapitre les présente comme une 3ᵉ étape (« Protéger lors de l\'exécution et après la conclusion ») : c\'est ce plan qui est suivi ici.']));
+add(H(3, 'A. Le droit de rétractation'));
+add(box('exercice', 'Exercice du cours : Emma change d\'avis', [
+  '**Achat en ligne** : lundi, Emma commande le NOVA BOOK X5 sur le site ; mardi, elle le reçoit ; mercredi, elle change d\'avis. Peut-elle se rétracter ? **Achat en boutique** : lundi, elle achète le même ordinateur en boutique et repart avec ; mercredi, elle change d\'avis. Peut-elle exiger que Lucas le reprenne ?',
+  '**Bonne réponse : C** — oui pour l\'achat en ligne, mais **pas de droit légal général de rétractation pour l\'achat en boutique** (le vendeur peut accepter un échange par geste commercial, mais n\'y est pas obligé).',
+]));
+add(P('**Le principe :** pour les ==contrats conclus à distance ou hors établissement== (achat sur Internet, par téléphone, démarchage à domicile…), le consommateur dispose de ==14 jours pour se rétracter sans avoir à motiver sa décision== (art. L.221-18 C. conso.).'));
+add(P('**Point de départ du délai :** pour une **vente de biens**, en principe à compter de la **réception du bien** ; pour une **prestation de services**, en principe à compter de la **conclusion du contrat**.'));
+add(P('**Des exceptions** existent (art. L.221-28 C. conso.) :'));
+add(table([3000, 1300, 5338], ['Situation', 'Rétractation ?', 'Pourquoi ?'], [
+  ['Emma commande un **ordinateur standard** en ligne et change d\'avis 2 jours après réception', '**OUI**, en principe', 'Contrat à distance, bien standard'],
+  ['Emma commande un **sac personnalisé** « EMMA – PROMO 2026 »', '**NON**', 'Exception : biens confectionnés selon les spécifications du consommateur ou nettement personnalisés'],
+  ['Emma achète en ligne une **place de concert** à une date déterminée', '**NON**', 'Exception : certaines prestations de loisirs fournies à une date ou période déterminée'],
+  ['Emma achète un **logiciel** en ligne, demande son exécution immédiate en renonçant expressément à son droit ; le téléchargement commence', '**NON**', 'Exception : contenus numériques sans support matériel dont l\'exécution a commencé avec l\'accord du consommateur, dans les conditions légales'],
+]));
+
+add(H(3, 'B. La garantie légale de conformité'));
+add(box('exemple', 'Une situation concrète', ['Emma : « Je ne change pas d\'avis ! Je veux garder mon ordinateur, mais il ne fonctionne pas comme prévu… » Le site annonçait une **autonomie jusqu\'à 10 heures** ; la batterie ne tient que **2 heures**. Rétractation ou garantie ? → ==Garantie légale de conformité== (réponse B).']));
+add(art('Article L.217-3 du Code de la consommation', 'Le vendeur doit délivrer un bien conforme. Il répond des défauts de conformité existant lors de la délivrance et apparaissant dans un délai de **2 ans** à compter de celle-ci.'));
+add(P('**Qu\'est-ce qu\'un bien conforme ?** Un bien qui correspond notamment à ce qui a été **prévu au contrat** (ex. : caractéristiques annoncées) et aux **critères légaux de conformité** (ex. : qualités auxquelles le consommateur peut légitimement s\'attendre). **Qui est responsable ?** Le **vendeur** (ici Lucas / NOVA). **Pendant combien de temps ?** ==2 ans à compter de la délivrance du bien.=='));
+add(P('**Que peut demander Emma ?**'));
+add(...N([
+  '**En principe : la mise en conformité** → **réparation ou remplacement**, sans frais pour le consommateur, dans un délai raisonnable (**maximum 30 jours**), sans inconvénient majeur.',
+  '**À défaut**, sous les conditions prévues par la loi → **réduction du prix** ou **résolution du contrat**.',
+]));
+add(box('remarque', 'Piège QCM', ['==Rétractation : « je change d\'avis » ≠ conformité : « le bien présente un défaut ».== Ce sont deux mécanismes différents, avec des conditions différentes.']));
+
+add(H(3, 'C. Les recours du consommateur'));
+add(P('Emma a signalé le défaut à NOVA. Lucas refuse toute prise en charge : « Pour moi, l\'ordinateur fonctionne suffisamment bien. Je ne ferai rien. » Le dialogue échoue : que peut faire Emma ?'));
+add(table([2600, 7038], ['Étape', 'Contenu'], [
+  ['**1. Réclamer auprès du professionnel** (réclamation préalable)', 'Exposer clairement le problème, formuler sa demande (réparation, remplacement…), conserver une trace écrite (courriel, courrier, formulaire…). Cette réclamation est **recommandée et souvent nécessaire** avant de saisir le médiateur.'],
+  ['**2. Recourir au** [[médiateur de la consommation]] (résolution amiable)', 'Droit pour le consommateur d\'y recourir (**art. L.612-1**). **Gratuit** pour le consommateur. Médiateur compétent pour le professionnel (coordonnées communiquées par NOVA). Il examine le litige, cherche une solution amiable et peut proposer une solution. Le professionnel doit garantir au consommateur un recours effectif à un dispositif de médiation (**art. L.616-1**).'],
+  ['**3. Si le litige persiste** (recours juridictionnel)', 'Si aucune solution n\'est trouvée, Emma peut saisir la juridiction compétente. La médiation **n\'est pas obligatoire** et n\'empêche pas de saisir le juge (**art. L.612-4**).'],
+]));
+add(box('retenir', 'À retenir sur la médiation', [
+  B('Le médiateur **n\'est pas un juge**.'),
+  B('La solution proposée **n\'est pas imposée** : les parties sont libres de l\'accepter ou de la refuser.'),
+  B('La médiation **n\'exclut pas** un recours devant un tribunal.'),
+]));
+add(P('**Méthode : qualifier le problème → identifier la protection → appliquer le régime.** ==Changer d\'avis (rétractation, L.221-18) ≠ bien non conforme (garantie, L.217-3) ≠ litige persistant (médiation, L.612-1).=='));
+
+add(H(3, 'Cas pratiques du cours'));
+add(box('exercice', 'Cas n° 1 : Le Studio Lumière', [
+  '**Faits :** Chloé vend en ligne l\'appareil photo « LumixPro Z100 » : « Qualité 4K – Zoom 30x – Batterie longue durée (12 h) », ~~999 €~~ **649 €** « Offre exceptionnelle ! », « Plus que 3 exemplaires ! ». Antoine, 22 ans, étudiant, le commande le 15 mars 2026 pour un usage personnel. CGV : art. 8 « Toute réclamation relative à un défaut du produit devra être adressée directement au fabricant. Le Studio Lumière ne pourra être tenu à aucune réparation, échange ou remboursement » ; art. 10 « 14 jours de rétractation, sauf pour les produits d\'occasion et personnalisés ». Antoine reçoit l\'appareil le 24 mars : autonomie de 5 h (et non 12 h), zoom de 10x (et non 30x), pas de mode 4K. Il demande un remplacement ou un remboursement. Chloé refuse : « nos annonces sont des informations commerciales et peuvent varier », « la garantie relève du fabricant (art. 8) », « le droit de rétractation ne s\'applique pas aux produits électroniques personnalisés ».',
+  '**Correction (raisonnement attendu) :**',
+  B('**1. Qualification** : Antoine (personne physique, usage personnel) est **consommateur** ; Chloé est **professionnelle** → **relation de consommation**, le Code de la consommation s\'applique. Problèmes : **pratiques commerciales trompeuses** (caractéristiques fausses ; prix barré et rareté douteux), **clause abusive** (art. 8), **défaut de conformité**.'),
+  B('**2. Droits d\'Antoine** : **garantie légale de conformité** (art. L.217-3) : le bien ne correspond pas aux caractéristiques annoncées → **réparation ou remplacement**, à défaut réduction du prix ou résolution. Il est aussi dans le délai de **rétractation de 14 jours** (contrat à distance, art. L.221-18), qui court depuis la réception le 24 mars. Pratiques trompeuses : art. L.121-2.'),
+  B('**3. Arguments de Chloé** : **aucun n\'est valable**. Les annonces engagent le vendeur (L.111-1, L.121-2) ; la garantie de conformité pèse sur le **vendeur**, pas sur le fabricant, et la clause qui l\'écarte est **abusive** donc **réputée non écrite** (L.212-1, L.241-1) ; l\'appareil est un produit **standard**, pas « personnalisé » : l\'exception ne joue pas.'),
+  B('**4. Si le litige persiste** : réclamation écrite → **médiateur de la consommation** (gratuit, L.612-1) → **juge** (la médiation n\'est pas obligatoire, L.612-4).'),
+]));
+add(box('exercice', 'Cas n° 2 : GREENMOVE', [
+  '**Faits :** Émilie, 26 ans, achète en ligne la trottinette « E-Go 500 » pour ses déplacements quotidiens : « Autonomie 50 km – Vitesse max 25 km/h – Ultra légère 12 kg », « ~~799 €~~ **559 €** – -30 % aujourd\'hui seulement ! », « Derniers exemplaires disponibles ! ». CGV : art. 4 « La validation de la commande vaut acceptation des CGV » ; art. 7 « Les délais de livraison sont indicatifs et ne peuvent engager la responsabilité de GREENMOVE » ; art. 12 « La garantie commerciale est limitée à 6 mois » ; art. 15 « Aucune réclamation ne sera prise en compte passé un délai de 15 jours après la réception ». Livrée 6 jours après la commande, la trottinette n\'a que 20 km d\'autonomie, 18 km/h de vitesse max et pèse 15 kg. Le 8 avril, Émilie demande un échange ou un remboursement ; le 12 avril, GREENMOVE refuse en invoquant l\'art. 15.',
+  '**Correction (raisonnement attendu) :**',
+  B('**1. Droit de la consommation ?** Oui : Émilie est une **personne physique** qui achète pour ses déplacements personnels (**consommatrice**) ; GREENMOVE est un **professionnel** (article liminaire).'),
+  B('**2. Obligations d\'information** (L.111-1) : caractéristiques essentielles exactes, prix TTC et frais, identité du professionnel, délais de livraison, garanties légales et droit de rétractation.'),
+  B('**3. Éléments du site** : caractéristiques fausses (autonomie, vitesse, poids) ; promotion « -30 % aujourd\'hui seulement » et « derniers exemplaires » à vérifier (fausse urgence / fausse rareté) → possibles **pratiques commerciales trompeuses** (L.121-2).'),
+  B('**4. Article 15** : il prive en pratique le consommateur de sa **garantie légale de 2 ans** → **déséquilibre significatif** → **clause abusive**, réputée non écrite (L.212-1, L.241-1). De même, une garantie **commerciale** de 6 mois ne peut pas remplacer la garantie **légale** de conformité.'),
+  B('**5. Droits d\'Émilie** : **garantie légale de conformité** (L.217-3) → réparation ou remplacement, à défaut réduction du prix ou résolution ; éventuellement **rétractation** dans les 14 jours suivant la réception (L.221-18).'),
+  B('**6. Démarches** : réclamation écrite (déjà faite) → **médiateur de la consommation** (L.612-1) → juge si le litige persiste (L.612-4).'),
+]));
+
+// ----- Points à retenir ch6 -----
+add(H(2, 'Points à retenir – Chapitre 6'));
+add(box('retenir', 'Points à retenir – Chapitre 6', [
+  B('**Consommateur** = **personne physique** qui agit **hors** de son activité professionnelle ; **professionnel** = personne physique **ou morale** qui agit **dans** le cadre de son activité (article liminaire). On regarde la **qualité dans l\'opération**, pas la personne.'),
+  B('**Relation de consommation** → droit commun des contrats **+** règles protectrices du Code de la consommation, justifiées par le **déséquilibre** entre les parties. Protéger ≠ supprimer la liberté de contracter.'),
+  B('**Information précontractuelle** (L.111-1) : caractéristiques essentielles, prix, identité du professionnel, délais, garanties → **consentement éclairé**.'),
+  B('**Pratique commerciale trompeuse** (L.121-2 et s.) : allégations fausses ou de nature à induire en erreur, susceptibles d\'altérer le comportement économique (faux prix barré, fausse rareté…).'),
+  B('**Clause abusive** (L.212-1) : **déséquilibre significatif** ; liste **noire** (R.212-1, aucune preuve contraire), liste **grise** (R.212-2, preuve contraire possible), autres au cas par cas → **réputée non écrite** (L.241-1), le contrat subsiste.'),
+  B('**Rétractation** (L.221-18) : contrats **à distance ou hors établissement**, **14 jours**, sans motif ; point de départ = réception du bien (biens) ou conclusion du contrat (services) ; exceptions (L.221-28) : biens personnalisés, loisirs à date fixe, contenus numériques commencés… **Pas de droit légal de rétractation en boutique.**'),
+  B('**Garantie légale de conformité** (L.217-3) : le **vendeur** répond des défauts pendant **2 ans** ; réparation ou remplacement (max. 30 jours, sans frais), à défaut réduction du prix ou résolution.'),
+  B('**Litige** : réclamation écrite → **médiation** (L.612-1, gratuite, non obligatoire, solution non imposée, L.616-1) → **juge** (L.612-4).'),
+  B('**Changer d\'avis ≠ bien non conforme ≠ litige persistant.**'),
+]));
+add(pageBreak());
+
+// =====================================================================
+// CHAPITRE 7
+// =====================================================================
+add(H(1, 'Chapitre 7 – Faire face à la concurrence'));
+add(box('exercice', 'Remédiation sur le chapitre 6', [
+  '(1) Nina commande une enceinte sur Internet ; elle la reçoit conforme mais, 3 jours plus tard, change simplement d\'avis. (2) Yanis commande un ordinateur annoncé avec 16 Go de mémoire vive ; le modèle livré n\'en a que 8. (3) Une boutique annonce « Prix exceptionnel ! ~~899 €~~ 599 € » alors que la TV était déjà vendue 599 € avant l\'opération.',
+  '**Correction :** (1) **droit de rétractation** (contrat à distance, 14 jours, L.221-18) ; (2) **garantie légale de conformité** (L.217-3) ; (3) **pratique commerciale trompeuse** : fausse réduction de prix (L.121-2).',
+]));
+add(box('exemple', 'Fil rouge : Lucas n\'est plus seul sur son marché', [
+  'Une nouvelle enseigne, **PIXEL**, s\'installe à proximité de NOVA avec une stratégie offensive : produits similaires, prix plus attractifs sur certains modèles, importante campagne publicitaire. Plusieurs anciens clients de NOVA se tournent vers PIXEL et, en quelques semaines, Lucas constate une baisse de ses ventes.',
+  '**Question : faire perdre des clients à un concurrent est-il juridiquement reprochable ?**',
+]));
+add(box('exercice', 'Exercice d\'introduction : ces comportements posent-ils problème au regard du droit de la concurrence ?', [
+  '(1) PIXEL, leader du marché, baisse le prix de son modèle phare de 749 € à 699 € pour attirer de nouveaux clients. (2) PIXEL propose à un revendeur ses ordinateurs à un prix très attractif à condition qu\'il ne vende pas de produits NOVA. (3) PIXEL, qui détient une part de marché très importante, refuse de fournir ses pièces détachées à un réparateur indépendant qui veut réparer des ordinateurs concurrents. (4) PIXEL applique des conditions différentes selon les revendeurs (A : 680 €, livraison 2 jours ; B : 749 €, livraison 7 jours) sans justification.',
+  '**Correction :** (1) **non**, c\'est en principe le jeu normal de la concurrence (concurrence par les prix) ; (2), (3) et (4) **peuvent poser problème** s\'ils sont le fait d\'une entreprise en **position dominante** : clause d\'exclusivité qui évince un concurrent, **refus de vente**, **conditions discriminatoires** sans justification objective. Ce sont des formes possibles d\'**abus de position dominante** (partie 2.B).',
+]));
+add(P('**Problématique :** ==jusqu\'où une entreprise peut-elle aller pour conquérir des clients et faire face à ses concurrents ?== Trois parties : **1. le principe de liberté de la concurrence** (que permet le jeu normal de la concurrence ?) ; **2. les pratiques anticoncurrentielles** (préserver le marché : quand un comportement fausse-t-il le jeu de la concurrence ?) ; **3. la concurrence déloyale** (encadrer les moyens utilisés : quand les procédés employés deviennent-ils fautifs ?).'));
+add(P('==Concurrence libre ≠ concurrence sans règles.=='));
+
+// ----- 1 -----
+add(H(2, '1. Le principe de liberté de la concurrence'));
+add(H(3, 'A. La liberté d\'entreprendre et de concurrencer'));
+add(P('PIXEL décide de pratiquer des prix plus attractifs, faire davantage de publicité, proposer de nouveaux produits et chercher à conquérir les clients de NOVA. **En a-t-il le droit ?** Oui, en principe.'));
+add(table([3212, 3213, 3213], ['Liberté d\'entreprendre', 'Liberté de concurrencer', 'La clientèle'], [
+  ['Créer une activité économique, l\'exploiter, la développer.', 'Chercher à attirer la clientèle par ses **prix**, ses **produits**, ses **services**, son **innovation** ou sa **communication**.', 'Elle **peut être disputée** par les entreprises présentes sur le marché : personne n\'a de « droit » sur ses clients.'],
+]));
+add(P('==Faire perdre des clients à un concurrent ≠ commettre une faute.== Le dommage économique subi par un concurrent **ne suffit pas, à lui seul**, à rendre le comportement illicite.'));
+add(P('**Cinq moyens légitimes de se différencier** (chaque entreprise décide, en principe, de sa stratégie) :'));
+add(table([2200, 7438], ['Moyen', 'Exemple NOVA / PIXEL'], [
+  ['**1. Le prix**', 'NOVA vend à 749 €, PIXEL à 699 € : les concurrents peuvent, en principe, fixer des prix différents.'],
+  ['**2. Le produit**', 'NOVA : un modèle puissant pour les usages professionnels ; PIXEL : un modèle léger et ultra-portable pour les étudiants.'],
+  ['**3. La qualité et les services**', 'NOVA : conseils personnalisés, installation, SAV réactif ; PIXEL : aide en ligne, tutoriels vidéo, support par chat.'],
+  ['**4. L\'innovation**', 'NOVA améliore les performances ; PIXEL lance un service de reprise des anciens ordinateurs.'],
+  ['**5. La communication**', 'Chacun peut promouvoir son offre et chercher à attirer la clientèle.'],
+]));
+add(P('**Mais la liberté de concurrence s\'exerce dans le respect des règles juridiques.**'));
+
+add(H(3, 'B. Les limites à la liberté de la concurrence'));
+add(table([3212, 3213, 3213], ['1. PIXEL baisse ses prix', '2. PIXEL contacte Lucas', '3. PIXEL attaque NOVA'], [
+  ['PIXEL décide **seul** de proposer un prix inférieur pour attirer les clients.', '« Fixons ensemble un prix minimum de 799 €. Comme ça, aucun de nous ne vendra moins cher. »', 'Sur les réseaux sociaux : « N\'achetez pas chez NOVA : leurs ordinateurs sont dangereux ! »'],
+  ['→ **Jeu normal de la concurrence** : licite en principe.', '→ **Le fonctionnement du marché est en cause** : les entreprises déterminent-elles encore librement leur prix ?', '→ **Le moyen utilisé pour concurrencer est en cause** : peut-on attirer des clients en discréditant un concurrent ?'],
+]));
+add(P('Deux types de limites :'));
+add(B('**Protéger le fonctionnement concurrentiel du marché** : comportements qui faussent ou restreignent le jeu de la concurrence → [[pratiques anticoncurrentielles]].'));
+add(B('**Encadrer les procédés utilisés dans la compétition économique** : comportements fautifs à l\'encontre d\'un concurrent → [[concurrence déloyale]].'));
+add(P('**La méthode (arbre de décision) :** ne pas partir de la conséquence (« NOVA perd des clients »), mais ==partir du comportement et le qualifier== : faits (que s\'est-il passé ?) → comportement (que fait l\'entreprise ?) → intérêt affecté (quel intérêt est en cause ?) → qualification juridique (quelle règle appliquer ?).'));
+add(...N([
+  '**S\'agit-il simplement de chercher à être plus attractif** (prix, produits, qualité/services, innovation, communication) ? **Oui** → ==concurrence licite en principe== : le concurrent peut perdre des clients sans qu\'une faute soit commise.',
+  '**Sinon : le comportement est-il susceptible de porter atteinte au jeu de la concurrence sur le marché ?** (coordination entre concurrents, comme la fixation conjointe des prix ; comportement abusif d\'une entreprise dominante) **Oui** → ==pratiques anticoncurrentielles==. Question centrale : le fonctionnement concurrentiel du marché est-il affecté ?',
+  '**Sinon : le moyen utilisé dans la compétition économique est-il fautif ?** (créer une confusion, discréditer un concurrent = dénigrement, désorganiser son activité, profiter indûment des efforts d\'autrui = parasitisme) **Oui** → ==concurrence déloyale / parasitisme==. Question centrale : le procédé employé est-il juridiquement fautif ?',
+]));
+add(box('retenir', 'Synthèse de la partie 1', [
+  B('**Le principe** : les entreprises sont libres de se concurrencer (fixer leur stratégie, se différencier, attirer la clientèle).'),
+  B('**Une première limite** : ne pas **fausser le jeu de la concurrence** → pratiques anticoncurrentielles (ex. : entente entre concurrents, abus de position dominante).'),
+  B('**Une autre limite** : ne pas employer de **procédés déloyaux** → concurrence déloyale / parasitisme (ex. : création de confusion, dénigrement, désorganisation, parasitisme).'),
+  '==Faire concurrence ≠ fausser la concurrence ≠ concurrencer déloyalement.== Toujours commencer par qualifier le comportement.',
+]));
+
+// ----- 2 -----
+add(H(2, '2. Les pratiques anticoncurrentielles'));
+add(H(3, 'A. Les ententes anticoncurrentielles'));
+add(box('exemple', '« Lucas, si on arrêtait de se faire concurrence ? »', ['Le dirigeant de PIXEL : « Nous vendons tous les deux le même ordinateur. Si nous décidions de ne jamais le vendre à moins de 799 € ? Comme ça, aucun de nous n\'aura besoin de baisser ses prix. »']));
+add(table([4819, 4819], ['Avant l\'accord', 'Après l\'accord'], [
+  ['Chaque entreprise **détermine seule son prix** (NOVA 749 €, PIXEL 699 €) : chacune cherche à attirer la clientèle.', 'Les concurrents **coordonnent leur comportement** (prix minimum commun : 799 €) : ils ne déterminent plus indépendamment leur stratégie de prix.'],
+]));
+add(P('**Qu\'est-ce qui est juridiquement problématique ?** Le prix de 799 € ? **Non**, le seul constat de prix identiques ne suffit pas. Le fait que Lucas puisse gagner davantage ? **Non**, la recherche d\'un profit plus élevé n\'est pas en soi interdite. ==La coordination entre concurrents susceptible de fausser le jeu de la concurrence ? Oui== : c\'est ce qui peut constituer une entente anticoncurrentielle.'));
+add(art('Article L.420-1 du Code de commerce', 'Sont prohibées les actions concertées, conventions, ententes expresses ou tacites ou coalitions qui ont pour objet ou peuvent avoir pour effet d\'empêcher, de restreindre ou de fausser le jeu de la concurrence sur un marché, notamment lorsqu\'elles tendent à limiter l\'accès au marché, à faire obstacle à la fixation des prix par le libre jeu du marché, à limiter ou contrôler la production, les débouchés, les investissements ou le progrès technique, ou à répartir les marchés ou les sources d\'approvisionnement.'));
+add(P('Une [[entente anticoncurrentielle]] **suppose 2 éléments :**'));
+add(...N([
+  '**Une coordination entre entreprises** : actions concertées, conventions, ententes expresses ou tacites, coalitions. Elle peut prendre la forme d\'un accord écrit, d\'un accord oral ou d\'une coordination sans contrat formel. ==L\'absence d\'écrit n\'exclut pas l\'entente.==',
+  '**Une atteinte au jeu de la concurrence** : la coordination doit avoir **pour objet** ou peut avoir **pour effet** d\'**empêcher**, de **restreindre** ou de **fausser** le jeu de la concurrence sur un marché.',
+]));
+add(P('**Les principaux comportements visés par l\'article L.420-1 :**'));
+add(table([3000, 3600, 3038], ['Comportement', 'Contenu', 'Exemple'], [
+  ['**1. Accès au marché**', 'Limiter l\'accès au marché ou le libre exercice de la concurrence', '« On empêche un nouveau concurrent d\'entrer sur le marché. »'],
+  ['**2. Prix**', 'Faire obstacle à la fixation des prix par le libre jeu du marché', '« Aucun de nous ne vendra sous 799 €. »'],
+  ['**3. Production, investissements, progrès technique**', 'Limiter ou contrôler la production, les débouchés, les investissements ou le progrès technique', '« Nous limitons volontairement les quantités mises sur le marché. »'],
+  ['**4. Répartition des marchés**', 'Répartir les marchés ou les sources d\'approvisionnement', '« Chacun son territoire » : NOVA → Lyon, PIXEL → Grenoble'],
+]));
+add(box('remarque', 'Attention', ['==Des comportements identiques ≠ nécessairement une entente.== Le simple constat que deux entreprises adoptent un comportement similaire (NOVA et PIXEL à 749 €) ne démontre pas, à lui seul, une coordination.', '**Schéma à retenir :** coordination entre entreprises **+** objet ou effet anticoncurrentiel **→** entente anticoncurrentielle (art. L.420-1 C. com.).']));
+add(box('exercice', 'Exercice du cours : entente ou pas ?', [
+  '(1) NOVA baisse le prix d\'un ordinateur de 749 € à 699 € ; le lendemain, PIXEL fait de même après avoir constaté la baisse de NOVA. (2) Lors d\'un salon professionnel, Lucas et le dirigeant de PIXEL conviennent oralement de ne plus vendre leurs ordinateurs à moins de 749 €. (3) NOVA décide de développer ses ventes uniquement dans la région lyonnaise ; PIXEL, sans avoir échangé avec NOVA, concentre aussi sa stratégie sur cette région. (4) Lucas et deux concurrents se mettent d\'accord : chacun démarchera exclusivement les clients d\'une zone géographique (NOVA → Lyon, PIXEL → Grenoble, TECH+ → Saint-Étienne). (5) Plusieurs vendeurs augmentent leurs prix après que leur fournisseur commun a annoncé une hausse importante du prix des composants ; aucun échange n\'a eu lieu entre eux.',
+  '**Correction :**',
+  B('(1) **Pas d\'entente** : PIXEL réagit seul au marché (simple alignement), sans coordination.'),
+  B('(2) **Entente** sur les prix : la coordination est réelle, et ==l\'accord oral suffit==.'),
+  B('(3) **Pas d\'entente** : décisions indépendantes, aucun échange.'),
+  B('(4) **Entente** par **répartition des marchés** (« chacun son territoire »).'),
+  B('(5) **Pas d\'entente** : hausse due à une cause extérieure commune (le fournisseur), sans coordination entre vendeurs.'),
+]));
+
+add(H(3, 'B. L\'abus de position dominante'));
+add(box('exemple', 'PIXEL, un acteur très puissant', ['PIXEL détient désormais **70 % de part de marché** (NOVA 15 %, TECH+ 10 %, DIGIT 5 %) : ses concurrents exercent sur lui une pression beaucoup plus limitée. Il fournit un service indispensable à plusieurs revendeurs (distribution, mises à jour, assistance…) et menace NOVA : « Si vous continuez à commercialiser les ordinateurs NOVA, je cesse de vous fournir notre service. » **Être très puissant, est-ce interdit ?**']));
+add(art('Article L.420-2 du Code de commerce', 'Est prohibée l\'exploitation abusive par une entreprise ou un groupe d\'entreprises d\'une position dominante sur le marché intérieur ou une partie substantielle de celui-ci. Ces abus peuvent notamment consister en refus de vente, en ventes liées ou en conditions de vente discriminatoires, ainsi que dans la rupture de relations commerciales établies.'));
+add(P('==Position dominante ≠ abus de position dominante.== **Être** en position dominante n\'est **pas interdit en soi** ; **exploiter abusivement** cette position **peut être interdit**.'));
+add(P('L\'[[abus de position dominante]] **suppose 3 éléments :**'));
+add(table([2800, 6838], ['Élément', 'Contenu'], [
+  ['**1. Une** [[position dominante]]', 'L\'entreprise dispose d\'une puissance économique telle qu\'elle peut **déterminer son comportement dans une mesure appréciable sans subir la même pression** de ses concurrents, de ses clients ou des consommateurs. Indices (non exhaustifs) : **part de marché importante**, **barrières à l\'entrée**, **faible pression** des concurrents et des clients. Elle s\'apprécie sur un marché déterminé (le « **marché pertinent** »). ==Être le leader ou avoir une forte part de marché ne suffit pas automatiquement.=='],
+  ['**2. Une exploitation abusive**', 'Comment l\'entreprise utilise-t-elle sa puissance ? **Refus de vente** (refuser de fournir un produit ou un service à un concurrent ou à un partenaire) ; **ventes liées** (imposer l\'achat d\'un produit avec un autre produit ou service) ; **conditions de vente discriminatoires** (conditions différentes à des partenaires placés dans des situations comparables, sans justification objective) ; **rupture de relations commerciales établies** (au seul motif que le partenaire refuse des conditions injustifiées). Liste non exhaustive.'],
+  ['**3. Une atteinte, au moins potentielle, à la concurrence**', 'Le comportement doit avoir **pour objet** ou peut avoir **pour effet** d\'empêcher, de restreindre ou de fausser le jeu de la concurrence : **évincer** des concurrents, **contraindre** les partenaires, **empêcher** l\'entrée ou le maintien de concurrents. ==Même si tous les concurrents n\'ont pas disparu, un effet potentiel peut suffire.=='],
+]));
+add(P('**Schéma :** position dominante **+** exploitation abusive **+** objet ou effet restrictif de concurrence **→** abus de position dominante (art. L.420-2 C. com.).'));
+add(box('remarque', 'Les pièges à éviter', [
+  B('**Piège 1 : 70 % de part de marché ≠ automatiquement position dominante.** Il n\'existe **pas de seuil légal** automatique : la position dominante s\'apprécie au cas par cas, en fonction du marché et de plusieurs critères.'),
+  B('**Piège 2 : position dominante ≠ comportement interdit.** Être en position dominante n\'est pas interdit en soi ; c\'est l\'**exploitation abusive** de cette position qui peut être sanctionnée.'),
+]));
+add(box('exercice', 'Exercice du cours : PIXEL est en position dominante, et maintenant ?', [
+  '(1) PIXEL améliore sa logistique, réduit ses coûts et baisse ses prix (899 € → 749 €). (2) PIXEL contrôle un service nécessaire à certains revendeurs et annonce à l\'un d\'eux : « Je cesse de vous fournir ce service si vous continuez à commercialiser les produits NOVA. » (3) PIXEL investit dans son SAV (assistance 7j/7, délais raccourcis, nouveaux services) : les clients choisissent de plus en plus PIXEL plutôt que NOVA. (4) PIXEL accorde à certains revendeurs des conditions beaucoup plus avantageuses qu\'à d\'autres placés dans une situation comparable (A : remise 20 %, délai 2 jours, services inclus ; B : remise 5 %, délai 7 jours, services en option), sans justification objective apparente.',
+  '**Correction :**',
+  B('(1) **Licite** : concurrence par les mérites (gains d\'efficacité répercutés sur les prix).'),
+  B('(2) **Abus possible** : **refus de vente / pression** pour évincer un concurrent.'),
+  B('(3) **Licite** : concurrence par la **qualité** et l\'**innovation**.'),
+  B('(4) **Abus possible** : **conditions de vente discriminatoires** sans justification objective.'),
+  '==La question n\'est pas de savoir si NOVA perd des clients, mais si le comportement concurrence par ses mérites ou exploite abusivement sa puissance.==',
+]));
+
+// ----- 3 -----
+add(H(2, '3. La concurrence déloyale'));
+add(box('remarque', 'À compléter', ['Les slides reçues s\'arrêtent à l\'abus de position dominante. Cette partie sera complétée dès que vous m\'aurez envoyé la suite du chapitre 7.']));
+add(P('D\'après le plan et la synthèse des slides, cette partie répond à la question : ==quand les procédés employés dans la compétition économique deviennent-ils fautifs ?== Elle vise à **encadrer les moyens utilisés** à l\'encontre d\'un concurrent. Les quatre exemples annoncés :'));
+add(B('**Création de confusion** avec un concurrent ;'));
+add(B('**Dénigrement** : discréditer un concurrent (ex. : « N\'achetez pas chez NOVA : leurs ordinateurs sont dangereux ! ») ;'));
+add(B('**Désorganisation** de l\'activité d\'un concurrent ;'));
+add(B('**Parasitisme** : profiter indûment des efforts d\'autrui.'));
+add(box('complement', null, ['La concurrence déloyale n\'est pas prévue par un texte spécial : elle est sanctionnée sur le fondement de la **responsabilité civile pour faute** (art. 1240 du Code civil). Il faut donc prouver une **faute**, un **préjudice** et un **lien de causalité**. Le fil rouge du chapitre (« un concurrent imite la communication de Lucas : peut-il agir ? ») relève de cette partie.']));
+
+// ----- Points à retenir ch7 -----
+add(H(2, 'Points à retenir – Chapitre 7'));
+add(box('retenir', 'Points à retenir – Chapitre 7', [
+  B('**Principe : liberté d\'entreprendre et de concurrencer.** La clientèle peut être disputée ; ==faire perdre des clients à un concurrent ≠ commettre une faute==. On se différencie par le prix, le produit, la qualité/les services, l\'innovation, la communication.'),
+  B('**Concurrence libre ≠ concurrence sans règles.** Deux limites : les **pratiques anticoncurrentielles** (le **fonctionnement du marché** est en cause) et la **concurrence déloyale** (le **moyen utilisé** est en cause).'),
+  B('**Méthode** : partir du **comportement** (pas de la conséquence) → plus attractif ? (licite) → atteinte au jeu de la concurrence ? (anticoncurrentiel) → procédé fautif ? (déloyal).'),
+  B('**Entente** (art. L.420-1 C. com.) = **coordination** entre entreprises (écrite, orale ou tacite : l\'absence d\'écrit n\'exclut pas l\'entente) **+ objet ou effet** d\'empêcher, restreindre ou fausser la concurrence. Visés : accès au marché, prix, production, répartition des marchés. **Comportements identiques ≠ entente.**'),
+  B('**Abus de position dominante** (art. L.420-2 C. com.) = **position dominante** (puissance permettant d\'agir sans subir la pression du marché ; indices : part de marché, barrières à l\'entrée…) **+ exploitation abusive** (refus de vente, ventes liées, conditions discriminatoires, rupture de relations établies) **+ objet ou effet restrictif** (même potentiel).'),
+  B('**Pièges** : 70 % de parts de marché ≠ automatiquement position dominante (pas de seuil légal) ; position dominante ≠ comportement interdit.'),
+  B('**Concurrence déloyale** : confusion, dénigrement, désorganisation, parasitisme (partie à compléter avec les slides).'),
+]));
+add(pageBreak());
+
+// =====================================================================
 // GLOSSAIRE
 // =====================================================================
 add(H(1, 'Glossaire'));
@@ -1096,7 +1399,25 @@ add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
   ['**L.441-10**', 'Délais de paiement', '30 jours par défaut ; 60 jours max. à compter de la facture ou 45 jours fin de mois ; pénalités de retard.', cellLinks(4, 5)],
   ['**D.441-5**', 'Indemnité forfaitaire', 'Indemnité forfaitaire pour frais de recouvrement de **40 €** en cas de retard de paiement.', cellLinks(4, 5)],
   ['**L.442-1, II**', 'Rupture brutale', 'Engage la responsabilité de son auteur la rupture brutale d\'une relation commerciale établie sans préavis écrit suffisant.', cellLinks(4)],
+  ['**L.420-1**', 'Ententes', 'Prohibe les actions concertées, conventions, ententes expresses ou tacites ou coalitions ayant pour objet ou pour effet d\'empêcher, restreindre ou fausser la concurrence sur un marché.', cellLinks(7)],
+  ['**L.420-2**', 'Abus de position dominante', 'Prohibe l\'exploitation abusive d\'une position dominante (refus de vente, ventes liées, conditions discriminatoires, rupture de relations établies…).', cellLinks(7)],
   ['**L.721-3**', 'Tribunal de commerce', 'Compétent pour les litiges entre commerçants, relatifs aux sociétés commerciales et aux actes de commerce.', cellLinks(2)],
+]));
+add(H(3, 'Code de la consommation'));
+add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
+  ['**Liminaire**', 'Consommateur / professionnel', 'Consommateur : personne physique agissant hors de son activité professionnelle. Professionnel : personne physique ou morale agissant dans le cadre de son activité.', cellLinks(6)],
+  ['**L.111-1**', 'Information précontractuelle', 'Avant le contrat : caractéristiques essentielles, prix, identité du professionnel, délais et conditions d\'exécution, garanties et autres droits.', cellLinks(6)],
+  ['**L.121-2** et s.', 'Pratiques trompeuses', 'Pratique reposant sur des allégations fausses ou de nature à induire en erreur, susceptible d\'altérer le comportement économique du consommateur.', cellLinks(6, 7)],
+  ['**L.212-1**', 'Clauses abusives', 'Est abusive la clause créant, au détriment du consommateur, un déséquilibre significatif entre les droits et obligations des parties.', cellLinks(6)],
+  ['**R.212-1**', 'Liste noire', 'Clauses irréfragablement présumées abusives (aucune preuve contraire possible).', cellLinks(6)],
+  ['**R.212-2**', 'Liste grise', 'Clauses présumées abusives (le professionnel peut prouver le contraire).', cellLinks(6)],
+  ['**L.217-3** et s.', 'Garantie légale de conformité', 'Le vendeur délivre un bien conforme et répond des défauts existant à la délivrance et apparaissant dans les 2 ans.', cellLinks(6, 7)],
+  ['**L.221-18** et s.', 'Droit de rétractation', '14 jours pour se rétracter, sans motif, pour les contrats à distance ou hors établissement.', cellLinks(6, 7)],
+  ['**L.221-28**', 'Exceptions à la rétractation', 'Biens personnalisés, loisirs à date déterminée, contenus numériques dont l\'exécution a commencé…', cellLinks(6)],
+  ['**L.241-1**', 'Sanction des clauses abusives', 'La clause abusive est réputée non écrite ; le contrat subsiste en principe sans elle.', cellLinks(6)],
+  ['**L.612-1** et s.', 'Médiation', 'Droit du consommateur de recourir gratuitement à un médiateur de la consommation.', cellLinks(6)],
+  ['**L.612-4**', 'Médiation non obligatoire', 'Interdiction d\'imposer le recours préalable à la médiation avant de saisir le juge.', cellLinks(6)],
+  ['**L.616-1**', 'Information sur le médiateur', 'Le professionnel communique les coordonnées du médiateur compétent (site, CGV…).', cellLinks(6)],
 ]));
 add(H(3, 'Code monétaire et financier'));
 add(table(ART_W, ['Article', 'Thème', 'Contenu', 'Chapitre'], [
@@ -1120,6 +1441,7 @@ add(table(ART_W, ['Article', 'Code', 'Contenu', 'Chapitre'], [
   ['**Art. 1353**', 'Code civil', '**Charge de la preuve** : celui qui réclame l\'exécution d\'une obligation doit la prouver ; celui qui se prétend libéré doit justifier le paiement ou le fait qui a éteint son obligation.', cellLinks(1)],
   ['**Art. 1358**', 'Code civil', 'Hors les cas où la loi en dispose autrement, la preuve peut être apportée **par tout moyen**.', cellLinks(1)],
   ['**Art. 1360**', 'Code civil', 'Exceptions à l\'écrit : **impossibilité matérielle ou morale** de se procurer un écrit, usage, perte de l\'écrit par force majeure.', cellLinks(1)],
+  ['**Art. 1240**', 'Code civil', 'Tout fait quelconque de l\'homme qui cause à autrui un dommage oblige celui par la faute duquel il est arrivé à le réparer : fondement de l\'action en **concurrence déloyale**.', cellLinks(7)],
   ['**L.210-1**', 'Code de commerce', 'Sont **commerciales par leur forme**, quel que soit leur objet : SNC, sociétés en commandite simple, SARL et sociétés par actions (SA, SAS…).', cellLinks(2)],
   ['**L.526-22**', 'Code de commerce', 'L\'**entrepreneur individuel** a un **patrimoine professionnel** (biens, droits, obligations et sûretés utiles à son activité) distinct de son patrimoine personnel.', cellLinks(2)],
 ]));
@@ -1226,6 +1548,26 @@ const notions = [
   ['Sûreté personnelle', 'Garantie reposant sur l\'engagement d\'une personne supplémentaire envers le créancier.'],
   ['Sûreté réelle', 'Garantie reposant sur un bien affecté au paiement préférentiel du créancier (art. 2323).'],
   ['Titre exécutoire', 'Acte (souvent une décision de justice) constatant une créance certaine, liquide et exigible, sans lequel aucune exécution forcée n\'est possible.'],
+  ['Abus de position dominante', 'Exploitation abusive d\'une position dominante ayant pour objet ou pour effet de restreindre la concurrence (L.420-2 C. com.).'],
+  ['Clause abusive', 'Clause créant un déséquilibre significatif au détriment du consommateur ; réputée non écrite (L.212-1, L.241-1).'],
+  ['Concurrence déloyale', 'Utilisation de procédés fautifs à l\'encontre d\'un concurrent (confusion, dénigrement, désorganisation, parasitisme).'],
+  ['Consommateur', 'Personne physique qui agit à des fins qui n\'entrent pas dans le cadre de son activité professionnelle (article liminaire).'],
+  ['Contrat à distance / hors établissement', 'Contrat conclu sans présence physique simultanée (Internet, téléphone) ou en dehors du lieu de vente habituel (démarchage) ; ouvre le droit de rétractation.'],
+  ['Dénigrement', 'Fait de discréditer publiquement les produits ou l\'entreprise d\'un concurrent.'],
+  ['Droit de rétractation', 'Faculté pour le consommateur de revenir sur un contrat à distance ou hors établissement dans les 14 jours, sans motif (L.221-18).'],
+  ['Entente anticoncurrentielle', 'Coordination entre entreprises ayant pour objet ou pour effet d\'empêcher, restreindre ou fausser la concurrence (L.420-1 C. com.).'],
+  ['Garantie légale de conformité', 'Obligation du vendeur de délivrer un bien conforme ; il répond des défauts pendant 2 ans (L.217-3).'],
+  ['Liste noire / liste grise', 'Clauses abusives présumées de façon irréfragable (noire, R.212-1) ou simple, avec preuve contraire possible (grise, R.212-2).'],
+  ['Liberté de la concurrence', 'Liberté pour les entreprises de se disputer la clientèle par leurs prix, produits, services, innovation et communication.'],
+  ['Marché pertinent', 'Marché déterminé (produits et zone géographique) sur lequel s\'apprécie la position dominante.'],
+  ['Médiateur de la consommation', 'Tiers qui cherche gratuitement une solution amiable au litige ; ce n\'est pas un juge et sa solution n\'est pas imposée (L.612-1).'],
+  ['Parasitisme', 'Fait de profiter indûment des efforts, des investissements ou de la notoriété d\'autrui.'],
+  ['Position dominante', 'Puissance économique permettant à une entreprise d\'agir sans subir la même pression de ses concurrents, clients ou consommateurs.'],
+  ['Pratique commerciale trompeuse', 'Pratique reposant sur des informations fausses ou de nature à induire en erreur le consommateur (L.121-2).'],
+  ['Pratiques anticoncurrentielles', 'Comportements qui faussent ou restreignent le jeu de la concurrence sur un marché : ententes et abus de position dominante.'],
+  ['Professionnel', 'Personne physique ou morale qui agit dans le cadre de son activité commerciale, industrielle, artisanale, libérale ou agricole (article liminaire).'],
+  ['Relation de consommation', 'Relation entre un professionnel et un consommateur, soumise aux règles protectrices du Code de la consommation.'],
+  ['Réputée non écrite', 'Se dit d\'une clause qui est considérée comme n\'ayant jamais existé, le reste du contrat continuant de s\'appliquer.'],
 ];
 notions.sort((a, b) => a[0].localeCompare(b[0], 'fr'));
 add(table([3000, 6638], ['Notion', 'Définition'], notions.map(([n, d]) => [`**${n}**`, d])));
@@ -1237,7 +1579,7 @@ const front = [];
 front.push(new Paragraph({ spacing: { before: 2400, after: 200 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Droit des affaires', bold: true, color: RED, size: 64 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [new TextRun({ text: 'Licence Gestion et Management – L2 S3', size: 28 })] }));
 front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 }, children: [new TextRun({ text: 'Mme Wolf – iaelyon, Université Lyon 3', size: 24, color: GREY })] }));
-front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 à 5)', italics: true, size: 24 })] }));
+front.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 800 }, children: [new TextRun({ text: 'Cours complété à partir des slides (chapitres 1 à 7)', italics: true, size: 24 })] }));
 front.push(...box('remarque', 'Code couleur du document', [
   B('[[Terme en rouge souligné]] : définition à connaître.'),
   B('==Surligné jaune== : idée essentielle.'),
